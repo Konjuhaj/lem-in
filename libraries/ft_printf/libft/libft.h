@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/09 15:29:45 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/03/29 12:13:43 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,10 @@ long				ft_atol(const char *str);
 
 void				ft_strstrdel(char ***s);
 
+char				*ft_read_file(int fd);
+
+int					ft_rowlen(char **s);
+
+char				*ft_strcpy_until(char *s, char c);
 
 #endif
