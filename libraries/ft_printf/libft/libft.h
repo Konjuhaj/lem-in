@@ -4,6 +4,7 @@
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
@@ -14,6 +15,12 @@
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
 /*   Updated: 2020/03/09 15:29:45 by bkonjuha         ###   ########.fr       */
 >>>>>>> first commit
+=======
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/03/29 12:13:43 by bkonjuha         ###   ########.fr       */
+>>>>>>> Working reading files and connecting rooms
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,14 +205,21 @@ long				ft_atol(const char *str);
 void				ft_strstrdel(char ***s);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Working reading files and connecting rooms
 char				*ft_read_file(int fd);
 
 int					ft_rowlen(char **s);
 
+<<<<<<< HEAD
 char				*ft_strsub_until(char *s, char c);
 
 int					*sort_arr(int *arr, int size);
 =======
 >>>>>>> first commit
+=======
+char				*ft_strcpy_until(char *s, char c);
+>>>>>>> Working reading files and connecting rooms
 
 #endif
