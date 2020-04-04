@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/24 18:42:47 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/24 18:44:06 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,7 @@ COLOR_DEFAULT = \033[1;34m
 
 all: $(LEMIN)
 
-<<<<<<< HEAD
 $(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF) $(SRC)
-=======
-$(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF)
->>>>>>> Working reading files and connecting rooms
 		@$(COMPILE) $(SRC) $(LIBFT) $(PRINTF) -o $(LEMIN)
 		@echo "[$(COLOR_PENDING)Putting everything togeather$(COLOR_RESET)]"
 		@echo "[$(COLOR_SUCCESS)Executable $(PUSH_SWAP) created$(COLOR_RESET)]"
