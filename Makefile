@@ -6,14 +6,14 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/03/29 16:11:27 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/04/01 18:41:34 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LEMIN = lem-in
 
 SRC_PATH = ./srcs/
-SRC_FILES = lemin.c ft_errno.c
+SRC_FILES = lemin.c ft_errno.c find_path.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/
