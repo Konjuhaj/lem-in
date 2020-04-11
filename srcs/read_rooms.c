@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/10 15:42:57 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/11 12:11:38 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		readst_rooms(char **s, t_farm *farm)
 		if (s[i][0] != '#')
 			farm->rooms[j++]->name = ft_strcpy_until(s[i], ' ');
 		farm->rooms[j -1]->visited = 0;
+		farm->rooms[j -1]->length = 0;
 		set_rooms_to_null(farm, j);
 	}
 	return (i);

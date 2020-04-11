@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/05 12:01:17 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/11 12:28:13 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int		find_paths(t_room **room, t_room **sink, int limit, int current)
 		return (1);
 	while (*room != *sink)
 	{
-		(*room)->level = current;
-		(*room)->visited = 1;
+		(*room)->distance = current;
+		(*room)->visited++;
 		while ((*room)->pipe[i])
 		{
 			base = (*room)->pipe[i];
-			while (base->visited == 1 && (*room)->pipe[i + 1])
+			while (base->visited > 1 && (*room)->pipe[i + 1])
 				base = (*room)->pipe[++i];
 			if ((ret = find_paths(&base, sink, limit, current + 1)) == 1)
 				break ;
-			else if (ret == 3)
+			else if (ret == 3 && ++(*room)->length && ++(*room)->visited)
 				return (3);
 			i++;
 		}

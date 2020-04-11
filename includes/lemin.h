@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/10 16:23:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/11 12:21:44 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct	s_room
 	void		**pipe;
 	int			visited;
 	int			length;
-	int			level;
+	int			distance;
 	char		*name;
 }				t_room;
 
