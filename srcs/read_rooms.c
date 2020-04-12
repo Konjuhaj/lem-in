@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/12 17:09:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/12 18:48:37 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static void	connect_bothways(t_room *from, t_room *to)
 
 void	connect_rooms(char **s, t_farm *farm, int i)
 {
-	void *from;
-	void *to;
+	char *from;
+	char *to;
 	int	src_room;
 	int	dst_room;
 
@@ -96,8 +96,8 @@ void	connect_rooms(char **s, t_farm *farm, int i)
 		to = ft_strsub_until(ft_strchr(s[i], '-') + 1, 0);
 		while (!(ft_strequ(farm->rooms[dst_room]->name, to)))
 			dst_room++;
-		ft_memdel(&to);
-		ft_memdel(&from);
+		ft_strdel(&to);
+		ft_strdel(&from);
 		connect_bothways(farm->rooms[src_room], farm->rooms[dst_room]);
 		i++;
 	}
