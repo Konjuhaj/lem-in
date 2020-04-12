@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/12 14:00:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/12 17:09:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,39 @@ int		read_rooms(char **s, t_farm *farm)
 	return (i);
 }
 
+static void	connect_bothways(t_room *from, t_room *to)
+{
+	int i;
+
+	i = 0;
+	while (from->pipe[i] != NULL)
+		i++;
+	from->pipe[i] = to;
+	while (to->pipe[i] != NULL)
+		i++;
+	to->pipe[i] = from;
+}
+
 void	connect_rooms(char **s, t_farm *farm, int i)
 {
-	char *from_to;
+	void *from;
+	void *to;
 	int	src_room;
 	int	dst_room;
-	int l;
 
 	while(s[i])
 	{
 		src_room = 0;
 		dst_room = 0;
-		l = 0;
-		from_to = ft_strsub_until(s[i], '-');
-		while (!(ft_strequ(farm->rooms[src_room]->name, from_to)))
+		from = ft_strsub_until(s[i], '-');
+		while (!(ft_strequ(farm->rooms[src_room]->name, from)))
 			src_room++;
-		ft_strdel(&from_to);
-		from_to = ft_strsub_until(ft_strchr(s[i], '-') + 1, 0);
-		while (!(ft_strequ(farm->rooms[dst_room]->name, from_to)))
+		to = ft_strsub_until(ft_strchr(s[i], '-') + 1, 0);
+		while (!(ft_strequ(farm->rooms[dst_room]->name, to)))
 			dst_room++;
-		ft_strdel(&from_to);
-		while (farm->rooms[src_room]->pipe[l] != NULL)
-			l++;
-		farm->rooms[src_room]->pipe[l] = farm->rooms[dst_room];
-		l = 0;
-		while (farm->rooms[dst_room]->pipe[l] != NULL)
-			l++;
-		farm->rooms[dst_room]->pipe[l] = farm->rooms[src_room];
+		ft_memdel(&to);
+		ft_memdel(&from);
+		connect_bothways(farm->rooms[src_room], farm->rooms[dst_room]);
 		i++;
-
 	}
 }

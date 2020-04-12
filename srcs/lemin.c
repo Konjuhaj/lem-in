@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/12 13:24:50 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:29:38 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		limit = 0;
-		// if (!(farm = (t_farm *)malloc(sizeof(t_farm))))
-		// 	ft_errno();
 		fd = open(av[1], O_RDONLY);
 		line = ft_read_file(fd);
 		file = ft_strsplit(line, '\n');
 		farm.ants = ft_atoi(file[0]);
-		if(!(farm.rooms = (t_room **)malloc(sizeof(t_room *) * ft_rowlen(av))))
-			ft_errno();
 		connect_rooms(file, &farm, read_rooms(file, &farm));
 		while (find_paths(&farm.source,&farm.sink, limit, 0) != 3)
 			limit++;
@@ -38,6 +34,6 @@ int		main(int ac, char **av)
 			limit++;
 		print_values(&farm);
 	}
-	// system("leaks lem-in");
+	system("leaks lem-in");
 	return (0);
 }
