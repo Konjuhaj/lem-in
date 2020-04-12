@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 11:47:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/29 11:48:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/11 21:42:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char    *ft_read_file(int fd)
 	char *str;
 	int ret;
 
-	str = ft_strnew(1);
+	str = NULL;
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:28:49 by bkonjuha          #+#    #+#             */
-/*   Updated: 2019/12/27 08:16:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/11 21:38:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t i;
 
 	i = 0;
-	while (str[i] && str)
+	while (str && str[i])
 		i++;
 	return (i);
 }

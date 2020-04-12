@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/29 12:13:43 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/12 12:22:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,6 @@ char				*ft_read_file(int fd);
 
 int					ft_rowlen(char **s);
 
-char				*ft_strcpy_until(char *s, char c);
+char				*ft_strsub_until(char *s, char c);
 
 #endif

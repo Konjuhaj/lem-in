@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy_until.c                                  :+:      :+:    :+:   */
+/*   ft_strsub_until.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 12:08:34 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/29 12:13:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/12 13:20:38 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy_until(char *s, char c)
+char	*ft_strsub_until(char *s, char c)
 {
 	int		len;
 	char	*str;
