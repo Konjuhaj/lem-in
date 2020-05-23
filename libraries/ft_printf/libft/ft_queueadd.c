@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   ft_queueadd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/05/23 18:26:43 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/05/23 18:20:33 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/05/23 18:23:43 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#include "libft.h"
 
-void		find_paths(t_room **room, t_room **sink)
+void	ft_queueadd(t_list **alst, t_list *new)
 {
-	t_list	*queue;
-	t_room	*temp;
-	int		i;
+	t_list *temp;
 
-	queue = ft_lstnew(room, sizeof(*room));
-	temp = *room;
-	while (temp != *sink)
-	{
-		i = -1;
-		while (temp->pipe[++i] != NULL)
-		{
-			ft_queueadd(&queue, ft_lstnew(temp->pipe[i], sizeof(*room)));
-		}
-	}
+	temp = *alst;
+	while(temp->next)
+		temp = temp->next;
+	temp->next = new;
 }

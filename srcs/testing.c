@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 16:15:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/05/10 21:01:19 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/05/23 18:27:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,4 @@ int removeDuplicates(int* nums, int numsSize)
         }
     }
     return (ret);
-}
-
-int main(void)
-{
-	int nums[] = {1, 1, 2};
-	printf("%d",removeDuplicates(nums, 3));
-	return (0);
 }

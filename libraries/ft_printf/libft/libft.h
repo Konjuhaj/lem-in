@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/12 12:22:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/05/23 18:22:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,7 @@ char				*ft_read_file(int fd);
 int					ft_rowlen(char **s);
 
 char				*ft_strsub_until(char *s, char c);
+
+void				ft_queueadd(t_list **alst, t_list *new);
 
 #endif
