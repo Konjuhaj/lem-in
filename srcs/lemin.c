@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/12 18:56:56 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/04/13 13:06:04 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int		main(int ac, char **av)
 		file = ft_strsplit(line, '\n');
 		farm.ants = ft_atoi(file[0]);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
-		while (find_paths(&farm.source,&farm.sink, limit, 0) != 3)
-			limit++;
 		while (find_paths(&farm.source,&farm.sink, limit, 0) != 3)
 			limit++;
 		print_values(&farm);
