@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errno.c                                         :+:      :+:    :+:   */
+/*   ft_queuefind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 16:09:28 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 10:53:32 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/06/04 10:27:19 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/06/04 10:57:52 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	ft_errno(void)
+t_queue	*ft_queuefind(t_queue **queue, char *id)
 {
-	ft_putstr("Error");
-	exit(0);
+	t_queue *temp;
+
+	temp = *queue;
+	while (temp && temp->id != id)
+	{
+		temp = temp->next;
+	}
+	if (!temp)
+		ft_printf("ID(%s) NOT FOUND", id);
+	return(temp);
 }

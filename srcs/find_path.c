@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/05/23 20:53:33 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/06/05 09:43:29 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void next_room(t_room **room, t_queue **queue)
 	*room = (*queue)->content;
 }
 
-static void add_room(t_queue *queue, t_room *temp)
+static int add_rooms(t_queue **queue, t_room *temp, char *end)
 {
 	int		i;
 	t_room	*room;
@@ -27,42 +27,56 @@ static void add_room(t_queue *queue, t_room *temp)
 	while (temp->pipe[++i])
 	{
 		room = temp->pipe[i];
-		ft_printf("has %s been visited %d\n", room->name, room->visited);
 		if (room->visited != 1)
 		{
-			ft_queueadd(&queue, ft_queuenew(room, sizeof(*room), room->name), temp->name, room->name);
+			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
 		}
+		if (room->name == end)
+			return(1);
 	}
+	return (0);
 }
 
-void		store_path(t_queue *queue, char *last, char *first)// WOP
+void		print_queue_id(t_queue **queue)
 {
-	t_list *path;
 	t_queue *temp;
 
-	temp = queue;
-	while(temp->id != last)
-		temp = temp->next;
-	path = ft_lstnew(queue->id, sizeof(queue->id));
-	while(temp->id != first)
+	temp = *queue;
+	while (temp)
 	{
+		ft_printf("%s -> ", temp->id);
+		temp = temp->next;
 	}
+	ft_putstr("\n");
+}
 
+void		store_path(t_queue *queue, char *first)// WOP
+{
+	t_queue *path;
+
+	path = ft_dequeue(&queue);
+	while (path->id != first)
+	{
+		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
+	}
+	print_queue_id(&queue);
 }
 
 void		find_paths(t_room *room, char *end)
 {
 	t_queue	*queue;
+	t_queue *base;
 	t_room	*temp;
-	int		stopper = 0;
 
 	queue = ft_queuenew(room, sizeof(*room), room->name);
+	base = queue;
 	temp = room;
 	while (!ft_strequ(temp->name, end))
 	{
 		temp->visited = 1;
-		add_room(queue, temp);
+		if (add_rooms(&queue, temp, end) == 1)
+			break ;
 		next_room(&temp, &queue);
 	}
-	store_path(queue, temp->name, end);
+	store_path(base, temp->name);
 }

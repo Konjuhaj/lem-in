@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_queueadd.c                                      :+:      :+:    :+:   */
+/*   ft_queuenew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/23 18:20:33 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/05/23 20:13:09 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/05/23 20:08:26 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/06/04 10:48:09 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/lemin.h"
 
-void	ft_queueadd(t_queue **alst, t_queue *new, char *caller)
+t_queue	*ft_queuenew(void *content, size_t content_size, char *id)
 {
-	t_queue *temp;
+	t_queue *new;
 
-	temp = *alst;
-	while(temp->next)
-		temp = temp->next;
-	temp->next = new;
-	new->called_by = caller;
+	if (!(new = (t_queue *)malloc(sizeof(t_queue))))
+		return (NULL);
+	if (content == NULL)
+	{
+		new->content = NULL;
+		new->content_size = 0;
+	}
+	else
+	{
+		new->content = content;
+		new->content_size = content_size;
+		new->called_by = "default";
+		new->id = id;
+	}
+	new->next = NULL;
+	return (new);
 }

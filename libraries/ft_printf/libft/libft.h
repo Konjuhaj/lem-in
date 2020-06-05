@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/05/23 20:45:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/06/04 09:59:23 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct		s_queue
-{
-	void			*content;
-	size_t			content_size;
-	struct s_queue	*next;
-	char			*called_by;
-	char			*id;
-}					t_queue;
 
 size_t				ft_strlen(const char *str);
 
@@ -200,9 +191,5 @@ char				*ft_read_file(int fd);
 int					ft_rowlen(char **s);
 
 char				*ft_strsub_until(char *s, char c);
-
-void				ft_queueadd(t_queue **alst, t_queue *new, char *caller, char *id);
-
-t_queue				*ft_queuenew(void const *content, size_t content_size, char *id);
 
 #endif

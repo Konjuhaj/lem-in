@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errno.c                                         :+:      :+:    :+:   */
+/*   ft_queueaddfront.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/29 16:09:28 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 10:53:32 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/06/04 10:22:15 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/06/04 10:53:29 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	ft_errno(void)
+void	ft_queueaddfront(t_queue **queue, t_queue *new)
 {
-	ft_putstr("Error");
-	exit(0);
+	if (new)
+	{
+		new->next = *queue;
+		*queue = new;
+	}
+	else
+	{
+		ft_errno();
+	}
+
 }
