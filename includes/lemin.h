@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 10:43:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:38:36 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct		s_queue
 
 void				ft_errno(void);
 
-void				find_paths(t_room *room, char *end);
+void				find_paths(t_room *room, char *end, char *id);
 
 void				connect_rooms(char **s, t_farm *farm, int i);
 
