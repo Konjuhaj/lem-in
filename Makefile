@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/06/04 10:48:51 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/06/11 20:27:04 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ LEMIN = lem-in
 
 SRC_PATH = ./srcs/
 SRC_FILES = lemin.c ft_errno.c find_path.c read_rooms.c ft_queuenew.c ft_queueadd.c \
-			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c
+			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c path_constructor.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/
@@ -46,6 +46,11 @@ $(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF)
 $(PRINTF) $(LIBFT): $(PRINTF_SRCS)*.c $(LIBFT_PATH)*.c
 		@echo "Recompiling libraries"
 		@make -C $(PRINTF_PATH)
+
+exec:
+		@$(COMPILE) $(SRC) $(LIBFT) $(PRINTF) -o $(LEMIN)
+		@echo "[$(COLOR_PENDING)Putting everything togeather$(COLOR_RESET)]"
+		@echo "[$(COLOR_SUCCESS)Executable $(PUSH_SWAP) created$(COLOR_RESET)]"
 
 clean:
 		@make clean -C libraries/ft_printf/ >/dev/null
