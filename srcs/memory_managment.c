@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_constructor.c                                 :+:      :+:    :+:   */
+/*   memory_managment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/11 20:02:28 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/16 17:40:45 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/06/16 17:25:28 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/06/16 17:57:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,18 @@
 // 	ft_putstr("\n");
 // }
 
-// void	path_constructor(t_farm *farm, t_queue *path)
-// {
+void	mm_store_paths(t_farm *farm, t_queue *path)
+{
+	static t_queue_set	*set;
+	t_queue_set			*base;
 
-// }
+	set = (t_queue_set *)malloc(sizeof(t_queue_set));
+	if (farm != NULL)
+		farm->paths->set = set;
+	base = set;
+	while (base->next)
+		base = base->next;
+	base->next = (t_queue_set *)malloc(sizeof(t_queue_set));
+	base = base->next;
+	base->queue = path;
+}

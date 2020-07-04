@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/11 21:06:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/06/16 17:40:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,34 @@ typedef struct		s_queue
 {
 	void			*content;
 	size_t			content_size;
-	struct s_queue	*next;
+	void			*next;
 	char			*called_by;
 	char			*id;
 }					t_queue;
 
+typedef struct		s_queue_set
+{
+	t_queue			*queue;
+	void			*next;
+}					t_queue_set;
+
 
 typedef struct		s_combinations
 {
-	t_queue			**paths;
+	t_queue_set		*set;
 	int				max_flow;
 	int				min_cut;
+	void			*next;
 }					t_combinations;
 
 typedef struct	s_farm
 {
-	t_combinations	**paths;
+	t_combinations	*paths;
 	t_room			**rooms;
 	t_room			*source;
 	t_room			*sink;
 	int				ants;
+	int				bottleneck;
 }					t_farm;
 
 void				ft_errno(void);
@@ -85,5 +93,6 @@ void				*ft_queuefind(t_queue **queue, char *id);
 
 void				path_constructor(t_farm *farm, t_queue *path);
 
+void				mm_store_paths(t_farm *farm, t_queue *path);
 
 #endif

@@ -6,24 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/11 20:42:53 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/06/16 17:32:49 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-static void		print_queue_id(t_queue **queue)
-{
-	t_queue *temp;
-
-	temp = *queue;
-	while (temp)
-	{
-		ft_printf("%s -> ", temp->id);
-		temp = temp->next;
-	}
-	ft_putstr("\n");
-}
 
 static void next_room(t_room **room, t_queue **queue)
 {
@@ -78,14 +65,11 @@ void		store_path(t_queue *queue, char *first)// WOP
 	t_queue *path;
 
 	path = ft_dequeue(&queue);
-	path->next = NULL;
 	while (path->id != first)
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
 	}
-	ft_printf("\n\nPath >>");
-	print_queue_id(&path);
-	path_constructor(NULL, path);
+	mm_store_paths(NULL, path);
 }
 
 void		find_paths(t_room *room, char *end, char *id)
