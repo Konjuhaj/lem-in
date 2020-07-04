@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/16 17:40:12 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/04 17:10:22 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,21 @@ typedef struct		s_queue
 	void			*content;
 	size_t			content_size;
 	void			*next;
+	void			*parralel;
 	char			*called_by;
 	char			*id;
 }					t_queue;
 
-typedef struct		s_queue_set
-{
-	t_queue			*queue;
-	void			*next;
-}					t_queue_set;
+// typedef struct		s_queue_set
+// {
+// 	t_queue			*queue;
+// 	void			*next;
+// }					t_queue_set;
 
 
 typedef struct		s_combinations
 {
-	t_queue_set		*set;
+	t_queue			*set;
 	int				max_flow;
 	int				min_cut;
 	void			*next;
@@ -91,8 +92,7 @@ void				*ft_queuefind(t_queue **queue, char *id);
 **					HELPER FUNCTIONS
 */
 
-void				path_constructor(t_farm *farm, t_queue *path);
+void				save_path(t_queue *path);
 
-void				mm_store_paths(t_farm *farm, t_queue *path);
 
 #endif

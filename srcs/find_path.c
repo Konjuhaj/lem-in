@@ -6,24 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 16:19:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/04 17:29:00 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-static void		print_queue_id(t_queue *queue)
-{
-	t_queue *temp;
-
-	temp = queue;
-	while (temp)
-	{
-		ft_printf("%s -> ", temp->id);
-		temp = temp->next;
-	}
-	ft_putstr("\n");
-}
 
 static void next_room(t_room **room, t_queue **queue)
 {
@@ -43,7 +30,7 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 		if (room->visited == 0)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
-			//room->visited = 1;
+			room->visited = 1;
 		}
 		if (room->name == end)
 			return(1);
@@ -73,7 +60,7 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 	return (0);
 }
 
-void		store_path(t_queue *queue, char *first)// WOP
+void		store_path(t_queue *queue, char *first)
 {
 	t_queue *path;
 
@@ -82,7 +69,7 @@ void		store_path(t_queue *queue, char *first)// WOP
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
 	}
-	print_queue_id(path);
+	save_path(path);
 }
 
 void		find_paths(t_room *room, char *end, char *id)
