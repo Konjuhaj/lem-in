@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
+#    By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/06/16 17:41:16 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/07/04 16:22:26 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ LEMIN = lem-in
 
 SRC_PATH = ./srcs/
 SRC_FILES = lemin.c ft_errno.c find_path.c read_rooms.c ft_queuenew.c ft_queueadd.c \
-			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c path_constructor.c \
-			memory_managment.c
+			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/

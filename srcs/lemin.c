@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 16:19:33 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:23:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ int		main(int ac, char **av)
 			}
 		}
 		temp = -1;
-			find_paths(farm.source->pipe[temp], farm.sink->name, "reverse");
-			int i = -1;
-			while (farm.rooms[++i])
-			{
-				farm.rooms[i]->visited = 0;
-			}
-			farm.source->visited = 2;
+		find_paths(farm.source->pipe[temp], farm.sink->name, "reverse");
+		int i = -1;
+		while (farm.rooms[++i])
+		{
+			farm.rooms[i]->visited = 0;
 		}
+		farm.source->visited = 2;
 	}
 	//system("leaks lem-in");
 	return (0);
