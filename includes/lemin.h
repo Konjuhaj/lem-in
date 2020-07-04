@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 17:10:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:26:59 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ typedef struct		s_queue
 	char			*id;
 }					t_queue;
 
-// typedef struct		s_queue_set
-// {
-// 	t_queue			*queue;
-// 	void			*next;
-// }					t_queue_set;
-
-
 typedef struct		s_combinations
 {
 	t_queue			*set;
@@ -61,7 +54,7 @@ typedef struct	s_farm
 
 void				ft_errno(void);
 
-void				find_paths(t_room *room, char *end, char *id);
+void				find_paths(t_room *room, char *end, char *id, t_farm *farm);
 
 void				connect_rooms(char **s, t_farm *farm, int i);
 
@@ -71,8 +64,7 @@ int					read_rooms(char **s, t_farm *farm);
 **					TESTING FUNCTUION
 */
 
-void				print_values(t_farm *farm);
-
+void				print_queue_id(t_queue *queue);
 
 /*
 **					QUEUE Functions
@@ -92,7 +84,7 @@ void				*ft_queuefind(t_queue **queue, char *id);
 **					HELPER FUNCTIONS
 */
 
-void				save_path(t_queue *path);
+void				save_path(t_queue *path, t_farm *farm);
 
 
 #endif

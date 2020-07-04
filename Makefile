@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/07/04 16:30:25 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/07/04 17:41:03 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ LEMIN = lem-in
 
 SRC_PATH = ./srcs/
 SRC_FILES = lemin.c ft_errno.c find_path.c read_rooms.c ft_queuenew.c ft_queueadd.c \
-			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c save_path.c
+			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c save_path.c printer.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/

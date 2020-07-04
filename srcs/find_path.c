@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 17:29:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:40:08 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 		if (room->visited == 0)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
-			room->visited = 1;
 		}
 		if (room->name == end)
 			return(1);
@@ -52,7 +51,6 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 		if (room->visited == 0)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
-			room->visited = 1;
 		}
 		if (room->name == end)
 			return(1);
@@ -60,7 +58,7 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 	return (0);
 }
 
-void		store_path(t_queue *queue, char *first)
+void		store_path(t_queue *queue, char *first, t_farm *farm)
 {
 	t_queue *path;
 
@@ -69,10 +67,10 @@ void		store_path(t_queue *queue, char *first)
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
 	}
-	save_path(path);
+	save_path(path, farm);
 }
 
-void		find_paths(t_room *room, char *end, char *id)
+void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 {
 	t_queue	*queue;
 	t_queue *base;
@@ -87,12 +85,12 @@ void		find_paths(t_room *room, char *end, char *id)
 		if (ft_strequ(id, "forward"))
 		{
 			if (add_rooms(&queue, temp, end) == 1)
-				store_path(base, room->name);
+				store_path(base, room->name, farm);
 		}
 		else if (ft_strequ(id, "reverse"))
 		{
 			if (add_rooms_rev(&queue, temp, end) == 1)
-				break ;
+				store_path(base, room->name, farm);
 		}
 		next_room(&temp, &queue);
 	}
