@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 15:43:53 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:45:20 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int			main(int ac, char **av)
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		clean_up_rooms(&farm);
+		combinations(&farm);
 	}
 	//testing
 	t_queue *test;
