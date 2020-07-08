@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 11:47:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/04/11 21:42:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 14:10:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_read_file(int fd)
+char	*ft_read_file(int fd)
 {
 	char buff[BUFF_SIZE + 1];
 	char *temp;

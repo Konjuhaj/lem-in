@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 18:40:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:54:25 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	save_path(t_queue *path, t_farm *farm)
 {
-	static t_queue			*temp;
+	t_queue			*temp;
 
 	if (!farm->paths->set)
 	{

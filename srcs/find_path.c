@@ -6,16 +6,20 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 18:40:08 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:54:21 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static void next_room(t_room **room, t_queue **queue)
+/*
+** Move to the next room and get the T_room node out of q_queue
+*/
+
+static void next_room(t_room **temp, t_queue **queue)
 {
 	*queue = (*queue)->next;
-	*room = (*queue)->content;
+	*temp = (*queue)->content;
 }
 
 static int add_rooms(t_queue **queue, t_room *temp, char *end)
@@ -54,7 +58,7 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 		}
 		if (room->name == end)
 			return(1);
-	}
+		}
 	return (0);
 }
 
@@ -63,6 +67,7 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	t_queue *path;
 
 	path = ft_dequeue(&queue);
+	path->next = NULL;
 	while (path->id != first)
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
@@ -94,5 +99,5 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 		}
 		next_room(&temp, &queue);
 	}
-	//store_path(base, room->name);
+	//store_path(base, room->name, farm);
 }
