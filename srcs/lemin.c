@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 14:10:43 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:43:53 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ static void	pathfinder(t_farm *farm)
 	}
 }
 
+/*
+** Room cleaning. Causes leaks. Maybe not necassary.
+*/
+// static void	clean_up_rooms(t_farm *farm)
+// {
+// 	t_queue *temp;
+// 	t_queue *base;
+
+// 	base = farm->paths->set;
+// 	while (base)
+// 	{
+// 		temp = base;
+// 		while (temp->content != farm->sink)
+// 			temp = temp->next;
+// 		temp->next = NULL;
+// 		base = base->parralel;
+// 	}
+// }
+
 int			main(int ac, char **av)
 {
 	char	**file;
@@ -66,8 +85,18 @@ int			main(int ac, char **av)
 		if(!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
 			ft_errno();
 		farm.paths->set = NULL;
-		//pathfinder(&farm);
+		pathfinder(&farm);
+		clean_up_rooms(&farm);
 	}
+	//testing
+	t_queue *test;
+	test = farm.paths->set;
+	while (test)
+	{
+		print_queue_id(test);
+		test = test->parralel;
+	}
+	ft_printf("\n");
 	system("leaks lem-in");
 	return (0);
 }

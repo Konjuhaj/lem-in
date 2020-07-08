@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 13:54:21 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:24:04 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	t_queue *path;
 
 	path = ft_dequeue(&queue);
-	path->next = NULL;
 	while (path->id != first)
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
 	}
+	//print_queue_id(path);
 	save_path(path, farm);
 }
 
@@ -98,6 +98,7 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 				store_path(base, room->name, farm);
 		}
 		next_room(&temp, &queue);
+		//print_queue_id(base);
 	}
 	//store_path(base, room->name, farm);
 }
