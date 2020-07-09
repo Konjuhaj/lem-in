@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 15:45:20 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:20:24 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,10 @@ int			main(int ac, char **av)
 			ft_errno();
 		farm.paths->set = NULL;
 		pathfinder(&farm);
-		clean_up_rooms(&farm);
+		//clean_up_rooms(&farm);
 		combinations(&farm);
 	}
-	//testing
-	t_queue *test;
-	test = farm.paths->set;
-	while (test)
-	{
-		print_queue_id(test);
-		test = test->parralel;
-	}
-	ft_printf("\n");
+	print_sets(farm.paths);
 	system("leaks lem-in");
 	return (0);
 }

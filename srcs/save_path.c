@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 15:23:44 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:16:40 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,4 @@ void	save_path(t_queue *path, t_farm *farm)
 		temp = temp->parralel;
 		temp->parralel = NULL;
 	}
-	//testing
-
-	// t_queue *test;
-	// test = farm->paths->set;
-	// while (test)
-	// {
-	// 	print_queue_id(test);
-	// 	test = test->parralel;
-	// }
-	// ft_printf("\n");
 }

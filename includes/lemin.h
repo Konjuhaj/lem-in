@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/04 18:26:59 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:24:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int					read_rooms(char **s, t_farm *farm);
 
 void				print_queue_id(t_queue *queue);
 
+void				print_sets(t_combinations *set);
+
+void				print_set(t_combinations *set);
+
 /*
 **					QUEUE Functions
 */
@@ -85,6 +89,13 @@ void				*ft_queuefind(t_queue **queue, char *id);
 */
 
 void				save_path(t_queue *path, t_farm *farm);
+
+/*
+**					COMBINATIONS
+*/
+
+void				combinations(t_farm *farm);
+
 
 
 #endif
