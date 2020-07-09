@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 11:27:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:46:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ static int	are_duplicates(t_queue *path1, t_queue *path2)
 		temp2 = base2;
 		while (temp2)
 		{
-			if (ft_strequ(temp2->id, base1->id) == 1)
+			if (ft_strequ(base1->id, "end") == 1)
+				return (0);
+			else if (ft_strequ(temp2->id, "end"))
+				break ;
+			else if (ft_strequ(temp2->id, base1->id) == 1)
+			{
+				ft_printf("%s vs %s\n", base1->id, temp2->id);
 				return (1);
+			}
 			temp2 = temp2->next;
 		}
 		base1 = base1 ->next;
@@ -67,15 +74,17 @@ t_queue	*copy_path(t_queue *paths)
 	return (NULL);
 }
 
-t_queue	*new_set(t_queue *paths)
+t_combinations	*new_set(t_queue *paths)
 {
 	t_queue *base;
 	t_queue *temp_new;
-	t_queue *new;
+	t_combinations *new;
 
 	base = paths;
-	new = copy_path(paths);
-	temp_new = new;
+	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
+		ft_errno();
+	new->set = copy_path(paths);
+	temp_new = new->set;
 	while (base)
 	{
 		if (!are_duplicates(temp_new, base->parralel))
@@ -97,11 +106,10 @@ void	combinations(t_farm *farm)
 	size = size_of_set(farm->paths);
 	temp = farm->paths;
 	path = temp->set;
-	while (path->next)
+	while (path->parralel)
 	{
 		temp->next = new_set(path);
 		temp = temp->next;
-		print_set(temp);
-		path = path->next;
+		path = path->parralel;
 	}
 }
