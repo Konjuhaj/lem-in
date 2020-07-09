@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 11:46:51 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 11:56:09 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	are_duplicates(t_queue *path1, t_queue *path2)
 		temp2 = base2;
 		while (temp2)
 		{
-			if (ft_strequ(base1->id, "end") == 1)
+			if (ft_strequ(base1->id, "11") == 1)
 				return (0);
-			else if (ft_strequ(temp2->id, "end"))
+			else if (ft_strequ(temp2->id, "11"))
 				break ;
 			else if (ft_strequ(temp2->id, base1->id) == 1)
 			{

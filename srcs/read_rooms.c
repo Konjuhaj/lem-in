@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 14:02:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:50:53 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		read_rooms(char **s, t_farm *farm)
 	j = 0;
 	while(s[++i])
 	{
+		while (s[i][0] == '#'&& s[i][1] != '#')
+			i++;
 		if((ft_strchr(s[i], '-')))
 			break ;
 		if (!(farm->rooms[j] = (t_room *)malloc(sizeof(t_room))))
@@ -88,6 +90,8 @@ void	connect_rooms(char **s, t_farm *farm, int i)
 
 	while(s[i])
 	{
+		if (s[i][0] == '#' && i++)
+			continue ;
 		src_room = 0;
 		dst_room = 0;
 		from = ft_strsub_until(s[i], '-');
