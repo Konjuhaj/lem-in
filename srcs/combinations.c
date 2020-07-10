@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 10:00:53 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:19:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,37 @@ t_queue	*copy_path(t_queue *paths)
 
 t_combinations	*new_set(t_queue *paths, t_room *sink)
 {
-	t_queue *base;
 	t_queue *temp_new;
 	t_combinations *new;
 
-	base = paths;
 	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
 		ft_errno();
 	new->set = copy_path(paths);
 	temp_new = new->set;
-	while (base->parralel)
+	while (paths->parralel)
 	{
-		if (!are_duplicates(base->parralel, new->set, sink))
+		if (!are_duplicates(paths->parralel, new->set, sink))
 		{
-			temp_new->parralel = copy_path(base->parralel);
+			temp_new->parralel = copy_path(paths->parralel);
 			temp_new = temp_new->parralel;
 		}
-		base = base->parralel;
+		paths = paths->parralel;
 	}
 	return (new);
 }
 
 void	combinations(t_farm *farm)
 {
-	t_combinations	*temp;
+	t_combinations	*comb;
 	t_queue			*path;
 
-	temp = farm->paths;
-	path = temp->set;
+	comb = farm->paths;
+	path = comb->set;
 	while (path->parralel)
 	{
-		temp->next = new_set(path, farm->sink);
-		temp = temp->next;
-		update_combination(temp);
+		comb->next = new_set(path, farm->sink);
+		comb = comb->next;
+		update_combination(comb);
 		path = path->parralel;
 	}
 }

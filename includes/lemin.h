@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 09:55:29 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:52:55 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,11 @@ void				combinations(t_farm *farm);
 */
 
 int					are_duplicates(t_queue *new, t_queue *base, t_room *sink);
+
+/*
+**					SEND ANTS
+*/
+
+void				send_ants(t_farm *farm);
 
 #endif
