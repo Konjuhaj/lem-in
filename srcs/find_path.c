@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 09:49:36 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 11:12:31 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@
 ** Move to the next room and get the T_room node out of q_queue
 */
 
-static void next_room(t_room **temp, t_queue **queue)
+static int next_room(t_room **temp, t_queue **queue)
 {
-	*queue = (*queue)->next;
-	*temp = (*queue)->content;
+	if((*queue)->next)
+	{
+		*queue = (*queue)->next;
+		*temp = (*queue)->content;
+		return (1);
+	}
+	return (0);
 }
 
 static int add_rooms(t_queue **queue, t_room *temp, char *end)
@@ -101,7 +106,8 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 			if (add_rooms_rev(&queue, temp, end) == 1)
 				store_path(base, room->name, farm);
 		}
-		next_room(&temp, &queue);
+		if(!next_room(&temp, &queue))
+			break ;
 		//print_queue_id(base);
 	}
 	//store_path(base, room->name, farm);
