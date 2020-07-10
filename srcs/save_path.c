@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 11:16:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:19:38 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	save_path(t_queue *path, t_farm *farm)
+void		save_path(t_queue *path, t_farm *farm)
 {
 	t_queue			*temp;
 

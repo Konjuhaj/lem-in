@@ -6,45 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 11:56:09 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:27:36 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-/*
-** Might work without temp variables
-**
-*/
-
-static int	are_duplicates(t_queue *path1, t_queue *path2)
-{
-	t_queue *base1;
-	t_queue *temp2;
-	t_queue *base2;
-
-	base1 = path1;
-	base2 = path2;
-	while (base1)
-	{
-		temp2 = base2;
-		while (temp2)
-		{
-			if (ft_strequ(base1->id, "11") == 1)
-				return (0);
-			else if (ft_strequ(temp2->id, "11"))
-				break ;
-			else if (ft_strequ(temp2->id, base1->id) == 1)
-			{
-				ft_printf("%s vs %s\n", base1->id, temp2->id);
-				return (1);
-			}
-			temp2 = temp2->next;
-		}
-		base1 = base1 ->next;
-	}
-	return (0);
-}
 
 static int	size_of_set(t_combinations *set)
 {
@@ -74,7 +40,7 @@ t_queue	*copy_path(t_queue *paths)
 	return (NULL);
 }
 
-t_combinations	*new_set(t_queue *paths)
+t_combinations	*new_set(t_queue *paths, t_room *sink)
 {
 	t_queue *base;
 	t_queue *temp_new;
@@ -85,9 +51,9 @@ t_combinations	*new_set(t_queue *paths)
 		ft_errno();
 	new->set = copy_path(paths);
 	temp_new = new->set;
-	while (base)
+	while (base->parralel)
 	{
-		if (!are_duplicates(temp_new, base->parralel))
+		if (!are_duplicates(base->parralel, new->set, sink))
 		{
 			temp_new->parralel = copy_path(base->parralel);
 			temp_new = temp_new->parralel;
@@ -108,7 +74,7 @@ void	combinations(t_farm *farm)
 	path = temp->set;
 	while (path->parralel)
 	{
-		temp->next = new_set(path);
+		temp->next = new_set(path, farm->sink);
 		temp = temp->next;
 		path = path->parralel;
 	}

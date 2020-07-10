@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 11:24:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:17:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ void				save_path(t_queue *path, t_farm *farm);
 
 void				combinations(t_farm *farm);
 
+/*
+**					CHECKER
+*/
 
+int					are_duplicates(t_queue *new, t_queue *base, t_room *sink);
 
 #endif
