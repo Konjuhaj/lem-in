@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/08 15:24:04 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 09:49:36 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 
 void		store_path(t_queue *queue, char *first, t_farm *farm)
 {
-	t_queue *path;
+	int		i;
+	t_queue	*path;
 
+	i = 1;
 	path = ft_dequeue(&queue);
+	path->distance = 0;
 	while (path->id != first)
 	{
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
+		path->distance = i++;
 	}
 	//print_queue_id(path);
 	save_path(path, farm);

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 15:17:34 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 09:50:46 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ typedef struct		s_room
 {
 	void			**pipe;
 	int				visited;
-	int				length;
-	int				distance;
 	char			*name;
 }					t_room;
 
@@ -31,6 +29,7 @@ typedef struct		s_queue
 	void			*next;
 	void			*parralel;
 	char			*called_by;
+	int				distance;
 	char			*id;
 }					t_queue;
 

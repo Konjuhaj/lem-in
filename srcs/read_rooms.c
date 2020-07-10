@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/09 13:50:53 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 09:50:17 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int		read_rooms(char **s, t_farm *farm)
 		if (ft_strequ(s[i], "##end") && i++)
 			farm->sink = farm->rooms[j];
 		farm->rooms[j]->name = ft_strsub_until(s[i], ' ');
-		farm->rooms[j]->visited = 0;
-		farm->rooms[j++]->length = 0;
+		farm->rooms[j++]->visited = 0;
 	}
 	farm->rooms[j] = NULL;
 	return (i);
