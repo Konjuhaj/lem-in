@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 11:12:31 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:34:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 	t_queue	*queue;
 	t_queue *base;
 	t_room	*temp;
+	int		ret;
 
 	queue = ft_queuenew(room, sizeof(*room), room->name);
 	base = queue;
@@ -106,9 +107,7 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 			if (add_rooms_rev(&queue, temp, end) == 1)
 				store_path(base, room->name, farm);
 		}
-		if(!next_room(&temp, &queue))
+		if(!(ret = next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
-		//print_queue_id(base);
 	}
-	//store_path(base, room->name, farm);
 }
