@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 16:03:14 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:43:31 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		file = get_rooms(av[1]);
-		farm.ants = ft_atoi(av[1]);
+		farm.ants = ft_atoi(file[0]);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
 		if(!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
 			ft_errno();

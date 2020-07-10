@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 16:00:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:43:21 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static t_combinations	*best_path(t_combinations *comb, int ants)
 			else if (comb->avg_speed < temp->avg_speed && comb->max_flow == temp->max_flow)
 				temp = comb;
 		}
-		else if (comb->max_flow > ants && temp->avg_speed < comb->avg_speed)
+		else if (comb->max_flow > ants && temp->avg_speed > comb->avg_speed)
+		{
 			temp = comb;
+		}
 	}
 	return (temp);
 }
