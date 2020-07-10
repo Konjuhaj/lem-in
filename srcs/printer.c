@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 09:51:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 10:01:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		print_sets(t_combinations *set)
 	i = 0;
 	while (temp)
 	{
-		ft_printf("\nSET %d\n", i++);
+		ft_printf("\nSET-%d M_F-%d, A-S%f\n", i++, temp->max_flow, temp->avg_speed);
 		print_set(temp);
 		temp = temp->next;
 	}

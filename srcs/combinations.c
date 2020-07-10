@@ -6,11 +6,27 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 09:51:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/10 10:00:53 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
+
+void	update_combination(t_combinations *comb)
+{
+	t_queue *temp;
+
+	temp = comb->set;
+	comb->avg_speed = 0.0;
+	comb->max_flow = 0;
+	while (temp)
+	{
+		comb->max_flow++;
+		comb->avg_speed += (double)temp->distance;
+		temp = temp->parralel;
+	}
+	comb->avg_speed /= (double)comb->max_flow;
+}
 
 t_queue	*copy_path(t_queue *paths)
 {
@@ -60,6 +76,7 @@ void	combinations(t_farm *farm)
 	{
 		temp->next = new_set(path, farm->sink);
 		temp = temp->next;
+		update_combination(temp);
 		path = path->parralel;
 	}
 }
