@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 16:19:48 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/15 11:50:10 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_queue	*copy_path(t_queue *paths)
 	while (paths)
 	{
 		new = ft_queuenew(paths->content, paths->content_size, paths->id);
+		new->previous = paths->previous;
 		new->distance = paths->distance;
 		new->next = copy_path(paths->next);
 		return (new);

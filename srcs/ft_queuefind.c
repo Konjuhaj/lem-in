@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_queuefind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 10:27:19 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/11 12:42:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/15 10:58:28 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	*ft_queuefind(t_queue **queue, char *id)
 	}
 	if (!temp)
 		ft_printf("ID(%s) NOT FOUND", id);
-	return(temp);
+	return (temp);
 }

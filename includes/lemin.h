@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 15:52:55 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/15 11:29:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ typedef struct		s_queue
 	void			*content;
 	size_t			content_size;
 	void			*next;
+	void			*previous;
 	void			*parralel;
 	char			*called_by;
 	int				distance;
+	int				ants;
+	int				c_ant;
 	char			*id;
 }					t_queue;
 
