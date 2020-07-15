@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 11:50:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/15 15:07:26 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ void	update_combination(t_combinations *comb)
 	comb->avg_speed /= (double)comb->max_flow;
 }
 
-t_queue	*copy_path(t_queue *paths)
+t_queue			*copy_path(t_queue *paths)
 {
 	t_queue *new;
 
 	while (paths)
 	{
 		new = ft_queuenew(paths->content, paths->content_size, paths->id);
-		new->previous = paths->previous;
 		new->distance = paths->distance;
 		new->next = copy_path(paths->next);
 		return (new);

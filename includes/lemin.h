@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 11:29:12 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:27:10 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int					read_rooms(char **s, t_farm *farm);
 */
 
 void				print_queue_id(t_queue *queue);
+
+void				print_queue_id_rev(t_queue *queue);
 
 void				print_sets(t_combinations *set);
 
