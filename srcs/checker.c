@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 13:54:49 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 16:26:46 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:52:43 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	are_duplicates(t_queue *path, t_queue *set, t_room *sink)
 	base_path = path;
 	while (set)
 	{
-		while (path->content != sink)
+		while (path && path->content != sink)
 		{
-			while (set->content != sink)
+			while (set && set->content != sink)
 			{
 				if (ft_strequ(path->id, set->id) == 1)
 					return (1);

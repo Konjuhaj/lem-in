@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 09:31:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:33:58 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	pathfinder(t_farm *farm)
 		if (!farm->source->pipe[temp + 1])
 		{
 			direction = "reverse";
+			write(1, "\n\n\n", 3);
 			count++;
 			temp = -1;
 			if (count == 2)
@@ -90,7 +91,7 @@ int			main(int ac, char **av)
 		combinations(&farm);
 		send_ants(&farm);
 	}
-	print_sets(farm.paths);
+	//print_sets(farm.paths);
 	//system("leaks lem-in");
 	return (0);
 }

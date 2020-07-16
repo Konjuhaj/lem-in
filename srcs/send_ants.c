@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 09:29:56 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:00:15 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 	if (prev->id == end->id)
 		*s_a += 1;
 	prev->c_ant++;
-	ft_printf("L%s -> %s ", temp->id, prev->id);
+	//ft_printf("L%s -> %s ", temp->id, prev->id);
 }
 
 static void				send_ant(t_queue *prev)
 {
 	prev->ants--;
-	ft_printf("Lstart -> %s ", prev->id);
+	//ft_printf("Lstart -> %s ", prev->id);
 	prev->c_ant++;
 }
 
@@ -119,7 +119,7 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 				send_ant(prev);
 			set = set->parralel;
 		}
-		write(1, "\n", 1);
+		//write(1, "\n", 1);
 	}
 }
 
@@ -143,6 +143,8 @@ static void				reverse_connect(t_combinations *comb, t_room *sink)
 		{
 		current = set->next;
 		previous = set;
+		if (!current)
+			break ;
 		while(current->content != sink)
 		{
 			current->previous = previous;
@@ -161,7 +163,7 @@ void					send_ants(t_farm *farm)
 
 	best_comb = best_path(farm->paths->next, farm->ants);
 	calculate_ants_per_path(best_comb, farm->ants);
-	print_set(best_comb); // testing
+	//print_set(best_comb); // testing
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, get_sink(best_comb, farm->sink), farm->ants);
 }
