@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 15:07:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:41:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_combinations	*new_set(t_queue *paths, t_room *sink)
 		}
 		paths = paths->parralel;
 	}
+	temp_new->parralel = NULL;
 	return (new);
 }
 

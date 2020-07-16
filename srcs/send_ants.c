@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 17:15:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 09:29:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void					send_ants(t_farm *farm)
 
 	best_comb = best_path(farm->paths->next, farm->ants);
 	calculate_ants_per_path(best_comb, farm->ants);
-	//print_set(best_comb); // testing
+	print_set(best_comb); // testing
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, get_sink(best_comb, farm->sink), farm->ants);
 }
