@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 17:00:15 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:07:44 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 	while (sink_ants < ants)
 	{
 		set = comb->set;
-		while (set)
+		while (set && set->previous)
 		{
 			prev = set->previous;
-			while (set != prev)
+			while (prev && set != prev)
 			{
 				temp = prev->previous;
 				if (temp->c_ant == 1 && prev->c_ant == 0)
@@ -139,18 +139,18 @@ static void				reverse_connect(t_combinations *comb, t_room *sink)
 	t_queue *set;
 
 	set = comb->set;
-	while (set)
+	while (set->next)
 		{
 		current = set->next;
 		previous = set;
-		if (!current)
-			break ;
-		while(current->content != sink)
+		while(current && current->content != sink)
 		{
 			current->previous = previous;
 			current = current->next;
 			previous = previous->next;
 		}
+		if (!current)
+			break ;
 		current->previous = previous;
 		connect_queue(set, sink);
 		set = set->parralel;
