@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/22 12:05:41 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:00:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	pathfinder(t_farm *farm)
 	temp = -1;
 	i = -1;
 	count = 0;
+	farm->source->visited = 2;
+	// find_paths(farm->source, farm->sink->name, direction, farm);
 	while (farm->source->edge[++temp].next)
 	{
 		farm->source->visited = 2;

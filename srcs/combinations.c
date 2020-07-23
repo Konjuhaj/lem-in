@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 09:41:34 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:00:14 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	combinations(t_farm *farm)
 	{
 		comb->next = new_set(path, farm->sink);
 		comb = comb->next;
+		//print_set(comb);
 		update_combination(comb);
 		path = path->parralel;
 	}

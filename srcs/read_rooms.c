@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/22 12:00:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/23 10:34:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,18 @@ int		read_rooms(char **s, t_farm *farm)
 static void	connect_bothways(t_room *from, t_room *to)
 {
 	int i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (from->edge[i].next != NULL)
 		i++;
 	from->edge[i].next = to;
-	while (to->edge[i].next != NULL)
-		i++;
-	to->edge[i].next = from;
+	while (to->edge[j].next != NULL)
+		j++;
+	to->edge[j].next = from;
+	to->edge[j].pair = &from->edge[i];
+	from->edge[i].pair = &to->edge[j];
 }
 
 void	connect_rooms(char **s, t_farm *farm, int i)
