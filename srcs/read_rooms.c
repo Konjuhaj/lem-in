@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 10:03:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/22 12:00:06 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@
 	return (count);
  }
 
-static void	set_rooms_to_null(void **pipe, int limit)
+static void	set_rooms_to_null(t_edge *edge, int limit)
 {
 	int i;
 
 	i = -1;
 	while (++i < limit)
-		pipe[i] = NULL;
+	{
+		edge[i].next = NULL;
+		edge[i].current = 1;
+	}
 }
 
 int		read_rooms(char **s, t_farm *farm)
@@ -54,8 +57,8 @@ int		read_rooms(char **s, t_farm *farm)
 			break ;
 		if (!(farm->rooms[j] = (t_room *)malloc(sizeof(t_room))))
 			ft_errno();
-		farm->rooms[j]->pipe = (void **)malloc(sizeof(void *) * rooms);
-		set_rooms_to_null(farm->rooms[j]->pipe, rooms);
+		farm->rooms[j]->edge = (t_edge *)malloc(sizeof(t_edge) * rooms);
+		set_rooms_to_null(farm->rooms[j]->edge, rooms);
 		if (ft_strequ(s[i], "##start") && i++)
 			farm->source = farm->rooms[j];
 		if (ft_strequ(s[i], "##end") && i++)
@@ -72,12 +75,12 @@ static void	connect_bothways(t_room *from, t_room *to)
 	int i;
 
 	i = 0;
-	while (from->pipe[i] != NULL)
+	while (from->edge[i].next != NULL)
 		i++;
-	from->pipe[i] = to;
-	while (to->pipe[i] != NULL)
+	from->edge[i].next = to;
+	while (to->edge[i].next != NULL)
 		i++;
-	to->pipe[i] = from;
+	to->edge[i].next = from;
 }
 
 void	connect_rooms(char **s, t_farm *farm, int i)

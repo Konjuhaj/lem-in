@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 16:56:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/22 12:04:14 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 	t_room	*room;
 
 	i = -1;
-	while (temp->pipe[++i])
+	while (temp->edge[++i].next)
 	{
-		room = temp->pipe[i];
+		room = temp->edge[i].next;
 		if (room->visited == 0)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
@@ -52,11 +52,11 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 	t_room	*room;
 
 	i = 0;
-	while (temp->pipe[i])
+	while (temp->edge[i].next)
 		i++;
 	while (--i > -1)
 	{
-		room = temp->pipe[i];
+		room = temp->edge[i].next;
 		if (room->visited == 0)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
@@ -100,8 +100,7 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 	base = queue;
 	temp = room;
 	count = 0;
-	// while (!ft_strequ(queue->id, end))
-	while(count < 2)
+	while (!ft_strequ(queue->id, end))
 	{
 		if (ft_strequ(queue->id, end))
 			count++;
@@ -116,23 +115,6 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 			if (add_rooms_rev(&queue, temp, end) == 1)
 				store_path(base, room->name, farm);
 		}
-		///testing
-		if (ft_strequ(queue->id, "Vtj1") && ft_strequ(base->id, "Mij6"))
-		{
-			//test();
-			// int i = -1;
-			// t_room *temp;
-			// t_room *neb;
-			// temp = queue->content;
-			// while (temp->pipe[++i])
-			// {
-			// 	neb = temp->pipe[i];
-			// 	//ft_printf("NEIGHBORS %d-> %s -----> %d <------ \n", i, neb->name, neb->visited);
-			// }
-			// print_queue_id(queue);
-			// write(1, "\n", 1);
-		}
-		///
 		if(!(ret = next_room(&temp, &queue))) // dead-end paths need to freed
 		{
 			// if (ft_strequ(base->id, "Mij6"))//testing

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 16:33:58 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/22 12:05:41 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ static void	pathfinder(t_farm *farm)
 	temp = -1;
 	i = -1;
 	count = 0;
-	while (farm->source->pipe[++temp])
+	while (farm->source->edge[++temp].next)
 	{
 		farm->source->visited = 2;
-		find_paths(farm->source->pipe[temp], farm->sink->name, direction, farm);
+		find_paths(farm->source->edge[temp].next, farm->sink->name, direction, farm);
 		int i = -1;
 		while (farm->rooms[++i])
 		{
 			farm->rooms[i]->visited = 0;
 		}
-		if (!farm->source->pipe[temp + 1])
+		if (!farm->source->edge[temp + 1].next)
 		{
 			direction = "reverse";
-			write(1, "\n\n\n", 3);
 			count++;
 			temp = -1;
 			if (count == 2)

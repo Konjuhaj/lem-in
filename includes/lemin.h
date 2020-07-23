@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 14:27:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/22 12:05:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 # define MAX_INT  2147483647
 # include "../libraries/ft_printf/includes/ft_printf.h"
 
+typedef struct		s_edge
+{
+	void			*next;
+	int				current;
+}					t_edge;
+
 typedef struct		s_room
 {
 	void			**pipe;
+	t_edge			*edge;
 	int				visited;
 	char			*name;
 }					t_room;
