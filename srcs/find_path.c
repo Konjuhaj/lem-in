@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/23 14:58:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 15:29:06 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,34 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 {
 	int		i;
 	t_room	*room;
-	t_edge	*pair;
+	t_edge *test;
 
 	i = -1;
 	while (temp->edge[++i].next)
 	{
-		if (temp->edge[i].current <= 0)
-			continue ;
-		temp->edge[i].current = -1;
-		pair = temp->edge[i].pair;
-		pair->current = 1;
-		room = temp->edge[i].next;
-		if (room->visited == 0)
+
+		test = temp->edge[i].pair;
+		if (temp->edge[i].current == 0 && test->current != 0)
 		{
-			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
+			temp = test->next;
+			room = temp;
+			if(test->current == 1)
+				test->current = -1;
+			else
+				test->current = 0;
 		}
+		else
+		{
+			if (temp->edge[i].current == 0)
+				continue ;
+			if (temp->edge[i].current == -1)
+				temp->edge[i].current = 0;
+			else
+				temp->edge[i].current = -1;
+			room = temp->edge[i].next;
+		}
+		if (room->visited != 2)
+			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
 		if (room->name == end)
 			return(1);
 	}
@@ -56,14 +69,34 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 {
 	int		i;
 	t_room	*room;
+	t_edge *test;
 
 	i = 0;
 	while (temp->edge[i].next)
 		i++;
 	while (--i > -1)
 	{
-		room = temp->edge[i].next;
-		if (room->visited == 0)
+		test = temp->edge[i].pair;
+		if (temp->edge[i].current == 0 && test->current != 0)
+		{
+			temp = test->next;
+			room = temp;
+			if(test->current == 1)
+				test->current = -1;
+			else
+				test->current = 0;
+		}
+		else
+		{
+			if (temp->edge[i].current == 0)
+				continue ;
+			if (temp->edge[i].current == -1)
+				temp->edge[i].current = 0;
+			else
+				temp->edge[i].current = -1;
+			room = temp->edge[i].next;
+		}
+		if (room->visited != 2)
 		{
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
 		}
@@ -90,17 +123,11 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	save_path(path, farm);
 }
 
-int		test(void)
-{
-	return (1);
-}
-
 void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 {
 	t_queue	*queue;
 	t_queue *base;
 	t_room	*temp;
-	int		ret;
 	int		count;
 
 	queue = ft_queuenew(room, sizeof(*room), room->name);
@@ -120,7 +147,7 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 			if (add_rooms_rev(&queue, temp, end) == 1)
 				store_path(base, room->name, farm);
 		}
-		if(!(ret = next_room(&temp, &queue))) // dead-end paths need to freed
+		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/23 15:00:48 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 17:53:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ static char	**get_rooms(char *av)
 static void	pathfinder(t_farm *farm)
 {
 	int		temp; //testing
-	int		i;
 	int		count;
 	char	*direction;
 
 	direction = "forward";
 	temp = -1;
-	i = -1;
 	count = 0;
 	farm->source->visited = 2;
 	// find_paths(farm->source, farm->sink->name, direction, farm);
@@ -42,7 +40,9 @@ static void	pathfinder(t_farm *farm)
 		int i = -1;
 		while (farm->rooms[++i])
 		{
-			farm->rooms[i]->visited = 0;
+			int j = -1;
+			while (farm->rooms[i]->edge[++j].next)
+				farm->rooms[i]->edge[j].current = 1;
 		}
 		if (!farm->source->edge[temp + 1].next)
 		{

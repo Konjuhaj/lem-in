@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/23 10:39:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:36:59 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct		s_edge
 
 typedef struct		s_room
 {
-	void			**pipe;
 	t_edge			*edge;
 	int				visited;
 	char			*name;
