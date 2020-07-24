@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 16:56:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 17:55:43 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,29 +116,8 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 			if (add_rooms_rev(&queue, temp, end) == 1)
 				store_path(base, room->name, farm);
 		}
-		///testing
-		if (ft_strequ(queue->id, "Vtj1") && ft_strequ(base->id, "Mij6"))
-		{
-			//test();
-			// int i = -1;
-			// t_room *temp;
-			// t_room *neb;
-			// temp = queue->content;
-			// while (temp->pipe[++i])
-			// {
-			// 	neb = temp->pipe[i];
-			// 	//ft_printf("NEIGHBORS %d-> %s -----> %d <------ \n", i, neb->name, neb->visited);
-			// }
-			// print_queue_id(queue);
-			// write(1, "\n", 1);
-		}
-		///
 		if(!(ret = next_room(&temp, &queue))) // dead-end paths need to freed
-		{
-			// if (ft_strequ(base->id, "Mij6"))//testing
-			// 	ft_printf("cat");//testins
 			break ;
-		}
 	}
 	// ft_printf("FIRST one %s \n\n LAST ONE %s\n\n", room->name, queue->id);
 }
