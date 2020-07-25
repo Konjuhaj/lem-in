@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/24 14:36:59 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/25 18:21:01 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_room
 {
 	t_edge			*edge;
 	int				visited;
+	int				path;
 	char			*name;
 }					t_room;
 
@@ -63,7 +64,9 @@ typedef struct	s_farm
 
 void				ft_errno(void);
 
-void				find_paths(t_room *room, char *end, char *id, t_farm *farm);
+void				find_paths(t_room *room, char *end, t_farm *farm);
+
+void				find_shortest(t_room *room, char *end, t_farm *farm);
 
 void				connect_rooms(char **s, t_farm *farm, int i);
 
@@ -100,6 +103,9 @@ void				*ft_queuefind(t_queue **queue, char *id);
 */
 
 void				save_path(t_queue *path, t_farm *farm);
+
+void				store_path(t_queue *queue, char *first, t_farm *farm);
+
 
 /*
 **					COMBINATIONS

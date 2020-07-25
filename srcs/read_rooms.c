@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/23 10:34:12 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/25 18:05:23 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		read_rooms(char **s, t_farm *farm)
 		if (ft_strequ(s[i], "##end") && i++)
 			farm->sink = farm->rooms[j];
 		farm->rooms[j]->name = ft_strsub_until(s[i], ' ');
+		farm->rooms[j]->path = 0;
 		farm->rooms[j++]->visited = 0;
 	}
 	farm->rooms[j] = NULL;
@@ -87,7 +88,7 @@ static void	connect_bothways(t_room *from, t_room *to)
 	from->edge[i].pair = &to->edge[j];
 }
 
-void	connect_rooms(char **s, t_farm *farm, int i)
+void	connect_rooms(char **s, t_farm *farm, int i)//string split could be used here to seperate src-dest "-"
 {
 	char *from;
 	char *to;

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/24 17:53:56 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/25 18:18:25 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,30 @@ static char	**get_rooms(char *av)
 	return (ft_strsplit(line, '\n'));
 }
 
+static void	reset_unused_edges(t_farm *farm)
+{
+	int i;
+	int j;
+	t_room *temp;
+	t_edge *pair;
+
+	i = -1;
+	while(farm->rooms[++i])
+	{
+		if(farm->rooms[i]->path == 0)
+		{
+			temp = farm->rooms[i];
+			j = -1;
+			while(temp->edge[++j].next)
+			{
+				temp->edge[j].current = 1;
+				pair = temp->edge[j].pair;
+				pair->current = 1;
+			}
+		}
+	}
+}
+
 static void	pathfinder(t_farm *farm)
 {
 	int		temp; //testing
@@ -31,28 +55,30 @@ static void	pathfinder(t_farm *farm)
 	direction = "forward";
 	temp = -1;
 	count = 0;
-	farm->source->visited = 2;
-	// find_paths(farm->source, farm->sink->name, direction, farm);
-	while (farm->source->edge[++temp].next)
-	{
-		farm->source->visited = 2;
-		find_paths(farm->source->edge[temp].next, farm->sink->name, direction, farm);
-		int i = -1;
-		while (farm->rooms[++i])
-		{
-			int j = -1;
-			while (farm->rooms[i]->edge[++j].next)
-				farm->rooms[i]->edge[j].current = 1;
-		}
-		if (!farm->source->edge[temp + 1].next)
-		{
-			direction = "reverse";
-			count++;
-			temp = -1;
-			if (count == 2)
-				break ;
-		}
-	}
+	farm->source->path = 2;
+	find_shortest(farm->source, farm->sink->name, farm);
+	reset_unused_edges(farm);
+	find_paths(farm->source, farm->sink->name, farm);
+	// while (farm->source->edge[++temp].next)
+	// {
+	// 	farm->source->visited = 2;
+	// 	find_paths(farm->source->edge[temp].next, farm->sink->name, direction, farm);
+	// 	int i = -1;
+	// 	while (farm->rooms[++i])
+	// 	{
+	// 		int j = -1;
+	// 		while (farm->rooms[i]->edge[++j].next)
+	// 			farm->rooms[i]->edge[j].current = 1;
+	// 	}
+	// 	if (!farm->source->edge[temp + 1].next)
+	// 	{
+	// 		direction = "reverse";
+	// 		count++;
+	// 		temp = -1;
+	// 		if (count == 2)
+	// 			break ;
+	// 	}
+	// }
 }
 
 /*
