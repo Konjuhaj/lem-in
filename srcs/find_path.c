@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/24 17:55:43 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 18:48:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 		room = temp->pipe[i];
 		if (room->visited == 0)
 		{
+			room->visited = 1;
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
 		}
 		if (room->name == end)
@@ -67,7 +68,7 @@ static int add_rooms_rev(t_queue **queue, t_room *temp, char *end)
 	return (0);
 }
 
-void		store_path(t_queue *queue, char *first, t_farm *farm)
+static int	store_path(t_queue *queue, char *first, t_farm *farm)
 {
 	int		i;
 	t_queue	*path;
@@ -80,7 +81,9 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
 		path->distance = i++;
 	}
+	print_queue_id(path);
 	save_path(path, farm);
+	return (1);
 }
 
 int		test(void)
@@ -88,7 +91,7 @@ int		test(void)
 	return (1);
 }
 
-void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
+int		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 {
 	t_queue	*queue;
 	t_queue *base;
@@ -100,24 +103,21 @@ void		find_paths(t_room *room, char *end, char *id, t_farm *farm)
 	base = queue;
 	temp = room;
 	count = 0;
-	// while (!ft_strequ(queue->id, end))
-	while(count < 2)
+	while (!ft_strequ(queue->id, end))
 	{
-		if (ft_strequ(queue->id, end))
-			count++;
 		temp->visited = 1;
 		if (ft_strequ(id, "forward"))
 		{
 			if (add_rooms(&queue, temp, end) == 1)
-				store_path(base, room->name, farm);
+				return(store_path(base, room->name, farm));
 		}
 		else if (ft_strequ(id, "reverse"))
 		{
 			if (add_rooms_rev(&queue, temp, end) == 1)
-				store_path(base, room->name, farm);
+				return(store_path(base, room->name, farm));
 		}
 		if(!(ret = next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
 	}
-	// ft_printf("FIRST one %s \n\n LAST ONE %s\n\n", room->name, queue->id);
+	return (0);
 }

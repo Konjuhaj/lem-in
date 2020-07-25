@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 16:33:58 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 18:35:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,19 @@ static void	pathfinder(t_farm *farm)
 		{
 			farm->rooms[i]->visited = 0;
 		}
-		if (!farm->source->pipe[temp + 1])
+	}
+	temp = -1;
+	while (farm->sink->pipe[++temp])
+	{
+		farm->sink->visited = 2;
+		find_paths(farm->sink->pipe[temp], farm->source->name, "reverse", farm);
+		int i = -1;
+		while (farm->rooms[++i])
 		{
-			direction = "reverse";
-			write(1, "\n\n\n", 3);
-			count++;
-			temp = -1;
-			if (count == 2)
-				break ;
+			farm->rooms[i]->visited = 0;
 		}
 	}
+
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/16 17:07:44 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 18:29:26 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static t_queue				*get_sink(t_combinations *comb, t_room *sink)
 static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 {
 	temp->c_ant--;
-	//ft_printf("%p -> %p && %p <- %s\n", prev->id, prev, end, end->id);
 	if (prev->id == end->id)
 		*s_a += 1;
 	prev->c_ant++;
@@ -139,7 +138,7 @@ static void				reverse_connect(t_combinations *comb, t_room *sink)
 	t_queue *set;
 
 	set = comb->set;
-	while (set->next)
+	while ( set && set->next)
 		{
 		current = set->next;
 		previous = set;
@@ -163,7 +162,7 @@ void					send_ants(t_farm *farm)
 
 	best_comb = best_path(farm->paths->next, farm->ants);
 	calculate_ants_per_path(best_comb, farm->ants);
-	//print_set(best_comb); // testing
+	print_set(best_comb); // testing
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, get_sink(best_comb, farm->sink), farm->ants);
 }

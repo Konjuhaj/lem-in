@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 14:27:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 18:44:23 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct	s_farm
 
 void				ft_errno(void);
 
-void				find_paths(t_room *room, char *end, char *id, t_farm *farm);
+int					find_paths(t_room *room, char *end, char *id, t_farm *farm);
 
 void				connect_rooms(char **s, t_farm *farm, int i);
 
@@ -87,6 +87,8 @@ t_queue				*ft_dequeue(t_queue **queue);
 void				ft_queueaddfront(t_queue **queue, t_queue *new);
 
 void				*ft_queuefind(t_queue **queue, char *id);
+
+void				ft_queueaddback(t_queue **queue, t_queue *data);
 
 /*
 **					HELPER FUNCTIONS
