@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 15:07:19 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/25 19:33:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 	t_room	*room;
 
 	i = -1;
-	while (temp->pipe[++i])
+	while (temp->pipe[++i] && temp->name != end)
 	{
 		room = temp->pipe[i];
 		if (room->visited == 0)
