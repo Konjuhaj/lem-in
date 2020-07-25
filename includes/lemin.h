@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/24 18:44:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:36:59 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 # define MAX_INT  2147483647
 # include "../libraries/ft_printf/includes/ft_printf.h"
 
+typedef struct		s_edge
+{
+	void			*next;
+	int				current;
+	void			*pair;
+}					t_edge;
+
 typedef struct		s_room
 {
-	void			**pipe;
+	t_edge			*edge;
 	int				visited;
 	char			*name;
 }					t_room;
@@ -56,7 +63,7 @@ typedef struct	s_farm
 
 void				ft_errno(void);
 
-int					find_paths(t_room *room, char *end, char *id, t_farm *farm);
+void				find_paths(t_room *room, char *end, char *id, t_farm *farm);
 
 void				connect_rooms(char **s, t_farm *farm, int i);
 
@@ -87,8 +94,6 @@ t_queue				*ft_dequeue(t_queue **queue);
 void				ft_queueaddfront(t_queue **queue, t_queue *new);
 
 void				*ft_queuefind(t_queue **queue, char *id);
-
-void				ft_queueaddback(t_queue **queue, t_queue *data);
 
 /*
 **					HELPER FUNCTIONS
