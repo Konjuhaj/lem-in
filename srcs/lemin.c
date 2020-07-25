@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 18:18:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/25 19:24:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	reset_unused_edges(t_farm *farm)
 	i = -1;
 	while(farm->rooms[++i])
 	{
+		farm->rooms[i]->visited = 0;
 		if(farm->rooms[i]->path == 0)
 		{
 			temp = farm->rooms[i];
@@ -48,37 +49,21 @@ static void	reset_unused_edges(t_farm *farm)
 
 static void	pathfinder(t_farm *farm)
 {
-	int		temp; //testing
-	int		count;
-	char	*direction;
+	int		i; //testing
 
-	direction = "forward";
-	temp = -1;
-	count = 0;
-	farm->source->path = 2;
-	find_shortest(farm->source, farm->sink->name, farm);
-	reset_unused_edges(farm);
-	find_paths(farm->source, farm->sink->name, farm);
-	// while (farm->source->edge[++temp].next)
-	// {
-	// 	farm->source->visited = 2;
-	// 	find_paths(farm->source->edge[temp].next, farm->sink->name, direction, farm);
-	// 	int i = -1;
-	// 	while (farm->rooms[++i])
-	// 	{
-	// 		int j = -1;
-	// 		while (farm->rooms[i]->edge[++j].next)
-	// 			farm->rooms[i]->edge[j].current = 1;
-	// 	}
-	// 	if (!farm->source->edge[temp + 1].next)
-	// 	{
-	// 		direction = "reverse";
-	// 		count++;
-	// 		temp = -1;
-	// 		if (count == 2)
-	// 			break ;
-	// 	}
-	// }
+	i = -1;
+	while (farm->source->edge[++i].next)
+	{
+		farm->source->path = 2;
+		farm->source->visited = 2;
+		find_shortest(farm->source->edge[i].next, farm->sink->name, farm);
+		reset_unused_edges(farm);
+		farm->source->visited = 2;
+		find_paths(farm->source->edge[i].next, farm->sink->name, farm);
+		reset_unused_edges(farm);
+		farm->source->visited = 2;
+		find_paths2(farm->source->edge[i].next, farm->sink->name, farm);
+	}
 }
 
 /*
