@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 19:27:39 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 17:50:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 		room = temp->edge[i].next;
 		if (room->visited != 2)
 		{
+			temp->edge[i].current = 0;
 			if(room->name != end)
 			{
-				temp->edge[i].current = 0;
 				room->visited = 2;
 			}
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
@@ -64,12 +64,15 @@ void		find_shortest(t_room *room, char *end, t_farm *farm)
 	temp = room;
 	while (!(ft_strequ(queue->id, end)))
 	{
+		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))
+		{
+			store_path(base, room->name, farm);
 			break ;
+		}
 		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
 	}
-	store_path(base, room->name, farm);
 }
 
 void		find_paths(t_room *room, char *end, t_farm *farm)
@@ -83,6 +86,7 @@ void		find_paths(t_room *room, char *end, t_farm *farm)
 	temp = room;
 	while (!(ft_strequ(queue->id, end)))
 	{
+		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))
 			store_path(base, room->name, farm);
 		if(!(next_room(&temp, &queue))) // dead-end paths need to freed

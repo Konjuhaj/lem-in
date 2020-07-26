@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 19:24:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 16:15:22 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ static void	pathfinder(t_farm *farm)
 	{
 		farm->source->path = 2;
 		farm->source->visited = 2;
-		find_shortest(farm->source->edge[i].next, farm->sink->name, farm);
+		find_shortest(farm->source, farm->sink->name, farm);
 		reset_unused_edges(farm);
 		farm->source->visited = 2;
-		find_paths(farm->source->edge[i].next, farm->sink->name, farm);
+		write(1, "cat\n", 4);
+		find_paths(farm->source, farm->sink->name, farm);
 		reset_unused_edges(farm);
 		farm->source->visited = 2;
-		find_paths2(farm->source->edge[i].next, farm->sink->name, farm);
+		write(1, "dog\n", 4);
+		find_paths2(farm->source, farm->sink->name, farm);
 	}
 }
 

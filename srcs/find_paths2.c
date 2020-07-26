@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 18:50:53 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 19:19:12 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 16:04:10 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		find_paths2(t_room *room, char *end, t_farm *farm)
 	temp = room;
 	while (!(ft_strequ(queue->id, end)))
 	{
+		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))
 			store_path(base, room->name, farm);
 		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
