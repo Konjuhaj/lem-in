@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 18:50:53 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/26 16:04:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:16:07 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 	t_edge *pair;
 
 	i = -1;
-	while (temp->edge[++i].next)
+	while (temp->edge[++i].next && temp->name != end)
 	{
 		pair = temp->edge[i].pair;
 		if (temp->edge[i].current == 0 && pair->current != 0)
@@ -66,7 +66,7 @@ void		find_paths2(t_room *room, char *end, t_farm *farm)
 	queue = ft_queuenew(room, sizeof(*room), room->name);
 	base = queue;
 	temp = room;
-	while (!(ft_strequ(queue->id, end)))
+	while (queue)
 	{
 		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))

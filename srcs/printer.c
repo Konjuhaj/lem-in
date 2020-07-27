@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/15 17:02:08 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:15:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_queue_id(t_queue *queue)
 	temp = queue;
 	while (temp)
 	{
-		ft_printf("%s(%d) -> ", temp->id, temp->c_ant);
+		ft_printf("%s(%s) -> ", temp->id, temp->called_by);
 		temp = temp->next;
 	}
 	ft_putstr("\n");

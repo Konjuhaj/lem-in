@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/26 16:15:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:18:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,25 @@ static void	reset_unused_edges(t_farm *farm)
 	}
 }
 
+static void	reset_all_edges(t_farm * farm)
+{
+	int i;
+	int j;
+	t_room *temp;
+
+	i = -1;
+	while(farm->rooms[++i])
+	{
+		farm->rooms[i]->visited = 0;
+		temp = farm->rooms[i];
+		j = -1;
+		while(temp->edge[++j].next)
+		{
+			temp->edge[j].current = 1;
+		}
+	}
+}
+
 static void	pathfinder(t_farm *farm)
 {
 	int		i; //testing
@@ -56,15 +75,17 @@ static void	pathfinder(t_farm *farm)
 	{
 		farm->source->path = 2;
 		farm->source->visited = 2;
-		find_shortest(farm->source, farm->sink->name, farm);
+		// ft_putendl("Shortest");
+		find_shortest(farm->source->edge[i].next, farm->sink->name, farm);
 		reset_unused_edges(farm);
 		farm->source->visited = 2;
-		write(1, "cat\n", 4);
-		find_paths(farm->source, farm->sink->name, farm);
+		// ft_putendl("Basic");
+		find_paths(farm->source->edge[i].next, farm->sink->name, farm);
 		reset_unused_edges(farm);
 		farm->source->visited = 2;
-		write(1, "dog\n", 4);
-		find_paths2(farm->source, farm->sink->name, farm);
+		// ft_putendl("Reverse");
+		find_paths2(farm->source->edge[i].next, farm->sink->name, farm);
+		reset_all_edges(farm);
 	}
 }
 
