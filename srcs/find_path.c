@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/26 19:27:37 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:00:26 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		find_shortest(t_room *room, char *end, t_farm *farm)
 	queue = ft_queuenew(room, sizeof(*room), room->name);
 	base = queue;
 	temp = room;
-	while (!(ft_strequ(queue->id, end)))
+	while (queue)
 	{
 		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))

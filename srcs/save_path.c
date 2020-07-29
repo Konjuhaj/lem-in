@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/26 20:18:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:11:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 		temp->path = 1;
 		path->distance = i++;
 	}
-	// print_queue_id(path);
+	print_queue_id(path);
 	save_path(path, farm);
 }

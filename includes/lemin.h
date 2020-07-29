@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 18:51:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/29 17:53:42 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_queue				*ft_dequeue(t_queue **queue);
 void				ft_queueaddfront(t_queue **queue, t_queue *new);
 
 void				*ft_queuefind(t_queue **queue, char *id);
+
+void				ft_free_queue(t_queue *queue);
 
 /*
 **					HELPER FUNCTIONS
