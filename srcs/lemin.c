@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 09:55:46 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 22:55:05 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,19 @@ static void	pathfinder(t_farm *farm)
 		i = -1;
 		farm->source->path = 2;
 		farm->source->visited = 2;
-		find_shortest(farm->source, farm->sink->name, farm);
-		while (++i < 5)
+		bfs(farm->source, farm->sink);
+		reconstruct_path(farm->sink, farm->source, farm);
+		reset_unused_edges(farm);
+		while (++i < 100)
 		{
-			reconstruct_path(farm->sink, farm->source->name, farm);
+			//ft_printf("\n ITARATION #%d\n", i);
+			farm->source->path = 2;
+			farm->source->visited = 2;
+			bfs(farm->source, farm->sink);
 			reset_unused_edges(farm);
-			find_paths2(farm->source, farm->sink->name, farm);
+			reconstruct_path(farm->sink, farm->source, farm);
+			reset_unused_edges(farm);
 		}
-		// farm->source->visited = 2;
-		// find_paths(farm->source, farm->sink->name, farm);
-		// farm->source->visited = 2;
-		// find_paths2(farm->source, farm->sink->name, farm);
 }
 
 int			main(int ac, char **av)
@@ -100,7 +102,6 @@ int			main(int ac, char **av)
 			ft_errno();
 		farm.paths->set = NULL;
 		pathfinder(&farm);
-		//clean_up_rooms(&farm);
 		combinations(&farm);
 		send_ants(&farm);
 	}

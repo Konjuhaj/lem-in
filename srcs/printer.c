@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/29 15:24:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 22:44:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_queue_id(t_queue *queue)
 	temp = queue;
 	while (temp)
 	{
-		ft_printf("%s(%p) -> ", temp->id, temp);
+		ft_printf("%s() -> ", temp->id);
 		temp = temp->next;
 	}
 	ft_putstr("\n");

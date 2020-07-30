@@ -3,71 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   reconstruct_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/30 09:45:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 09:50:24 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/07/30 22:39:13 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-/*
-** Move to the next room and get the T_room node out of q_queue
-*/
-
-static int next_room(t_room **temp, t_queue **queue)
-{
-	if((*queue)->next)
-	{
-		*queue = (*queue)->next;
-		*temp = (*queue)->content;
-		return (1);
-	}
-	return (0);
-}
-
-static int add_rooms(t_queue **queue, t_room *temp, char *end)
+static int	add_paths(t_queue *queue, t_room *source)
 {
 	int		i;
 	t_room	*room;
+	t_room	*neigbor;
 
 	i = -1;
-	while (temp->edge[++i].next && temp->name != end)
+	room = queue->content;
+	while (room->edge[++i].next)
 	{
-		if (temp->edge[i].current == 0)
+		if (room->edge[i].current == 0)
 			continue ;
-		room = temp->edge[i].next;
-		if (room->path && !room->visited)
+		neigbor = room->edge[i].next;
+		if (neigbor->path && !neigbor->visited)
 		{
-			temp->edge[i].current = 0;
-			if(room->name != end)
-			{
-				room->visited = 2;
-			}
-			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
+			if (neigbor != source)
+				neigbor->visited = VISITED;
+			ft_queueadd(&queue, ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
 		}
-		if (room->name == end)
-			return(1);
+		if (neigbor == source)
+			return (1);
 	}
 	return (0);
 }
 
-void		reconstruct_path(t_room *room, char *end, t_farm *farm)
+void	reconstruct_path(t_room *sink, t_room *source, t_farm *farm)
 {
-	t_queue	*queue;
+	t_queue *queue;
 	t_queue *base;
-	t_room	*temp;
 
-	queue = ft_queuenew(room, sizeof(*room), room->name);
+	queue = ft_queuenew(sink, sizeof(sink), sink->name);
 	base = queue;
-	temp = room;
+	sink->visited = VISITED;
 	while (queue)
 	{
-		room->visited = 2;
-		if ((add_rooms(&queue, temp, end)))
-			store_path(base, room->name, farm);
-		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
-			break ;
+		if(add_paths(queue, source))
+			store_path(base, sink->name, farm);
+		queue = queue->next;
 	}
 }

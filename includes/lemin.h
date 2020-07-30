@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 09:52:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 22:38:36 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN
 # define LEM_IN
 # define MAX_INT  2147483647
+# define VISITED 2
 # include "../libraries/ft_printf/includes/ft_printf.h"
 
 typedef struct		s_edge
@@ -74,7 +75,7 @@ void				connect_rooms(char **s, t_farm *farm, int i);
 
 int					read_rooms(char **s, t_farm *farm);
 
-void				reconstruct_path(t_room *room, char *end, t_farm *farm);
+void				reconstruct_path(t_room *sink, t_room *source, t_farm *farm);
 
 /*
 **					TESTING FUNCTUION
@@ -103,6 +104,10 @@ void				ft_queueaddfront(t_queue **queue, t_queue *new);
 void				*ft_queuefind(t_queue **queue, char *id);
 
 void				ft_free_queue(t_queue *queue);
+
+void				bfs(t_room *start, t_room *end);
+
+void				ft_queueaddback(t_queue **aqueue, t_queue *old);
 
 /*
 **					HELPER FUNCTIONS

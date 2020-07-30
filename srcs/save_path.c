@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 09:56:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 22:47:15 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,26 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 {
 	int		i;
 	t_queue	*path;
+	t_queue *last;
 	t_room *temp;
 
-	i = 1;
+	i = 0;
 	path = ft_dequeue(&queue);
 	path->distance = 0;
 	temp = path->content;
 	temp->path = 1;
-	while (path->id != first)
+	last = ft_queuefind(&queue, path->called_by);
+	while (last->id != first)
 	{
-		ft_queueaddfront(&path, ft_queuefind(&queue, path->called_by));
-		temp = path->content;
+		last = ft_queuefind(&queue, last->called_by);
+		ft_queueaddback(&path, last);
+		temp = last->content;
 		temp->path = 1;
 		path->distance = i++;
 	}
-	print_queue_id(path);
-	save_path(path, farm);
+	last = path->next;
+	last->distance = path->distance;
+	free((void *)path);
+	//print_queue_id(last);
+	save_path(last, farm);
 }

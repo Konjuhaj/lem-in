@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 17:51:09 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/29 15:00:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 20:20:33 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void		find_paths(t_room *room, char *end, t_farm *farm)
 	{
 		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))
+		{
+			ft_printf("mouse\n");
 			store_path(base, room->name, farm);
+		}
 		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
 	}
