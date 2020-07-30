@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_paths2.c                                      :+:      :+:    :+:   */
+/*   reconstruct_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/25 18:50:53 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 09:44:17 by bkonjuha         ###   ########.fr       */
+/*   Created: 2020/07/30 09:45:43 by bkonjuha          #+#    #+#             */
+/*   Updated: 2020/07/30 09:50:24 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,18 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 {
 	int		i;
 	t_room	*room;
-	t_edge *pair;
 
 	i = -1;
 	while (temp->edge[++i].next && temp->name != end)
 	{
-		pair = temp->edge[i].pair;
-		if (temp->edge[i].current == 0 && pair->current != 0)
-			room = pair->next;
-		else if (temp->edge[i].current == 0)
+		if (temp->edge[i].current == 0)
 			continue ;
 		room = temp->edge[i].next;
-		if (room->visited != 2)
+		if (room->path && !room->visited)
 		{
+			temp->edge[i].current = 0;
 			if(room->name != end)
 			{
-				temp->edge[i].current = 0;
 				room->visited = 2;
 			}
 			ft_queueadd(queue, ft_queuenew(room, sizeof(*room), room->name), temp->name);
@@ -57,7 +53,7 @@ static int add_rooms(t_queue **queue, t_room *temp, char *end)
 	return (0);
 }
 
-void		find_paths2(t_room *room, char *end, t_farm *farm)
+void		reconstruct_path(t_room *room, char *end, t_farm *farm)
 {
 	t_queue	*queue;
 	t_queue *base;
@@ -70,10 +66,8 @@ void		find_paths2(t_room *room, char *end, t_farm *farm)
 	{
 		room->visited = 2;
 		if ((add_rooms(&queue, temp, end)))
-			break ;
+			store_path(base, room->name, farm);
 		if(!(next_room(&temp, &queue))) // dead-end paths need to freed
 			break ;
 	}
-	store_path(base, room->name, farm);
-	//ft_free_queue(base);
 }

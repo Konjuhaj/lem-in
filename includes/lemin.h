@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/29 17:53:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/30 09:52:40 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void				find_shortest(t_room *room, char *end, t_farm *farm);
 void				connect_rooms(char **s, t_farm *farm, int i);
 
 int					read_rooms(char **s, t_farm *farm);
+
+void				reconstruct_path(t_room *room, char *end, t_farm *farm);
 
 /*
 **					TESTING FUNCTUION
