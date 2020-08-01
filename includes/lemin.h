@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 22:38:36 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:31:38 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				*ft_queuefind(t_queue **queue, char *id);
 
 void				ft_free_queue(t_queue *queue);
 
-void				bfs(t_room *start, t_room *end);
+void				bfs(t_room *start, t_room *end, t_farm *farm);
 
 void				ft_queueaddback(t_queue **aqueue, t_queue *old);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 21:41:59 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:31:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,26 @@ static int		add_rooms(t_queue *queue, t_room *end)
 	return (0);
 }
 
-static void mark_path(t_queue *queue)
+static void mark_path(t_queue *queue, t_farm *farm)
 {
 	t_queue *temp;
 	t_room *room;
 
-	temp = queue;
-	while (temp->next)
-		temp = temp->next;
+	temp = ft_dequeue(&queue);
+	// temp = queue;
+	// while (temp->next)
+	// 	temp = temp->next;
 	while (temp!= queue)
 	{
 		room = temp->content;
 		room->path = 2;
-		temp = ft_queuefind(&queue, temp->called_by);
+		ft_queueaddfront(&temp, ft_queuefind(&queue, temp->called_by));
 	}
+	print_queue_id(temp);
+	save_path(temp, farm);
 }
 
-void	bfs(t_room *start, t_room *end)
+void	bfs(t_room *start, t_room *end, t_farm *farm)
 {
 	t_queue *queue;
 	t_queue *base;
@@ -85,5 +88,5 @@ void	bfs(t_room *start, t_room *end)
 			break ;
 		queue = queue->next;
 	}
-	mark_path(base);
+	mark_path(base, farm);
 }
