@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reconstruct_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/31 10:29:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/01 20:59:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,11 @@ void	reconstruct_path(t_room *sink, t_room *source, t_farm *farm)
 			store_path(base, sink->name, farm);
 		queue = queue->next;
 	}
-	queue = base->next;
+	// queue = base->next;
+	// while (queue)
+	// {
+	// 	free((void *)base);
+	// 	base = queue;
+	// 	queue = queue->next;
+	// }
 }
