@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 22:47:15 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:36:44 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	temp = path->content;
 	temp->path = 1;
 	last = ft_queuefind(&queue, path->called_by);
+	ft_queueaddback(&path, last);
 	while (last->id != first)
 	{
 		last = ft_queuefind(&queue, last->called_by);
@@ -55,7 +56,6 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	}
 	last = path->next;
 	last->distance = path->distance;
-	free((void *)path);
-	//print_queue_id(last);
+	print_queue_id(last);
 	save_path(last, farm);
 }
