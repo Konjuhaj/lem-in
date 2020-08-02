@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/01 20:58:55 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/02 14:13:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ static void mark_path(t_queue *queue, t_farm *farm)
 {
 	t_queue *temp;
 	t_room *room;
+	int distance;
 
 	temp = ft_dequeue(&queue);
+	distance = 1;
 	while (temp->id != queue->id)
 	{
 		room = temp->content;
 		room->path = 2;
 		ft_queueaddfront(&temp, ft_queuefind(&queue, temp->called_by));
+		temp->distance = distance++;
 	}
 	temp = temp->next;
 	save_path(temp, farm);
@@ -82,7 +85,7 @@ void	bfs(t_room *start, t_room *end, t_farm *farm)
 	while (!(add_rooms(queue, end)))
 	{
 		if (!queue->next)
-			break ;
+			return ;
 		queue = queue->next;
 	}
 	if (queue->content != start)

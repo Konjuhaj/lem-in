@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   send_ants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 22:27:14 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/02 14:14:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,21 @@ static t_queue				*get_sink(t_combinations *comb, t_room *sink)
 
 static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 {
-	temp->c_ant--;
-	//ft_printf("%p -> %p && %p <- %s\n", prev->id, prev, end, end->id);
+	prev->c_ant = temp->c_ant;
+	temp->c_ant = 0;
 	if (prev->id == end->id)
 		*s_a += 1;
-	prev->c_ant++;
-	ft_printf("L%s -> %s ", temp->id, prev->id);
+	ft_printf("L%d-%s ", prev->c_ant, prev->id);
 }
 
 static void				send_ant(t_queue *prev)
 {
+	static int ant_number;
+
 	prev->ants--;
-	ft_printf("Lstart -> %s ", prev->id);
-	prev->c_ant++;
+	prev->c_ant = ++ant_number;
+	ft_printf("L%d-%s ", prev->c_ant, prev->id);
+	// *s_a += 1;
 }
 
 static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
@@ -102,6 +104,7 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 	sink_ants = 0;
 	while (sink_ants < ants)
 	{
+		i++;
 		set = comb->set;
 		while (set && set->previous)
 		{
@@ -109,9 +112,9 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 			while (prev && set != prev)
 			{
 				temp = prev->previous;
-				if (temp->c_ant == 1 && prev->c_ant == 0)
+				if (temp->c_ant && !prev->c_ant)
 					move_ant(temp, prev, end, &sink_ants);
-				else if (prev->id == end->id && temp->c_ant == 1)
+				else if (prev->id == end->id && temp->c_ant)
 					move_ant(temp, prev, end, &sink_ants);
 				prev = prev->previous;
 			}
@@ -120,6 +123,7 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 			set = set->parralel;
 		}
 		write(1, "\n", 1);
+		// ft_printf("%d vs %d\n", sink_ants, ants);
 	}
 }
 
