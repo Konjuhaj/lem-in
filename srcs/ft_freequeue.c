@@ -6,21 +6,22 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:49:17 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/29 17:54:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/02 15:03:10 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	ft_free_queue(t_queue *queue)
+void	ft_free_queue(t_queue *base)
 {
-	t_queue *temp;
+	t_queue *queue;
 
-	temp = queue;
-	while (temp)
+	queue = base->next;
+	free((void *)base);
+	while (queue)
 	{
+		base = queue;
 		queue = queue->next;
-		free((void *)temp);
-		temp = queue;
+		free((void *)base);
 	}
 }

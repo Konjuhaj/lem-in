@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/02 14:13:16 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/02 15:03:00 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int		add_rooms(t_queue *queue, t_room *end)
 static void mark_path(t_queue *queue, t_farm *farm)
 {
 	t_queue *temp;
+	t_queue *freeable;
 	t_room *room;
 	int distance;
 
@@ -70,7 +71,9 @@ static void mark_path(t_queue *queue, t_farm *farm)
 		ft_queueaddfront(&temp, ft_queuefind(&queue, temp->called_by));
 		temp->distance = distance++;
 	}
+	freeable = temp;
 	temp = temp->next;
+	free((void *)freeable);
 	save_path(temp, farm);
 }
 
@@ -85,17 +88,13 @@ void	bfs(t_room *start, t_room *end, t_farm *farm)
 	while (!(add_rooms(queue, end)))
 	{
 		if (!queue->next)
+		{
+			ft_free_queue(base);
 			return ;
+		}
 		queue = queue->next;
 	}
 	if (queue->content != start)
 		mark_path(base, farm);
-	// queue = base->next;
-	// free((void *) base);
-	// while (queue)
-	// {
-	// 	base = queue;
-	// 	queue = queue->next;
-	// 	free((void *)base);
-	// }
+	ft_free_queue(base);
 }
