@@ -6,11 +6,38 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 18:21:02 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 19:22:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
+
+static int	path_exists(t_queue *new, t_queue *all)
+{
+	t_queue *first_n;
+	t_queue *first_a;
+	int		fine;
+
+	first_n = new;
+	while (all)
+	{
+		first_a = all;
+		fine = 1;
+		while(new && all)
+		{
+			if (new->content != all->content)
+				fine = 0;
+			new = new->next;
+			all = all->next;
+		}
+		if (fine && (!new && !all))
+			return (1);
+		all = first_a;
+		all = all->parralel;
+		new = first_n;
+	}
+	return (0);
+}
 
 void		save_path(t_queue *path, t_farm *farm)
 {
@@ -18,17 +45,24 @@ void		save_path(t_queue *path, t_farm *farm)
 
 	if (!farm->paths->set)
 	{
+		print_queue_id(path);
 		farm->paths->set = path;
 		farm->paths->set->parralel = NULL;
 	}
 	else
 	{
-		temp = farm->paths->set;
-		while (temp->parralel)
+		if (!path_exists(path, farm->paths->set))
+		{
+			print_queue_id(path);
+			temp = farm->paths->set;
+			while (temp->parralel)
+				temp = temp->parralel;
+			temp->parralel = path;
 			temp = temp->parralel;
-		temp->parralel = path;
-		temp = temp->parralel;
-		temp->parralel = NULL;
+			temp->parralel = NULL;
+		}
+		else
+			ft_free_queue(path);
 	}
 }
 
@@ -57,6 +91,5 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	last = path->next;
 	last->distance = path->distance;
 	free((void *)path);
-	//print_queue_id(last);
 	save_path(last, farm);
 }

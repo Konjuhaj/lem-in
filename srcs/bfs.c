@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 18:20:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:44:13 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	freeable = temp;
 	temp = temp->next;
 	free((void *)freeable);
-	//print_queue_id(temp);
 	save_path(temp, farm);
 }
 
