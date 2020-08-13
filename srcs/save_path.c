@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 19:22:51 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:22:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		save_path(t_queue *path, t_farm *farm)
 
 	if (!farm->paths->set)
 	{
-		print_queue_id(path);
 		farm->paths->set = path;
 		farm->paths->set->parralel = NULL;
 	}
@@ -53,7 +52,6 @@ void		save_path(t_queue *path, t_farm *farm)
 	{
 		if (!path_exists(path, farm->paths->set))
 		{
-			print_queue_id(path);
 			temp = farm->paths->set;
 			while (temp->parralel)
 				temp = temp->parralel;

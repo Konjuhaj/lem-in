@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 23:57:43 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:11:00 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		print_set(t_combinations *set)
 	test = set->set;
 	while (test)
 	{
-		ft_printf("ANTS: %d, DISTANCE %d ", test->ants, test->distance);
+		ft_printf("A: %d, D %d ", test->ants, test->distance);
 		print_queue_id(test);
 		test = test->parralel;
 	}
