@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/02 14:53:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 09:00:04 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	pathfinder(t_farm *farm)
 		bfs(farm->source, farm->sink, farm);
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
-		while (++i < 50)
+		while (++i < 5)
 		{
 			//ft_printf("\n ITARATION #%d\n", i);
 			farm->source->path = 2;
@@ -106,7 +106,7 @@ int			main(int ac, char **av)
 		combinations(&farm);
 		send_ants(&farm);
 	}
-	print_sets(farm.paths);
-	system("leaks lem-in");
+	//print_sets(farm.paths);
+	//system("leaks lem-in");
 	return (0);
 }

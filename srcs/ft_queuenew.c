@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 20:08:26 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 10:48:09 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 08:57:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ t_queue	*ft_queuenew(void *content, size_t content_size, char *id)
 		new->content_size = content_size;
 		new->called_by = "default";
 		new->id = id;
+		new->ants = 0;
+		new->next = NULL;
+		new->parralel = NULL;
+		new->c_ant = 0;
 	}
 	new->next = NULL;
 	return (new);
