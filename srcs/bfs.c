@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 09:00:11 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:20:26 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int		add_rooms(t_queue *queue, t_room *end)
 		neigbor = room->edge[i].next;
 		if (!neigbor->visited)
 		{
-			room->edge[i].current = 0;
 			if (neigbor != end)
 				neigbor->visited = 2;
 			ft_queueadd(&queue, ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
@@ -53,6 +52,16 @@ static int		add_rooms(t_queue *queue, t_room *end)
 			return (1);
 	}
 	return (0);
+}
+
+static void	mark_current(t_room *from, t_room *to)
+{
+	int i;
+
+	i = 0;
+	while (from->edge[i].next != to)
+		i++;
+	from->edge[i].current = 0;
 }
 
 static void mark_path(t_queue *queue, t_farm *farm)
@@ -66,14 +75,17 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	distance = 1;
 	while (temp->id != queue->id)
 	{
+		freeable = ft_queuefind(&queue, temp->called_by);
+		mark_current(freeable->content, temp->content);
+		ft_queueaddfront(&temp, freeable);
 		room = temp->content;
 		room->path = 2;
-		ft_queueaddfront(&temp, ft_queuefind(&queue, temp->called_by));
 		temp->distance = distance++;
 	}
 	freeable = temp;
 	temp = temp->next;
 	free((void *)freeable);
+	//print_queue_id(temp);
 	save_path(temp, farm);
 }
 
