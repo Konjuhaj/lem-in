@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 19:59:07 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 00:14:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	pathfinder(t_farm *farm)
 		reset_unused_edges(farm);
 		while (++i < 50)
 		{
-			//ft_printf("\n ITARATION #%d\n", i);
+			// ft_printf("\n ITARATION #%d\n", i);
 			farm->source->path = 2;
 			farm->source->visited = 2;
 			bfs(farm->source, farm->sink, farm);

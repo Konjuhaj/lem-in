@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 21:22:56 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 00:28:08 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		save_path(t_queue *path, t_farm *farm)
 
 	if (!farm->paths->set)
 	{
+		// print_queue_id(path);
 		farm->paths->set = path;
 		farm->paths->set->parralel = NULL;
 	}
@@ -52,6 +53,9 @@ void		save_path(t_queue *path, t_farm *farm)
 	{
 		if (!path_exists(path, farm->paths->set))
 		{
+			// static int d;
+			// ft_printf("%d ==> ", ++d);
+			// print_queue_id(path);
 			temp = farm->paths->set;
 			while (temp->parralel)
 				temp = temp->parralel;
@@ -89,5 +93,8 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	last = path->next;
 	last->distance = path->distance;
 	free((void *)path);
+	// static int d;
+	// ft_printf("%d == ", ++d);
+	// print_queue_id(last);
 	save_path(last, farm);
 }
