@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/14 00:26:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 08:24:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int		add_rooms(t_queue *queue, t_room *end)
 		neigbor = room->edge[i].next;
 		if (!neigbor->visited)
 		{
-			room->edge[i].current = 0;
+			//room->edge[i].current = 0;
 			if (neigbor != end)
 				neigbor->visited = VISITED;
 			ft_queueadd(&queue, ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
@@ -90,11 +90,6 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	save_path(temp, farm);
 }
 
-static void	found(void)
-{
-			write(1, "found", 5);
-}
-
 void	bfs(t_room *start, t_room *end, t_farm *farm)
 {
 	t_queue *queue;
@@ -111,8 +106,6 @@ void	bfs(t_room *start, t_room *end, t_farm *farm)
 			return ;
 		}
 		queue = queue->next;
-		if(ft_strequ(queue->id, "I_z0"))
-			found();
 	}
 	if (queue->content != start)
 		mark_path(base, farm);
