@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/01 17:31:38 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 11:28:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void				ft_queueaddback(t_queue **aqueue, t_queue *old);
 
 void				save_path(t_queue *path, t_farm *farm);
 
-void				store_path(t_queue *queue, char *first, t_farm *farm);
+t_queue				*store_path(t_queue *queue, char *first, t_farm *farm);
 
 
 /*
@@ -123,6 +123,8 @@ void				store_path(t_queue *queue, char *first, t_farm *farm);
 */
 
 void				combinations(t_farm *farm);
+
+void				update_combination(t_combinations *comb);
 
 /*
 **					CHECKER

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/13 20:11:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 11:35:04 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ void		print_set(t_combinations *set)
 	//testing
 	t_queue *test;
 	test = set->set;
+	ft_printf("\nSET M_F-%d, A-S%f\n", set->max_flow, set->avg_speed);
 	while (test)
 	{
-		ft_printf("A: %d, D %d ", test->ants, test->distance);
+		ft_printf("A: %d, D %d \n", test->ants, test->distance);
 		print_queue_id(test);
 		test = test->parralel;
 	}

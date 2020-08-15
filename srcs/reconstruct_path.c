@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/14 08:59:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/15 23:10:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,23 @@ void	reconstruct_path(t_room *sink, t_room *source, t_farm *farm)
 {
 	t_queue *queue;
 	t_queue *base;
+	t_queue *temp;
+	int		total_distance;
 	int		i;
 
 	queue = ft_queuenew(sink, sizeof(sink), sink->name);
 	base = queue;
 	sink->visited = VISITED;
 	i = 0;
+	total_distance = 0;
 	while (queue)
 	{
-		if(add_paths(queue, source) && i++)
-			store_path(base, sink->name, farm);
+		if(add_paths(queue, source))
+		{
+			temp = store_path(base, sink->name, farm);
+			i++;
+			total_distance += temp->distance;
+		}
 		queue = queue->next;
 	}
 	ft_free_queue(base);

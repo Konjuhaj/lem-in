@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/14 00:14:47 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/15 23:11:35 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	reset_unused_edges(t_farm *farm)
 		farm->rooms[i]->visited = 0;
 		if(farm->rooms[i]->path == 0)
 		{
+			// ft_printf("ROOM %s being reseted\n", farm->rooms[i]->name);
 			temp = farm->rooms[i];
 			j = -1;
 			while(temp->edge[++j].next)
@@ -45,6 +46,7 @@ static void	reset_unused_edges(t_farm *farm)
 			}
 		}
 	}
+	// ft_printf("DONE\n");
 }
 
 // static void	reset_all_edges(t_farm * farm)
@@ -107,7 +109,7 @@ int			main(int ac, char **av)
 		combinations(&farm);
 		send_ants(&farm);
 	}
-	//print_sets(farm.paths);
-	//system("leaks lem-in");
+	// print_sets(farm.paths);
+	// system("leaks lem-in");
 	return (0);
 }

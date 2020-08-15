@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/14 08:24:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/14 11:18:41 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		has_unvisited_neigbour(t_room *room, int i)
 	while (room->edge[i].next)
 	{
 		temp = room->edge[i].next;
-		if (!temp->path)
+		if (!temp->path && !temp->visited)
 			return (i);
 		i++;
 	}
@@ -74,6 +74,8 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	int distance;
 
 	temp = ft_dequeue(&queue);
+	room = temp->content;
+	room->path = 2;
 	distance = 1;
 	while (temp->id != queue->id)
 	{
