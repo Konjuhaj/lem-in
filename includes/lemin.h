@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/14 11:28:48 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:24:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void				save_path(t_queue *path, t_farm *farm);
 
 t_queue				*store_path(t_queue *queue, char *first, t_farm *farm);
 
+t_queue				*copy_path(t_queue *paths);
+
 
 /*
 **					COMBINATIONS
@@ -126,11 +128,15 @@ void				combinations(t_farm *farm);
 
 void				update_combination(t_combinations *comb);
 
+void 				improve_set(t_queue *new, t_queue *all, t_room *sink);
+
 /*
 **					CHECKER
 */
 
 int					are_duplicates(t_queue *new, t_queue *base, t_room *sink);
+
+int					are_identical(t_queue *new, t_queue *all);
 
 /*
 **					SEND ANTS

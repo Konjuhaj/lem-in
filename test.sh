@@ -21,3 +21,7 @@ echo "Superposition 8 should be 94"
 ./lem-in test/flow-big-superposition_8 | wc -l
 echo "file_vaikea should be 8"
 ./lem-in test/test_file_vaikea | wc -l
+echo "flow-big should be 73"
+./lem-in test/flow-big| wc -l
+echo "simple 4"
+./lem-in test/flow-big| wc -l
