@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/16 00:22:56 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/18 19:01:47 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_PATH = ./srcs/
 SRC_FILES = lemin.c ft_errno.c find_path.c read_rooms.c ft_queuenew.c ft_queueadd.c \
 			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c save_path.c printer.c \
 			combinations.c checker.c send_ants.c find_paths2.c ft_freequeue.c \
-			bfs.c reconstruct_path.c ft_queueaddback.c improve_set.c
+			bfs.c reconstruct_path.c ft_queueaddback.c improve_set.c knapsack.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/15 23:56:44 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/18 19:50:17 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	save_path(temp, farm);
 }
 
-void	bfs(t_room *start, t_room *end, t_farm *farm)
+int	bfs(t_room *start, t_room *end, t_farm *farm)
 {
 	t_queue *queue;
 	t_queue *base;
@@ -105,11 +105,12 @@ void	bfs(t_room *start, t_room *end, t_farm *farm)
 		if (!queue->next)
 		{
 			ft_free_queue(base);
-			return ;
+			return (0);
 		}
 		queue = queue->next;
 	}
 	if (queue->content != start)
 		mark_path(base, farm);
 	ft_free_queue(base);
+	return (1);
 }

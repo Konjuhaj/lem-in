@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:07:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/16 00:31:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/18 17:35:32 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,6 @@ int			are_identical(t_queue *new, t_queue *all)
 		all = all->next;
 	}
 	return (1);
-}
-
-static void	get_unused_paths(t_queue *new, t_queue *all, t_room *sink)
-{
-	t_queue *unused;
-	t_queue *first_n;
-
-	first_n = new;
-	if (!(unused = (t_queue *)malloc(sizeof(t_queue))))
-		ft_errno();
-	while (all)
-	{
-		if (are_duplicates(all, new, sink) && !are_identical(new, all))
-		{
-			ft_printf("UNUSED \n");
-			print_queue_id(all);
-			unused = all;
-			unused->parralel = NULL;
-			unused = unused->parralel;
-		}
-		all = all->parralel;
-	}
 }
 
 void improve_set(t_queue *new, t_queue *all, t_room *sink)
@@ -66,5 +44,4 @@ void improve_set(t_queue *new, t_queue *all, t_room *sink)
 		}
 		all = all->parralel;
 	}
-	get_unused_paths(new, first_a, sink);
 }

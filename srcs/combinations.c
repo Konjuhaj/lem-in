@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/16 00:22:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/18 19:38:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	combinations(t_farm *farm)
 		comb = comb->next;
 		improve_set(comb->set, farm->paths->set, farm->sink);
 		update_combination(comb);
-		print_set(comb);
+		// print_set(comb);
 		path = path->parralel;
 	}
+	// comb->next = knapsack(farm->paths->set, farm->sink);
+	// ft_printf("KNAPSACK SETT\n");
+	// print_set(comb->next);
 }

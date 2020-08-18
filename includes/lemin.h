@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/16 00:24:27 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/18 19:52:23 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_queue
 	void			*parralel;
 	char			*called_by;
 	int				distance;
+	int				value;
 	int				ants;
 	int				c_ant;
 	char			*id;
@@ -105,7 +106,7 @@ void				*ft_queuefind(t_queue **queue, char *id);
 
 void				ft_free_queue(t_queue *queue);
 
-void				bfs(t_room *start, t_room *end, t_farm *farm);
+int					bfs(t_room *start, t_room *end, t_farm *farm);
 
 void				ft_queueaddback(t_queue **aqueue, t_queue *old);
 
@@ -129,6 +130,8 @@ void				combinations(t_farm *farm);
 void				update_combination(t_combinations *comb);
 
 void 				improve_set(t_queue *new, t_queue *all, t_room *sink);
+
+t_combinations		*knapsack(t_queue *queue, t_room *sink);
 
 /*
 **					CHECKER

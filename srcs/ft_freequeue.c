@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_freequeue.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:49:17 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/02 15:03:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/18 19:07:41 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ void	ft_free_queue(t_queue *base)
 {
 	t_queue *queue;
 
-	queue = base->next;
-	free((void *)base);
-	while (queue)
+	if (base)
 	{
-		base = queue;
-		queue = queue->next;
+		queue = base->next;
 		free((void *)base);
+			while (queue)
+		{
+			base = queue;
+			queue = queue->next;
+			free((void *)base);
+		}
 	}
+
 }
