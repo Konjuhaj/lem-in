@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 11:53:24 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 22:27:05 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,11 @@ static char	**get_rooms(char *av)
 static void	reset_unused_edges(t_farm *farm)
 {
 	int i;
-	int j;
-	t_room *temp;
-	t_edge *pair;
 
 	i = -1;
 	while(farm->rooms[++i])
-	{
 		farm->rooms[i]->visited = 0;
-		if(farm->rooms[i]->path == 0)
-		{
-			// ft_printf("ROOM %s being reseted\n", farm->rooms[i]->name);
-			temp = farm->rooms[i];
-			j = -1;
-			while(temp->edge[++j].next)
-			{
-				temp->edge[j].current = 1;
-				pair = temp->edge[j].pair;
-				pair->current = 1;
-			}
-		}
-	}
-	// ft_printf("DONE\n");
 }
-
-// static void	reset_all_edges(t_farm * farm)
-// {
-// 	int i;
-// 	int j;
-// 	t_room *temp;
-
-// 	i = -1;
-// 	while(farm->rooms[++i])
-// 	{
-// 		farm->rooms[i]->visited = 0;
-// 		temp = farm->rooms[i];
-// 		j = -1;
-// 		while(temp->edge[++j].next)
-// 		{
-// 			temp->edge[j].current = 1;
-// 		}
-// 	}
-// }
 
 static void	pathfinder(t_farm *farm)
 {
@@ -81,7 +44,6 @@ static void	pathfinder(t_farm *farm)
 		reset_unused_edges(farm);
 		while (++i < 50)
 		{
-			// ft_printf("\n ITARATION #%d\n", i);
 			farm->source->path = 2;
 			farm->source->visited = 2;
 			bfs(farm->source, farm->sink, farm);
@@ -110,6 +72,6 @@ int			main(int ac, char **av)
 		send_ants(&farm);
 	}
 	// print_sets(farm.paths);
-	// system("leaks lem-in");
+	system("leaks lem-in");
 	return (0);
 }

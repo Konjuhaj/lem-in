@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 20:23:55 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 22:24:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int		add_rooms(t_queue *queue, t_room *end)
 		neigbor = room->edge[i].next;
 		if (!neigbor->visited)
 		{
-			//room->edge[i].current = 0;
 			if (neigbor != end)
 				neigbor->visited = VISITED;
 			ft_queueadd(&queue, ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
