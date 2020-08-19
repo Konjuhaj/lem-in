@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 22:27:05 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 23:00:29 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	reset_unused_edges(t_farm *farm)
 	i = -1;
 	while(farm->rooms[++i])
 		farm->rooms[i]->visited = 0;
+	i = -1;
 }
 
 static void	pathfinder(t_farm *farm)
@@ -36,7 +37,6 @@ static void	pathfinder(t_farm *farm)
 		int i;
 
 		i = -1;
-		farm->source->path = 2;
 		farm->source->visited = 2;
 		bfs(farm->source, farm->sink, farm);
 		reset_unused_edges(farm);
@@ -44,14 +44,12 @@ static void	pathfinder(t_farm *farm)
 		reset_unused_edges(farm);
 		while (++i < 50)
 		{
-			farm->source->path = 2;
 			farm->source->visited = 2;
 			bfs(farm->source, farm->sink, farm);
 			reset_unused_edges(farm);
 			reconstruct_path(farm->sink, farm->source, farm);
 			reset_unused_edges(farm);
 		}
-		// exit(2);
 }
 
 int			main(int ac, char **av)
@@ -72,6 +70,6 @@ int			main(int ac, char **av)
 		send_ants(&farm);
 	}
 	// print_sets(farm.paths);
-	system("leaks lem-in");
+	//system("leaks lem-in");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/15 23:10:34 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 23:06:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ static int	add_paths(t_queue *queue, t_room *source)
 	int		i;
 	t_room	*room;
 	t_room	*neigbor;
+	t_edge	*pair;
 
 	i = -1;
 	room = queue->content;
 	while (room->edge[++i].next)
 	{
-		if (room->edge[i].current == 0)
+		pair = room->edge[i].pair;
+		if (room->edge[i].current == 0 || pair->current != 0)
 			continue ;
 		neigbor = room->edge[i].next;
 		if (neigbor->path && !neigbor->visited)
@@ -37,28 +39,37 @@ static int	add_paths(t_queue *queue, t_room *source)
 	return (0);
 }
 
-void	reconstruct_path(t_room *sink, t_room *source, t_farm *farm)
+void	reconstruct_path2(t_room *sink, t_room *source, t_farm *farm)
 {
 	t_queue *queue;
 	t_queue *base;
 	t_queue *temp;
-	int		total_distance;
-	int		i;
 
 	queue = ft_queuenew(sink, sizeof(sink), sink->name);
 	base = queue;
 	sink->visited = VISITED;
-	i = 0;
-	total_distance = 0;
 	while (queue)
 	{
 		if(add_paths(queue, source))
 		{
 			temp = store_path(base, sink->name, farm);
-			i++;
-			total_distance += temp->distance;
 		}
 		queue = queue->next;
 	}
 	ft_free_queue(base);
+}
+
+void	reconstruct_path(t_room *sink, t_room *source, t_farm *farm)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (sink->edge[++i].next)
+	{
+		reconstruct_path2(sink->edge[i].next, source, farm);
+		j = -1;
+		while (farm->rooms[++j])
+			farm->rooms[j]->visited = 0;
+	}
 }
