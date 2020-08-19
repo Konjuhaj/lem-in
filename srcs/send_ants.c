@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 14:36:35 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 20:28:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static t_combinations	*best_path(t_combinations *comb, int ants)
 	while (comb && comb->next)
 	{
 		comb = comb->next;
-		if (comb->using <= ants)
+		if (comb->max_flow <= ants)
 		{
-			if(comb->using > temp->using && comb->avg_speed < temp->avg_speed + 2)
+			if(comb->max_flow > temp->max_flow && comb->avg_speed < temp->avg_speed + 2)
 				temp = comb;
-			else if (comb->avg_speed < temp->avg_speed && comb->using == temp->using)
+			else if (comb->avg_speed < temp->avg_speed && comb->max_flow == temp->max_flow)
 				temp = comb;
 		}
-		else if (comb->using > ants && temp->avg_speed > comb->avg_speed)
+		else if (comb->max_flow > ants && temp->avg_speed > comb->avg_speed)
 		{
 			temp = comb;
 		}
@@ -167,7 +167,9 @@ void					send_ants(t_farm *farm)
 
 	best_comb = best_path(farm->paths->next, farm->ants);
 	calculate_ants_per_path(best_comb, farm->ants);
-	//print_set(best_comb); // testing
+	remove_unused(best_comb->set);
+	improve_set(best_comb->set, farm->paths->set, farm->sink);
+	// print_set(best_comb); // testing
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, get_sink(best_comb, farm->sink), farm->ants);
 }

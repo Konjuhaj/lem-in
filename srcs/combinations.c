@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 14:46:51 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 18:01:05 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ t_queue			*copy_path(t_queue *paths)
 
 t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 {
-	t_queue *temp_new;
-	t_combinations *new;
+	t_queue			*temp_new;
+	t_combinations	*new;
 
 	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
 		ft_errno();
@@ -121,7 +121,7 @@ void	combinations(t_farm *farm)
 		comb = comb->next;
 		improve_set(comb->set, farm->paths->set, farm->sink);
 		update_combination(comb);
-		get_paths_in_use(comb, farm->ants);
+		//get_paths_in_use(comb, farm->ants);
 		//print_set(comb);
 		path = path->parralel;
 	}

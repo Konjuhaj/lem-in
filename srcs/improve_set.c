@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:07:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/18 17:35:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 20:15:20 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,97 @@ int			are_identical(t_queue *new, t_queue *all)
 	}
 	return (1);
 }
+
+void		remove_unused(t_queue *queue)
+{
+	t_queue *temp;
+	t_queue *temp2;
+
+	temp = queue->parralel;
+	temp2 = queue;
+	while (temp)
+	{
+		if (temp->ants == 0)
+		{
+			temp2->parralel = temp->parralel;
+			ft_free_queue(temp);
+			temp = temp2->parralel;
+			continue ;
+		}
+		temp = temp->parralel;
+		temp2 = temp2->parralel;
+	}
+}
+
+// int			overlap(t_queue *path, t_queue *set, t_room *sink)
+// {
+// 	t_queue *base_set;
+// 	t_queue *base_path;
+// 	int		overlap;
+// 	int		breaker;
+
+// 	base_set = set;
+// 	base_path = path;
+// 	overlap = 0;
+// 	while (set)
+// 	{
+// 		breaker = 0;
+// 		while (path && path->content != sink)
+// 		{
+// 			while (set && set->content != sink)
+// 			{
+// 				if (path->content == set->content && overlap++ && breaker++)
+// 					break ;
+// 				set = set->next;
+// 			}
+// 			if (breaker)
+// 				break ;
+// 			set = base_set;
+// 			path = path->next;
+// 		}
+// 		base_set = base_set->parralel;
+// 		set = base_set;
+// 		path = base_path;
+// 	}
+// 	ft_printf("OVERLAP === %d\n", overlap);
+// 	print_queue_id(base_path);
+// 	return (overlap);
+// }
+
+// void		swap_nodes(t_queue *set, t_queue *new, t_queue *curr)
+// {
+// 	t_queue *temp;
+
+// 	temp = set;
+// 	while (temp->parralel != curr)
+// 		temp = temp->parralel;
+// 	temp->parralel = new;
+// 	new->parralel = curr->parralel;
+// 	ft_free_queue(curr);
+// }
+
+// void		improve_set2(t_queue *best, t_queue *all, t_room *sink)
+// {
+// 	t_queue *temp;
+// 	t_queue *temp2;
+
+	// remove_unused(best);
+	// temp = all;
+	// while (temp)
+	// {
+	// 	temp2 = best;
+	// 	while (temp2)
+	// 	{
+	// 		if (temp->distance < temp2->distance && overlap(temp, best, sink) == 1)
+	// 		{
+	// 			swap_nodes(best, temp, temp2);
+	// 		}
+	// 		temp2 = temp2->parralel;
+	// 	}
+	// 	temp = temp->parralel;
+	// }
+
+// }
 
 void improve_set(t_queue *new, t_queue *all, t_room *sink)
 {

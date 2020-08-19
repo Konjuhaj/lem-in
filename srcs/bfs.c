@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/18 19:50:17 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 20:23:55 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static int		add_rooms(t_queue *queue, t_room *end)
 	room = queue->content;
 	while (room->edge[++i].next)
 	{
+		neigbor = room->edge[i].next;
 		if (room->edge[i].current == 0)
 			continue ;
-		if (room->edge[i].next != end)
+		if (room->edge[i].next != end && neigbor->path)
 			i = has_unvisited_neigbour(room, i);
 		neigbor = room->edge[i].next;
 		if (!neigbor->visited)
@@ -90,6 +91,7 @@ static void mark_path(t_queue *queue, t_farm *farm)
 	temp = temp->next;
 	free((void *)freeable);
 	save_path(temp, farm);
+	farm->bottleneck = 0;
 }
 
 int	bfs(t_room *start, t_room *end, t_farm *farm)
