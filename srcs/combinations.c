@@ -6,11 +6,54 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/18 19:38:51 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 14:46:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
+
+void	get_paths_in_use(t_combinations *comb, int ants)
+{
+	int arr[50];
+	int i;
+	int using;
+	int	size;
+	t_queue *temp;
+
+	temp = comb->set;
+	i = -1;
+	using = 0;
+	ft_bzero(&arr[0], sizeof(arr));
+	while (temp)
+	{
+		arr[++i] = temp->distance;
+		temp = temp->parralel;
+	}
+	sort_arr(&arr[0], i);
+	size = i;
+	i = 0;
+	while (ants > 0 && size)
+	{
+		if (arr[i] < arr[i + 1] && i < size)
+		{
+			ants -= arr[i + 1] - arr[i];
+			arr[i] += arr[i + 1] - arr[i];
+			if (using < i + 1)
+				using = i + 1;
+			i = 0;
+			continue ;
+		}
+		if (i == size)
+		{
+			arr[i] += 1;
+			ants -= 1;
+			i = 0;
+
+		}
+		i++;
+	}
+	comb->using = using;
+}
 
 void	update_combination(t_combinations *comb)
 {
@@ -78,7 +121,8 @@ void	combinations(t_farm *farm)
 		comb = comb->next;
 		improve_set(comb->set, farm->paths->set, farm->sink);
 		update_combination(comb);
-		// print_set(comb);
+		get_paths_in_use(comb, farm->ants);
+		//print_set(comb);
 		path = path->parralel;
 	}
 	// comb->next = knapsack(farm->paths->set, farm->sink);

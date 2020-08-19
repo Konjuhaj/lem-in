@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/18 19:52:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/19 13:55:50 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct		s_combinations
 {
 	t_queue			*set;
 	int				max_flow;
+	int				using;
 	double			avg_speed;
 	void			*next;
 }					t_combinations;
