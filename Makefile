@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/18 19:01:47 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/19 11:53:46 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ COLOR_DEFAULT = \033[1;34m
 
 all: $(LEMIN)
 
-$(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF)
+$(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF) $(SRC)
 		@$(COMPILE) $(SRC) $(LIBFT) $(PRINTF) -o $(LEMIN)
 		@echo "[$(COLOR_PENDING)Putting everything togeather$(COLOR_RESET)]"
 		@echo "[$(COLOR_SUCCESS)Executable $(PUSH_SWAP) created$(COLOR_RESET)]"
