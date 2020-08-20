@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 20:15:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 11:40:24 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_combinations
 {
 	t_queue			*set;
 	int				max_flow;
-	int				using;
+	int				using[150];
 	double			avg_speed;
 	void			*next;
 }					t_combinations;
@@ -123,7 +123,9 @@ t_queue				*copy_path(t_queue *paths);
 
 void				remove_unused(t_queue *queue);
 
+void				reset_ants(t_queue *queue);
 
+void				get_paths_in_use(t_combinations *comb);
 
 /*
 **					COMBINATIONS
@@ -133,9 +135,9 @@ void				combinations(t_farm *farm);
 
 void				update_combination(t_combinations *comb);
 
-void 				improve_set(t_queue *new, t_queue *all, t_room *sink);
+void 				improve_set2(t_queue *new, t_combinations *farm, t_room *sink);
 
-void 				improve_set2(t_queue *best, t_queue *all, t_room *sink);
+void 				improve_set(t_queue *best, t_queue *all, t_room *sink);
 
 t_combinations		*knapsack(t_queue *queue, t_room *sink);
 
