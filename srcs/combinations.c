@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 18:47:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 23:25:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 	new->set = copy_path(current);
 	temp_new = new->set;
 	i = 0;
-	while (paths->parralel)
+	while (paths)
 	{
-		if (i++ > 50)
-			break ;
 		if (!are_duplicates(paths, new->set, sink))
 		{
 			temp_new->parralel = copy_path(paths);
@@ -78,19 +76,15 @@ void	combinations(t_farm *farm)
 	comb = farm->paths;
 	path = comb->set;
 	i = 0;
-	//get_paths_in_use(farm->paths);
+	farm->paths = get_paths_in_use(farm->paths);
 	while (path)
 	{
-		// if (i++ > 50)
-		// 	break ;
+		if (i++ > 80)
+			break ;
 		comb->next = new_set(farm->paths->set, path, farm->sink);
 		comb = comb->next;
-		improve_set(comb->set, farm->paths->set, farm->sink);
 		update_combination(comb);
 		//print_set(comb);
 		path = path->parralel;
 	}
-	// comb->next = knapsack(farm->paths->set, farm->sink);
-	// ft_printf("KNAPSACK SETT\n");
-	// print_set(comb->next);
 }

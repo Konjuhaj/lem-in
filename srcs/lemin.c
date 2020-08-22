@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 15:13:17 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 23:22:54 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	pathfinder(t_farm *farm)
 		reset_unused_edges(farm);
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
-		while (++i < 50)
+		while (++i < 40)
 		{
 			farm->source->visited = 2;
 			bfs(farm->source, farm->sink, farm);
@@ -70,7 +70,6 @@ int			main(int ac, char **av)
 		combinations(&farm);
 		send_ants(&farm);
 	}
-	// print_sets(farm.paths);
 	//ystem("leaks lem-in");
 	return (0);
 }

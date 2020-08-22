@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:07:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 11:40:03 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 22:21:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,35 +137,37 @@ void improve_set(t_queue *new, t_queue *all, t_room *sink)
 	}
 }
 
-// t_queue *get_smallest(t_combinations *comb, int i)
-// {
-// 	t_queue *temp;
+t_queue *get_smallest(t_combinations *comb, int i)
+{
+	t_queue *temp;
 
-// 	temp = comb->set;
-// 	while (temp && temp->distance != comb->using[i])
-// 		temp = temp->parralel;
-// 	return (temp);
-// }
+	temp = comb->set;
+	while (temp && temp->distance != comb->using[i])
+		temp = temp->parralel;
+	return (temp);
+}
 
 
-// void improve_set(t_queue *new, t_combinations *farm, t_room *sink)
-// {
-// 	t_queue *first_n;
-// 	t_queue *all;
-// 	int i;
+void improve_set2(t_queue *new, t_combinations *farm, t_room *sink)
+{
+	t_queue *first_n;
+	t_queue *all;
+	int i;
 
-// 	first_n = new;
-// 	i = -1;
-// 	while ((all = get_smallest(farm, ++i)))
-// 	{
-// 		if (!are_duplicates(all, new, sink))
-// 		{
-// 			while (new->parralel)
-// 				new = new->parralel;
-// 			new->parralel = copy_path(all);
-// 			new = new->parralel;
-// 			new->parralel = NULL;
-// 			new = first_n;
-// 		}
-// 	}
-// }
+	first_n = new;
+	i = -1;
+	while ((all = get_smallest(farm, ++i)))
+	{
+		if (i == 80)
+			break ;
+		if (!are_duplicates(all, new, sink))
+		{
+			while (new->parralel)
+				new = new->parralel;
+			new->parralel = copy_path(all);
+			new = new->parralel;
+			new->parralel = NULL;
+			new = first_n;
+		}
+	}
+}

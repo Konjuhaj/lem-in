@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 13:27:15 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/19 14:12:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 21:40:54 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	sort_arr(int *arr, int size)
+int	*sort_arr(int *arr, int size)
 {
 	int swap;
 	int i;
@@ -27,8 +27,10 @@ void	sort_arr(int *arr, int size)
 				swap = arr[i];
 				arr[i] = arr[i + 1];
 				arr[i + 1] = swap;
+				i = -1;
 			}
 		}
 		size--;
 	}
+	return (arr);
 }

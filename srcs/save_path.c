@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 18:31:01 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 20:52:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		save_path(t_queue *path, t_farm *farm)
 	}
 	else
 	{
-		if (!path_exists(path, farm->paths->set))
+		if (!path_exists(path, farm->paths->set) && path->distance < 105)
 		{
 			// ft_printf("%d %d ==> ", ++d, path->distance);
 			// print_queue_id(path);

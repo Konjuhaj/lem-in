@@ -6,16 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 18:54:52 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/20 23:28:52 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-/* WIP
-**	if statments could be done with tenary opperator
-**	// might be able to calculate with the amount of rooms in comb per path
-*/
 
 static t_combinations	*best_path(t_combinations *comb, int ants)
 {
@@ -27,7 +22,7 @@ static t_combinations	*best_path(t_combinations *comb, int ants)
 		comb = comb->next;
 		if (comb->max_flow <= ants)
 		{
-			if((comb->max_flow > temp->max_flow && comb->avg_speed < temp->avg_speed + 2)
+			if((comb->max_flow > temp->max_flow && comb->avg_speed <= temp->avg_speed + 2)
 				|| comb->max_flow - 3 > temp->max_flow)
 				temp = comb;
 			else if (comb->max_flow < 5 && (comb->max_flow > temp->max_flow && comb->avg_speed < temp->avg_speed))
@@ -43,7 +38,7 @@ static t_combinations	*best_path(t_combinations *comb, int ants)
 	return (temp);
 }
 
-static void				calculate_ants_per_path(t_combinations *comb, int ants)
+void				calculate_ants_per_path(t_combinations *comb, int ants)
 {
 	t_queue *temp;
 	t_queue *shortest;
@@ -82,7 +77,6 @@ static void				send_ant(t_queue *prev)
 	prev->ants--;
 	prev->c_ant = ++ant_number;
 	ft_printf("L%d-%s ", prev->c_ant, prev->id);
-	// *s_a += 1;
 }
 
 static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
@@ -116,7 +110,6 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 			set = set->parralel;
 		}
 		write(1, "\n", 1);
-		// ft_printf("%d vs %d\n", sink_ants, ants);
 	}
 }
 
@@ -158,15 +151,15 @@ void					send_ants(t_farm *farm)
 {
 	t_combinations	*best_comb;
 
+	// farm->paths = get_paths_in_use(farm->paths);
 	best_comb = best_path(farm->paths->next, farm->ants);
-	// ft_printf("BEST\n");
-	// print_set(best_comb);
 	calculate_ants_per_path(best_comb, farm->ants);
 	remove_unused(best_comb->set);
-	//improve_set(best_comb->set, farm->paths->set, farm->sink);
-	//print_set(best_comb); // testing
+	//print_set(best_comb);
+	improve_set2(best_comb->set, farm->paths, farm->sink);
 	reset_ants(best_comb->set);
 	calculate_ants_per_path(best_comb, farm->ants);
+	//print_set(best_comb);
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, best_comb->set->previous, farm->ants);
 }
