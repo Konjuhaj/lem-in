@@ -7,7 +7,6 @@ declare -i I=0
 declare -i AVG=0
 while [ $I -lt 100 ]
 do
-	sleep 1
 	MAP=$($GEN $flag > file.txt)
 	declare -i EXPECTED=$(cat file.txt | tail -n 1 | cut -d ' ' -f 8)
 	declare -i LINES=$($LEM file.txt | wc -l)

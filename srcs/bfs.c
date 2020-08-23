@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 08:09:21 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 12:54:49 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	mark_current(t_room *from, t_room *to)
 	from->edge[i].current = 0;
 }
 
-static void mark_path(t_queue *queue, t_farm *farm)
+static void mark_path(t_queue *queue)
 {
 	t_queue *temp;
 	t_queue *freeable;
@@ -86,14 +86,10 @@ static void mark_path(t_queue *queue, t_farm *farm)
 		room->path = 2;
 		temp->distance = distance++;
 	}
-	freeable = temp;
-	temp = temp->next;
-	free((void *)freeable);
-	save_path(temp, farm);
-	farm->bottleneck = 0;
+	ft_free_queue(temp);
 }
 
-int	bfs(t_room *start, t_room *end, t_farm *farm)
+int	bfs(t_room *start, t_room *end)
 {
 	t_queue *queue;
 	t_queue *base;
@@ -111,7 +107,7 @@ int	bfs(t_room *start, t_room *end, t_farm *farm)
 		queue = queue->next;
 	}
 	if (queue->content != start)
-		mark_path(base, farm);
+		mark_path(base);
 	ft_free_queue(base);
 	return (1);
 }

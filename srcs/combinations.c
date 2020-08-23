@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 23:25:47 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 12:53:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 {
 	t_queue			*temp_new;
 	t_combinations	*new;
-	int				i;
 
 	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
 		ft_errno();
 	new->set = copy_path(current);
 	temp_new = new->set;
-	i = 0;
 	while (paths)
 	{
 		if (!are_duplicates(paths, new->set, sink))
@@ -79,10 +77,12 @@ void	combinations(t_farm *farm)
 	farm->paths = get_paths_in_use(farm->paths);
 	while (path)
 	{
-		if (i++ > 80)
-			break ;
 		comb->next = new_set(farm->paths->set, path, farm->sink);
 		comb = comb->next;
+		calculate_ants_per_path(comb, farm->ants);
+		remove_unused(comb->set);
+		improve_set2(comb->set, farm->paths, farm->sink);
+		reset_ants(comb->set);
 		update_combination(comb);
 		//print_set(comb);
 		path = path->parralel;

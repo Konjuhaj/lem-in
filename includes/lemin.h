@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 22:29:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 12:54:58 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void				*ft_queuefind(t_queue **queue, char *id);
 
 void				ft_free_queue(t_queue *queue);
 
-int					bfs(t_room *start, t_room *end, t_farm *farm);
+int					bfs(t_room *start, t_room *end);
 
 void				ft_queueaddback(t_queue **aqueue, t_queue *old);
 
@@ -127,7 +127,7 @@ void				reset_ants(t_queue *queue);
 
 t_combinations		*get_paths_in_use(t_combinations *comb);
 
-void			calculate_ants_per_path(t_combinations *comb, int ants);
+void				calculate_ants_per_path(t_combinations *comb, int ants);
 
 /*
 **					COMBINATIONS

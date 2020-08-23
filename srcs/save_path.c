@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 20:52:51 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 13:00:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ t_queue		*store_path(t_queue *queue, char *first, t_farm *farm)
 	last = path->next;
 	last->distance = path->distance;
 	free((void *)path);
-	// static int d;
-	// ft_printf("%d == ", ++d);
-	// print_queue_id(last);
-	ft_queueaddback(&last, ft_queuenew(farm->sink, sizeof(t_room), farm->sink->name));
+	ft_queueaddback(&last, ft_queuenew(farm->sink, sizeof(t_room), farm->sink->name)); // leaking
 	save_path(last, farm);
 	return (last);
 }
