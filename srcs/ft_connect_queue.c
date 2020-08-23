@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:03:53 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 19:08:46 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:09:20 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	ft_connect_queue(t_queue *path, t_room *sink)
 {
-	t_queue *temp = path;
+	t_queue *temp;
 
+	temp = path;
 	while (temp->content != sink)
 		temp = temp->next;
 	path->previous = temp;
 }
-
 
 void	reverse_connect(t_combinations *comb, t_room *sink)
 {
@@ -30,10 +30,10 @@ void	reverse_connect(t_combinations *comb, t_room *sink)
 
 	set = comb->set;
 	while (set && set->next)
-		{
+	{
 		current = set->next;
 		previous = set;
-		while(current && current->content != sink)
+		while (current && current->content != sink)
 		{
 			current->previous = previous;
 			current = current->next;

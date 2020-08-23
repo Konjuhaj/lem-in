@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:23:29 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:52:10 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	reset_unused_edges(t_farm *farm)
 	i = -1;
 	while (farm->rooms[++i])
 		farm->rooms[i]->visited = 0;
-	i = -1;
 }
 
 static void	pathfinder(t_farm *farm)
@@ -46,7 +45,7 @@ static void	pathfinder(t_farm *farm)
 	reset_unused_edges(farm);
 	reconstruct_path(farm->sink, farm->source, farm);
 	reset_unused_edges(farm);
-	while (++i < 40)
+	while (++i < 50)
 	{
 		farm->source->visited = 2;
 		bfs(farm->source, farm->sink);

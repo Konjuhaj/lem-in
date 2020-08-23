@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:17:20 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:08:24 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_rooms(char **s)
 	return (count);
 }
 
-int		read_rooms(char **s, t_farm *farm)
+int			read_rooms(char **s, t_farm *farm)
 {
 	int i;
 	int	j;
@@ -37,11 +37,11 @@ int		read_rooms(char **s, t_farm *farm)
 	rooms = count_rooms(s);
 	farm->rooms = init_all_rooms(rooms);
 	j = 0;
-	while(s[++i])
+	while (s[++i])
 	{
-		while (s[i][0] == '#'&& s[i][1] != '#')
+		while (s[i][0] == '#' && s[i][1] != '#')
 			i++;
-		if((ft_strchr(s[i], '-')))
+		if ((ft_strchr(s[i], '-')))
 			break ;
 		farm->rooms[j] = init_room(rooms);
 		if (ft_strequ(s[i], "##start") && i++)
@@ -71,14 +71,14 @@ static void	connect_bothways(t_room *from, t_room *to)
 	from->edge[i].pair = &to->edge[j];
 }
 
-void	connect_rooms(char **s, t_farm *farm, int i)//string split could be used here to seperate src-dest "-"
+void		connect_rooms(char **s, t_farm *farm, int i)
 {
-	char *from;
-	char *to;
-	int	src_room;
-	int	dst_room;
+	char	*from;
+	char	*to;
+	int		src_room;
+	int		dst_room;
 
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i][0] == '#' && i++)
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:29:11 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:01:22 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		print_queue_id_rev(t_queue *queue)
 void		print_set(t_combinations *set)
 {
 	t_queue *test;
+
 	test = set->set;
 	ft_printf("\nSET Lines required: %d\n", set->print);
 	while (test)
@@ -68,4 +69,3 @@ void		print_sets(t_combinations *set)
 		temp = temp->next;
 	}
 }
-

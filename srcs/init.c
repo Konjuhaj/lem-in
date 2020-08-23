@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:54:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:28:07 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:05:40 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_combinations	*init_comb(void)
 {
 	t_combinations *comb;
 
-	if(!(comb = (t_combinations *)malloc(sizeof(t_combinations))))
+	if (!(comb = (t_combinations *)malloc(sizeof(t_combinations))))
 		ft_errno();
 	comb->next = NULL;
 	comb->print = 0;

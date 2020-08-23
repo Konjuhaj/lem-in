@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:49:17 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/18 19:07:41 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:04:35 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ void	ft_free_queue(t_queue *base)
 	{
 		queue = base->next;
 		free((void *)base);
-			while (queue)
+		while (queue)
 		{
 			base = queue;
 			queue = queue->next;
 			free((void *)base);
 		}
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 19:49:28 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:01:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ static void	send_ant(t_queue *prev)
 {
 	static int ant_number;
 
-	prev->ants--;
-	prev->c_ant = ++ant_number;
-	ft_printf("L%d-%s ", prev->c_ant, prev->id);
+	if (prev->ants > 0 && prev->c_ant == 0)
+	{
+		prev->ants--;
+		prev->c_ant = ++ant_number;
+		ft_printf("L%d-%s ", prev->c_ant, prev->id);
+	}
 }
 
 static void	move_ants(t_combinations *comb, t_queue *end, int ants)
 {
-	t_queue *temp;
-	t_queue *prev;
-	t_queue *set;
-	int		sink_ants;
+	t_queue		*temp;
+	t_queue		*prev;
+	t_queue		*set;
+	static int	sink_ants;
 
-	sink_ants = 0;
 	while (sink_ants < ants)
 	{
 		set = comb->set;
@@ -53,8 +55,7 @@ static void	move_ants(t_combinations *comb, t_queue *end, int ants)
 					move_ant(temp, prev, end, &sink_ants);
 				prev = prev->previous;
 			}
-			if (prev->ants > 0 && prev->c_ant == 0)
-				send_ant(prev);
+			send_ant(prev);
 			set = set->parralel;
 		}
 		write(1, "\n", 1);

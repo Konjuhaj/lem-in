@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:26:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:08:46 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 	return (new);
 }
 
-void	combinations(t_farm *farm)
+void			combinations(t_farm *farm)
 {
 	t_combinations	*comb;
 	t_queue			*path;
