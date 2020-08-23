@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:33:46 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 19:49:28 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
+static void	move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 {
 	prev->c_ant = temp->c_ant;
 	temp->c_ant = 0;
@@ -21,7 +21,7 @@ static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 	ft_printf("L%d-%s ", prev->c_ant, prev->id);
 }
 
-static void				send_ant(t_queue *prev)
+static void	send_ant(t_queue *prev)
 {
 	static int ant_number;
 
@@ -30,19 +30,16 @@ static void				send_ant(t_queue *prev)
 	ft_printf("L%d-%s ", prev->c_ant, prev->id);
 }
 
-static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
+static void	move_ants(t_combinations *comb, t_queue *end, int ants)
 {
 	t_queue *temp;
-	t_queue * prev;
+	t_queue *prev;
 	t_queue *set;
 	int		sink_ants;
-	int 	i;
 
-	i = 0;
 	sink_ants = 0;
 	while (sink_ants < ants)
 	{
-		i++;
 		set = comb->set;
 		while (set && set->previous)
 		{
@@ -64,41 +61,7 @@ static void				move_ants(t_combinations *comb, t_queue *end,  int ants)
 	}
 }
 
-static void		connect_queue(t_queue *path, t_room *sink)
-{
-	t_queue *temp = path;
-
-	while (temp->content != sink)
-		temp = temp->next;
-	path->previous = temp;
-}
-
-static void				reverse_connect(t_combinations *comb, t_room *sink)
-{
-	t_queue *current;
-	t_queue *previous;
-	t_queue *set;
-
-	set = comb->set;
-	while (set && set->next)
-		{
-		current = set->next;
-		previous = set;
-		while(current && current->content != sink)
-		{
-			current->previous = previous;
-			current = current->next;
-			previous = previous->next;
-		}
-		if (!current)
-			break ;
-		current->previous = previous;
-		connect_queue(set, sink);
-		set = set->parralel;
-	}
-}
-
-void					send_ants(t_farm *farm)
+void		send_ants(t_farm *farm)
 {
 	t_combinations	*best_comb;
 

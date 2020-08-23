@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:18:19 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:27:52 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ typedef struct		s_queue
 typedef struct		s_combinations
 {
 	t_queue			*set;
-	int				max_flow;
 	int				*using;
 	int				print;
-	double			avg_speed;
 	void			*next;
 }					t_combinations;
 
@@ -63,7 +61,6 @@ typedef struct	s_farm
 	t_room			*source;
 	t_room			*sink;
 	int				ants;
-	int				bottleneck;
 }					t_farm;
 
 void				ft_errno(void);
@@ -79,6 +76,18 @@ void				connect_rooms(char **s, t_farm *farm, int i);
 int					read_rooms(char **s, t_farm *farm);
 
 void				reconstruct_path(t_room *sink, t_room *source, t_farm *farm);
+
+int					bfs(t_room *start, t_room *end);
+
+/*
+**					INIT FUNCTIONS
+*/
+
+t_room				**init_all_rooms(int count);
+
+t_room				*init_room(int edges);
+
+t_combinations		*init_comb(void);
 
 /*
 **					TESTING FUNCTUION
@@ -108,9 +117,11 @@ void				*ft_queuefind(t_queue **queue, char *id);
 
 void				ft_free_queue(t_queue *queue);
 
-int					bfs(t_room *start, t_room *end);
-
 void				ft_queueaddback(t_queue **aqueue, t_queue *old);
+
+void				ft_connect_queue(t_queue *path, t_room *sink);
+
+void				reverse_connect(t_combinations *comb, t_room *sink);
 
 /*
 **					HELPER FUNCTIONS

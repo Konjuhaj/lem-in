@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:29:21 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:20:37 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,10 @@ static int	path_exists(t_queue *new, t_queue *all)
 
 void		save_path(t_queue *path, t_farm *farm)
 {
-	t_queue			*temp;
-	// static int d;
-
+	t_queue *temp;
 
 	if (!farm->paths->set)
 	{
-		// ft_printf("%d %d ==> ", ++d, path->distance);
-		// print_queue_id(path);
 		farm->paths->set = path;
 		farm->paths->set->parralel = NULL;
 	}
@@ -50,8 +46,6 @@ void		save_path(t_queue *path, t_farm *farm)
 	{
 		if (!path_exists(path, farm->paths->set) && path->distance < 105)
 		{
-			// ft_printf("%d %d ==> ", ++d, path->distance);
-			// print_queue_id(path);
 			temp = farm->paths->set;
 			while (temp->parralel)
 				temp = temp->parralel;
@@ -69,7 +63,7 @@ t_queue		*store_path(t_queue *queue, char *first, t_farm *farm)
 	int		i;
 	t_queue	*path;
 	t_queue *last;
-	t_room *temp;
+	t_room	*temp;
 
 	i = 0;
 	path = ft_dequeue(&queue);
@@ -88,7 +82,7 @@ t_queue		*store_path(t_queue *queue, char *first, t_farm *farm)
 	last->distance = path->distance;
 	free((void *)path);
 	path = ft_queuenew(farm->sink, sizeof(t_room), farm->sink->name);
-	ft_queueaddback(&last, path); // leaking
+	ft_queueaddback(&last, path);
 	free((void *)path);
 	save_path(last, farm);
 	return (last);

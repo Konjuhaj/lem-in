@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/25 18:05:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:17:20 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
- static int	count_rooms(char **s)
- {
+static int	count_rooms(char **s)
+{
 	int i;
 	int count;
 
@@ -25,18 +25,6 @@
 			count++;
 	}
 	return (count);
- }
-
-static void	set_rooms_to_null(t_edge *edge, int limit)
-{
-	int i;
-
-	i = -1;
-	while (++i < limit)
-	{
-		edge[i].next = NULL;
-		edge[i].current = 1;
-	}
 }
 
 int		read_rooms(char **s, t_farm *farm)
@@ -47,7 +35,7 @@ int		read_rooms(char **s, t_farm *farm)
 
 	i = 0;
 	rooms = count_rooms(s);
-	farm->rooms = malloc(sizeof(*farm->rooms) * rooms);
+	farm->rooms = init_all_rooms(rooms);
 	j = 0;
 	while(s[++i])
 	{
@@ -55,17 +43,12 @@ int		read_rooms(char **s, t_farm *farm)
 			i++;
 		if((ft_strchr(s[i], '-')))
 			break ;
-		if (!(farm->rooms[j] = (t_room *)malloc(sizeof(t_room))))
-			ft_errno();
-		farm->rooms[j]->edge = (t_edge *)malloc(sizeof(t_edge) * rooms);
-		set_rooms_to_null(farm->rooms[j]->edge, rooms);
+		farm->rooms[j] = init_room(rooms);
 		if (ft_strequ(s[i], "##start") && i++)
 			farm->source = farm->rooms[j];
 		if (ft_strequ(s[i], "##end") && i++)
 			farm->sink = farm->rooms[j];
-		farm->rooms[j]->name = ft_strsub_until(s[i], ' ');
-		farm->rooms[j]->path = 0;
-		farm->rooms[j++]->visited = 0;
+		farm->rooms[j++]->name = ft_strsub_until(s[i], ' ');
 	}
 	farm->rooms[j] = NULL;
 	return (i);

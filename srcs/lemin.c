@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:43:16 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:23:29 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 static char	**get_rooms(char *av)
 {
-	int 	fd;
+	int		fd;
 	char	*line;
+	char	**strstr;
 
 	fd = open(av, O_RDONLY);
 	line = ft_read_file(fd);
-	// ft_putendl(line);
-	return (ft_strsplit(line, '\n'));
+	//ft_putendl(line);
+	strstr = ft_strsplit(line, '\n');
+	ft_strdel(&line);
+	return (strstr);
 }
 
 static void	reset_unused_edges(t_farm *farm)
@@ -28,29 +31,29 @@ static void	reset_unused_edges(t_farm *farm)
 	int i;
 
 	i = -1;
-	while(farm->rooms[++i])
+	while (farm->rooms[++i])
 		farm->rooms[i]->visited = 0;
 	i = -1;
 }
 
 static void	pathfinder(t_farm *farm)
 {
-		int i;
+	int i;
 
-		i = -1;
+	i = -1;
+	farm->source->visited = 2;
+	bfs(farm->source, farm->sink);
+	reset_unused_edges(farm);
+	reconstruct_path(farm->sink, farm->source, farm);
+	reset_unused_edges(farm);
+	while (++i < 40)
+	{
 		farm->source->visited = 2;
 		bfs(farm->source, farm->sink);
 		reset_unused_edges(farm);
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
-		while (++i < 40)
-		{
-			farm->source->visited = 2;
-			bfs(farm->source, farm->sink);
-			reset_unused_edges(farm);
-			reconstruct_path(farm->sink, farm->source, farm);
-			reset_unused_edges(farm);
-		}
+	}
 }
 
 int			main(int ac, char **av)
@@ -63,13 +66,12 @@ int			main(int ac, char **av)
 		file = get_rooms(av[1]);
 		farm.ants = ft_atoi(file[0]);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
-		if(!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
+		if (!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
 			ft_errno();
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
 		send_ants(&farm);
 	}
-	system("leaks lem-in");
 	return (0);
 }

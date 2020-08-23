@@ -6,27 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:33:31 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:26:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-void	update_combination(t_combinations *comb)
-{
-	t_queue *temp;
-
-	temp = comb->set;
-	comb->avg_speed = 0.0;
-	comb->max_flow = 0;
-	while (temp)
-	{
-		comb->max_flow++;
-		comb->avg_speed += (double)temp->distance;
-		temp = temp->parralel;
-	}
-	comb->avg_speed /= (double)comb->max_flow;
-}
 
 t_queue			*copy_path(t_queue *paths)
 {
@@ -47,8 +31,7 @@ t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 	t_queue			*temp_new;
 	t_combinations	*new;
 
-	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
-		ft_errno();
+	new = init_comb();
 	new->set = copy_path(current);
 	temp_new = new->set;
 	while (paths)
@@ -69,11 +52,9 @@ void	combinations(t_farm *farm)
 {
 	t_combinations	*comb;
 	t_queue			*path;
-	int				i;
 
 	comb = farm->paths;
 	path = comb->set;
-	i = 0;
 	farm->paths = get_paths_in_use(farm->paths);
 	while (path)
 	{
@@ -85,8 +66,6 @@ void	combinations(t_farm *farm)
 		reset_ants(comb->set);
 		calculate_ants_per_path(comb, farm->ants);
 		update_length(comb);
-		update_combination(comb);
-		//print_set(comb);
 		path = path->parralel;
 	}
 }

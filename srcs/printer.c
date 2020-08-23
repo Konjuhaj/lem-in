@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:31:15 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:29:11 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ void		print_queue_id_rev(t_queue *queue)
 
 void		print_set(t_combinations *set)
 {
-	//testing
 	t_queue *test;
 	test = set->set;
-	ft_printf("\nSET M_F-%d, A-S%f U_S%d\n", set->max_flow, set->avg_speed, set->print);
+	ft_printf("\nSET Lines required: %d\n", set->print);
 	while (test)
 	{
 		ft_printf("A: %d, D %d \n", test->ants, test->distance);
@@ -64,7 +63,7 @@ void		print_sets(t_combinations *set)
 	i = 0;
 	while (temp)
 	{
-		ft_printf("\nSET-%d M_F-%d, A-S%f\n", i++, temp->max_flow, temp->avg_speed);
+		ft_printf("\nSET-%d\n", i++);
 		print_set(temp);
 		temp = temp->next;
 	}

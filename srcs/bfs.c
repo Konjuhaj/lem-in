@@ -6,15 +6,15 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 19:55:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 12:54:49 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:37:50 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static int		has_unvisited_neigbour(t_room *room, int i)
+static int	has_unvisited_neigbour(t_room *room, int i)
 {
-	t_room *temp;
+	t_room	*temp;
 	int		original;
 
 	original = i;
@@ -28,7 +28,7 @@ static int		has_unvisited_neigbour(t_room *room, int i)
 	return (original);
 }
 
-static int		add_rooms(t_queue *queue, t_room *end)
+static int	add_rooms(t_queue *queue, t_room *end)
 {
 	int		i;
 	t_room	*room;
@@ -48,7 +48,8 @@ static int		add_rooms(t_queue *queue, t_room *end)
 		{
 			if (neigbor != end)
 				neigbor->visited = VISITED;
-			ft_queueadd(&queue, ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
+			ft_queueadd(&queue,
+			ft_queuenew(neigbor, sizeof(neigbor), neigbor->name), room->name);
 		}
 		if (neigbor == end)
 			return (1);
@@ -66,30 +67,28 @@ static void	mark_current(t_room *from, t_room *to)
 	from->edge[i].current = 0;
 }
 
-static void mark_path(t_queue *queue)
+static void	mark_path(t_queue *queue)
 {
-	t_queue *temp;
-	t_queue *freeable;
-	t_room *room;
-	int distance;
+	t_queue	*temp;
+	t_queue *temp2;
+	t_room	*room;
 
-	temp = ft_dequeue(&queue);
+	temp = queue;
+	while (temp->next)
+		temp = temp->next;
 	room = temp->content;
 	room->path = 2;
-	distance = 1;
 	while (temp->id != queue->id)
 	{
-		freeable = ft_queuefind(&queue, temp->called_by);
-		mark_current(freeable->content, temp->content);
-		ft_queueaddfront(&temp, freeable);
+		temp2 = ft_queuefind(&queue, temp->called_by);
+		mark_current(temp2->content, temp->content);
+		temp = temp2;
 		room = temp->content;
 		room->path = 2;
-		temp->distance = distance++;
 	}
-	ft_free_queue(temp);
 }
 
-int	bfs(t_room *start, t_room *end)
+int			bfs(t_room *start, t_room *end)
 {
 	t_queue *queue;
 	t_queue *base;

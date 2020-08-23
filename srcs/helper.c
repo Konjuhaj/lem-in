@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 09:10:40 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:16:38 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 19:51:25 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	reset_ants(t_queue *queue)
+void			reset_ants(t_queue *queue)
 {
 	t_queue *temp;
 
@@ -24,7 +24,7 @@ void	reset_ants(t_queue *queue)
 	}
 }
 
-void				calculate_ants_per_path(t_combinations *comb, int ants)
+void			calculate_ants_per_path(t_combinations *comb, int ants)
 {
 	t_queue *temp;
 	t_queue *shortest;
@@ -37,7 +37,8 @@ void				calculate_ants_per_path(t_combinations *comb, int ants)
 	{
 		while (temp)
 		{
-			if (temp->distance + temp->ants < shortest->distance + shortest->ants)
+			if (temp->distance + temp->ants <
+				shortest->distance + shortest->ants)
 				shortest = temp;
 			temp = temp->parralel;
 		}
@@ -72,7 +73,7 @@ void			update_length(t_combinations *comb)
 
 	temp = comb->set;
 	longest = temp->distance + temp->ants;
-	while(temp)
+	while (temp)
 	{
 		if (temp->distance + temp->ants > longest)
 			longest = temp->distance + temp->ants;
@@ -83,9 +84,9 @@ void			update_length(t_combinations *comb)
 
 t_combinations	*best_path(t_combinations *comb, int ants)
 {
-	t_combinations *temp;
-	t_combinations *better;
-	int shortest;
+	t_combinations	*temp;
+	t_combinations	*better;
+	int				shortest;
 
 	shortest = comb->print;
 	better = comb;
@@ -101,29 +102,3 @@ t_combinations	*best_path(t_combinations *comb, int ants)
 	}
 	return (better);
 }
-
-// t_combinations	*best_path(t_combinations *comb, int ants)
-// {
-// 	t_combinations *temp;
-
-// 	temp = comb;
-// 	while (comb && comb->next)
-// 	{
-// 		comb = comb->next;
-// 		if (comb->max_flow <= ants)
-// 		{
-// 			if((comb->max_flow > temp->max_flow && comb->avg_speed <= temp->avg_speed + 2)
-// 				|| comb->max_flow - 3 > temp->max_flow)
-// 				temp = comb;
-// 			else if (comb->max_flow < 5 && (comb->max_flow > temp->max_flow && comb->avg_speed < temp->avg_speed))
-// 				temp = comb;
-// 			else if (comb->avg_speed < temp->avg_speed && comb->max_flow == temp->max_flow)
-// 				temp = comb;
-// 		}
-// 		else if (comb->max_flow > ants && temp->avg_speed > comb->avg_speed)
-// 		{
-// 			temp = comb;
-// 		}
-// 	}
-// 	return (temp);
-// }
