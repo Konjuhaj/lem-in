@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 12:54:58 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:18:19 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_combinations
 	t_queue			*set;
 	int				max_flow;
 	int				*using;
+	int				print;
 	double			avg_speed;
 	void			*next;
 }					t_combinations;
@@ -128,6 +129,10 @@ void				reset_ants(t_queue *queue);
 t_combinations		*get_paths_in_use(t_combinations *comb);
 
 void				calculate_ants_per_path(t_combinations *comb, int ants);
+
+t_combinations		*best_path(t_combinations *comb, int ants);
+
+void				update_length(t_combinations *comb);
 
 /*
 **					COMBINATIONS

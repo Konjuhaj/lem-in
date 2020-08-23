@@ -6,60 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 13:00:34 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:33:46 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-static t_combinations	*best_path(t_combinations *comb, int ants)
-{
-	t_combinations *temp;
-
-	temp = comb;
-	while (comb && comb->next)
-	{
-		comb = comb->next;
-		if (comb->max_flow <= ants)
-		{
-			if((comb->max_flow > temp->max_flow && comb->avg_speed <= temp->avg_speed + 2)
-				|| comb->max_flow - 3 > temp->max_flow)
-				temp = comb;
-			else if (comb->max_flow < 5 && (comb->max_flow > temp->max_flow && comb->avg_speed < temp->avg_speed))
-				temp = comb;
-			else if (comb->avg_speed < temp->avg_speed && comb->max_flow == temp->max_flow)
-				temp = comb;
-		}
-		else if (comb->max_flow > ants && temp->avg_speed > comb->avg_speed)
-		{
-			temp = comb;
-		}
-	}
-	return (temp);
-}
-
-void				calculate_ants_per_path(t_combinations *comb, int ants)
-{
-	t_queue *temp;
-	t_queue *shortest;
-	int		ant_set;
-
-	temp = comb->set;
-	shortest = comb->set;
-	ant_set = ants;
-	while (ant_set)
-	{
-		while (temp)
-		{
-			if (temp->distance + temp->ants < shortest->distance + shortest->ants)
-				shortest = temp;
-			temp = temp->parralel;
-		}
-		temp = comb->set;
-		shortest->ants++;
-		ant_set--;
-	}
-}
 
 static void				move_ant(t_queue *temp, t_queue *prev, t_queue *end, int *s_a)
 {
@@ -154,11 +105,9 @@ void					send_ants(t_farm *farm)
 	best_comb = best_path(farm->paths->next, farm->ants);
 	calculate_ants_per_path(best_comb, farm->ants);
 	remove_unused(best_comb->set);
-	//print_set(best_comb);
 	improve_set2(best_comb->set, farm->paths, farm->sink);
 	reset_ants(best_comb->set);
 	calculate_ants_per_path(best_comb, farm->ants);
-	//print_set(best_comb);
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, best_comb->set->previous, farm->ants);
 }
