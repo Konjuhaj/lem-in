@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:52:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:19:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static char	**get_rooms(char *av)
 	char	*line;
 	char	**strstr;
 
-	fd = open(av, O_RDONLY);
+	if((fd = open(av, O_RDONLY)))
+		ft_errno();
 	line = ft_read_file(fd);
 	//ft_putendl(line);
 	strstr = ft_strsplit(line, '\n');
