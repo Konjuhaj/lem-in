@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 21:30:48 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:43:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 1000000
 # define MAX_FD 10240
 # include <fcntl.h>
 # include <string.h>
