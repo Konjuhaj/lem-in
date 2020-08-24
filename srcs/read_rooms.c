@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 11:05:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:39:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,21 @@ static void	connect_bothways(t_room *from, t_room *to)
 	from->edge[i].pair = &to->edge[j];
 }
 
+static int	find_room(char *name, t_farm *farm)
+{
+	int i;
+
+	i = 0;
+	while (farm->rooms[i] &&
+		!(ft_strequ(farm->rooms[i]->name, name)))
+	{
+		i++;
+	}
+	if (!farm->rooms[i])
+		ft_errno("Unabele to find room", NULL);
+	return (i);
+}
+
 void		connect_rooms(char **s, t_farm *farm, int i)
 {
 	char	*from;
@@ -81,6 +96,8 @@ void		connect_rooms(char **s, t_farm *farm, int i)
 	int		src_room;
 	int		dst_room;
 
+	if (!s[i])
+		ft_errno("No connection", NULL);
 	while (s[i])
 	{
 		if (s[i][0] == '#' && i++)
@@ -88,11 +105,9 @@ void		connect_rooms(char **s, t_farm *farm, int i)
 		src_room = 0;
 		dst_room = 0;
 		from = ft_strsub_until(s[i], '-');
-		while (!(ft_strequ(farm->rooms[src_room]->name, from)))
-			src_room++;
+		src_room = find_room(from, farm);
 		to = ft_strsub_until(ft_strchr(s[i], '-') + 1, 0);
-		while (!(ft_strequ(farm->rooms[dst_room]->name, to)))
-			dst_room++;
+		dst_room = find_room(to, farm);
 		ft_strdel(&to);
 		ft_strdel(&from);
 		connect_bothways(farm->rooms[src_room], farm->rooms[dst_room]);

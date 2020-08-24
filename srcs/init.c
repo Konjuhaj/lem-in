@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:54:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 10:20:15 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:36:53 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_option		*init_option(void)
 	t_option *op;
 
 	if (!(op = (t_option *)malloc(sizeof(t_option))))
-		ft_errno();
+		ft_errno("Failed to allocate memory", NULL);
 	op->info = 0;
 	op->color = 0;
 	op->paths = 0;
@@ -33,7 +33,7 @@ t_room			**init_all_rooms(int count)
 
 	i = -1;
 	if (!(rooms = (t_room **)malloc(sizeof(t_room*) * count)))
-		ft_errno();
+		ft_errno("Failed to allocate memory", NULL);
 	while (++i < count)
 		rooms[i] = NULL;
 	return (rooms);
@@ -46,9 +46,9 @@ t_room			*init_room(int edges)
 
 	i = -1;
 	if (!(room = (t_room *)malloc(sizeof(t_room))))
-		ft_errno();
+		ft_errno("Failed to allocate memory", NULL);
 	if (!(room->edge = (t_edge *)malloc(sizeof(t_edge) * edges)))
-		ft_errno();
+		ft_errno("Failed to allocate memory", NULL);
 	room->name = NULL;
 	room->path = 0;
 	room->visited = 0;
@@ -66,7 +66,7 @@ t_combinations	*init_comb(void)
 	t_combinations *comb;
 
 	if (!(comb = (t_combinations *)malloc(sizeof(t_combinations))))
-		ft_errno();
+		ft_errno("Failed to allocate memory", NULL);
 	comb->next = NULL;
 	comb->print = 0;
 	comb->set = NULL;

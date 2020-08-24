@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 11:08:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:21:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,18 @@ static void		pathfinder(t_farm *farm)
 	int i;
 
 	i = -1;
-	farm->source->visited = 2;
 	bfs(farm->source, farm->sink);
 	reset_unused_edges(farm);
 	reconstruct_path(farm->sink, farm->source, farm);
 	reset_unused_edges(farm);
-	while (++i < 50)
+	while (bfs(farm->source, farm->sink))
 	{
-		farm->source->visited = 2;
-		bfs(farm->source, farm->sink);
 		reset_unused_edges(farm);
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
 	}
 	if (!farm->paths->set)
-		ft_errno();
+		ft_errno("No paths found", NULL);
 }
 
 static t_option	*parse(int ac, char **av)
@@ -95,6 +92,7 @@ int				main(int ac, char **av)
 	}
 	else
 	{
+		ft_errno(NULL, farm.op);
 		file = get_rooms(&farm);
 		farm.ants = ft_atoi(file[0]);
 		connect_rooms(file, &farm, read_rooms(file, &farm));

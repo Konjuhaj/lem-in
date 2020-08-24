@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 11:07:16 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:20:42 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_farm
 	int				ants;
 }					t_farm;
 
-void				ft_errno(void);
+void				ft_errno(char *s, t_option *o);
 
 void				find_paths(t_room *room, char *end, t_farm *farm);
 

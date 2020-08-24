@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 10:27:19 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 20:48:55 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:38:23 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	*ft_queuefind(t_queue **queue, char *id)
 		temp = temp->next;
 	}
 	if (!temp)
-		ft_errno();
+		ft_errno("Unable to find queue", NULL);
 	return (temp);
 }
