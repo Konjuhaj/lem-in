@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 16:09:28 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 10:53:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 09:13:57 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_errno(void)
 {
-	ft_putstr("Error");
+	ft_putstr("ERROR");
 	exit(0);
 }

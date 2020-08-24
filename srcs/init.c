@@ -6,11 +6,25 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:54:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:05:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 10:20:15 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
+
+t_option		*init_option(void)
+{
+	t_option *op;
+
+	if (!(op = (t_option *)malloc(sizeof(t_option))))
+		ft_errno();
+	op->info = 0;
+	op->color = 0;
+	op->paths = 0;
+	op->error = 0;
+	op->help = 0;
+	return (op);
+}
 
 t_room			**init_all_rooms(int count)
 {

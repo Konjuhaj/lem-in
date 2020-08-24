@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:16:40 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 11:07:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEMIN_H
 # define MAX_INT  2147483647
 # define VISITED 2
+# define STD_IN 0
 # include "../libraries/ft_printf/includes/ft_printf.h"
 
 typedef struct		s_edge
@@ -54,12 +55,24 @@ typedef struct		s_combinations
 	void			*next;
 }					t_combinations;
 
+typedef	struct 		s_option
+{
+	int				color;
+	int				paths;
+	int				info;
+	int				error;
+	int				help;
+}					t_option;
+
+
 typedef struct		s_farm
 {
 	t_combinations	*paths;
+	t_option		*op;
 	t_room			**rooms;
 	t_room			*source;
 	t_room			*sink;
+	char			*file;
 	int				ants;
 }					t_farm;
 
@@ -89,6 +102,18 @@ t_room				**init_all_rooms(int count);
 t_room				*init_room(int edges);
 
 t_combinations		*init_comb(void);
+
+t_option			*init_option(void);
+
+/*
+**					VALIDATION FUNCTIONS
+*/
+
+void				validate_rooms(char **s);
+
+char				**validate_instructions(char **s);
+
+void				validate_lines(char *s);
 
 /*
 **					TESTING FUNCTUION

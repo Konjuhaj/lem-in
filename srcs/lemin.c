@@ -6,25 +6,22 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:19:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 11:08:40 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static char	**get_rooms(char *av)
+static char		**get_rooms(t_farm *farm)
 {
-	int		fd;
 	char	*line;
 	char	**strstr;
 
-	if((fd = open(av, O_RDONLY)))
-		ft_errno();
-	line = ft_read_file(fd);
-	//ft_putendl(line);
+	line = ft_read_file(STD_IN);
+	validate_lines(line);
+	farm->file = line;
 	strstr = ft_strsplit(line, '\n');
-	ft_strdel(&line);
-	return (strstr);
+	return (validate_instructions(strstr));
 }
 
 static void	reset_unused_edges(t_farm *farm)
@@ -36,7 +33,7 @@ static void	reset_unused_edges(t_farm *farm)
 		farm->rooms[i]->visited = 0;
 }
 
-static void	pathfinder(t_farm *farm)
+static void		pathfinder(t_farm *farm)
 {
 	int i;
 
@@ -54,23 +51,58 @@ static void	pathfinder(t_farm *farm)
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
 	}
+	if (!farm->paths->set)
+		ft_errno();
 }
 
-int			main(int ac, char **av)
+static t_option	*parse(int ac, char **av)
+{
+	int			i;
+	t_option	*op;
+
+	i = 0;
+	op = init_option();
+	while (++i < ac)
+	{
+		if (ft_strequ(av[i], "-c") || ft_strequ(av[i], "--color"))
+			op->color = 1;
+		else if (ft_strequ(av[i], "-i") || ft_strequ(av[i], "--info"))
+			op->info = 1;
+		else if (ft_strequ(av[i], "-p") || ft_strequ(av[i], "--paths"))
+			op->paths = 1;
+		else if (ft_strequ(av[i], "-e") || ft_strequ(av[i], "--error"))
+			op->error = 1;
+		else if (!ft_strequ(av[i], "-i") && !ft_strequ(av[i], "--info")
+			&& !ft_strequ(av[i], "-c") && !ft_strequ(av[i], "--color")
+			&& !ft_strequ(av[i], "-e") && !ft_strequ(av[i], "--error")
+			&& !ft_strequ(av[i], "-p") && !ft_strequ(av[i], "--paths"))
+			op->help = 1;
+	}
+	return (op);
+}
+
+int				main(int ac, char **av)
 {
 	char	**file;
 	t_farm	farm;
 
-	if (ac == 2)
+	farm.op = parse(ac, av);
+	if (farm.op->help)
 	{
-		file = get_rooms(av[1]);
+		ft_putstr("Usage:\n./lem-in [-e --error] [-i --info] ");
+		ft_putendl("[-p --paths] [-c --color] < maps/demo_map");
+		return (0);
+	}
+	else
+	{
+		file = get_rooms(&farm);
 		farm.ants = ft_atoi(file[0]);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
-		if (!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
-			ft_errno();
+		farm.paths = init_comb();
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
+		//ft_putendl(farm.file);
 		send_ants(&farm);
 	}
 	return (0);

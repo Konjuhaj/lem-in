@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:08:24 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 11:05:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ static int	count_rooms(char **s)
 
 int			read_rooms(char **s, t_farm *farm)
 {
-	int i;
-	int	j;
-	int rooms;
+	int		i;
+	int		j;
+	int		rooms;
+	char	**temp;
 
 	i = 0;
 	rooms = count_rooms(s);
@@ -48,7 +49,9 @@ int			read_rooms(char **s, t_farm *farm)
 			farm->source = farm->rooms[j];
 		if (ft_strequ(s[i], "##end") && i++)
 			farm->sink = farm->rooms[j];
-		farm->rooms[j++]->name = ft_strsub_until(s[i], ' ');
+		temp = ft_strsplit(s[i], ' ');
+		validate_rooms(temp);
+		farm->rooms[j++]->name = temp[0];
 	}
 	farm->rooms[j] = NULL;
 	return (i);

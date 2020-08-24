@@ -9,7 +9,7 @@ while [ $I -lt 15 ]
 do
 	MAP=$($GEN $flag > file.txt)
 	declare -i EXPECTED=$(cat file.txt | tail -n 1 | cut -d ' ' -f 8)
-	declare -i LINES=$($LEM file.txt | wc -l)
+	declare -i LINES=$($LEM < file.txt | wc -l)
 	declare -i DIFF=$(($LINES - $EXPECTED))
 	echo "MINE: $LINES ||| EXPECTED $EXPECTED ||| DIFFIRENCE $DIFF"
 	AVG=$[$AVG+$DIFF]
