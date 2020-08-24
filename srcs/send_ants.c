@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 15:37:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 17:58:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 21:25:41 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		send_ants(t_farm *farm)
 {
 	t_combinations	*best_comb;
 
+	print_info(farm);
 	best_comb = best_path(farm->paths->next);
 	reverse_connect(best_comb, farm->sink);
 	move_ants(best_comb, best_comb->set->previous, farm->ants);

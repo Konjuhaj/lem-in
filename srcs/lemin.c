@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 21:23:54 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 21:25:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int				main(int ac, char **av)
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
-		print_info(&farm);
 		ft_putendl(farm.file);
 		send_ants(&farm);
 	}
