@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   number_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 06:35:00 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/04 19:19:09 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:51:28 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 
 static void	append_str_to_buffer(t_data *data, char *temp)
 {
-	if (BUFFER)
-		free(BUFFER);
+	if (data->container.buffer)
+		free(data->container.buffer);
 	if (data->precision > (int)ft_strlen(temp))
-		BUFFER = dot_flag(temp, data);
+		data->container.buffer = dot_flag(temp, data);
 	else
-		BUFFER = data->hash == '#' ? hash_flag(temp, data) : temp;
-	if (data->sign != 0 || (temp[0] == '-' && BUFFER[0] == '0'))
-		BUFFER = sign_flag(data, temp);
-	if (BUFFER != temp)
+		data->container.buffer = data->hash == '#' ?
+			hash_flag(temp, data) : temp;
+	if (data->sign != 0 || (temp[0] == '-' && data->container.buffer[0] == '0'))
+		data->container.buffer = sign_flag(data, temp);
+	if (data->container.buffer != temp)
 		free(temp);
 }
 
@@ -41,11 +42,12 @@ static void	append_str_to_buffer(t_data *data, char *temp)
 static void	zero_precision_w_zero_num(t_data *data, char *temp)
 {
 	if (data->hash == '#' && data->type == 'o')
-		BUFFER = ft_strdup("0");
-	data->ret += BUFFER == NULL ? 0 : ft_strlen(BUFFER);
+		data->container.buffer = ft_strdup("0");
+	data->ret += data->container.buffer == NULL ?
+		0 : ft_strlen(data->container.buffer);
 	if ((data->type == 'd' || data->type == 'i')
 		&& (data->sign == '+' || data->sign == ' '))
-		BUFFER = sign_flag(data, temp);
+		data->container.buffer = sign_flag(data, temp);
 	free(temp);
 }
 
@@ -60,12 +62,12 @@ void		number_hub(t_data *data, char *temp)
 		zero_precision_w_zero_num(data, temp);
 	else
 	{
-		if (!(BUFFER) || data->size <= (int)ft_strlen(temp))
+		if (!(data->container.buffer) || data->size <= (int)ft_strlen(temp))
 			append_str_to_buffer(data, temp);
 		else
 			ft_fill(temp, data);
 		if (data->type == 'X')
-			ft_capitalize(BUFFER);
-		data->ret += ft_strlen(BUFFER);
+			ft_capitalize(data->container.buffer);
+		data->ret += ft_strlen(data->container.buffer);
 	}
 }

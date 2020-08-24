@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:01:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:08:14 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,31 @@ void		print_queue_id(t_queue *queue)
 	temp = queue;
 	while (temp)
 	{
-		ft_printf("%s(%s) -> ", temp->id, temp->called_by);
+		ft_printf("(%s) => ", temp->id);
 		temp = temp->next;
 	}
 	ft_putstr("\n");
 }
 
-void		print_queue_id_rev(t_queue *queue)
-{
-	t_queue *temp;
-
-	temp = queue->previous;
-	ft_printf("FIST %s(%p)\n ", queue->id, queue->content);
-	while (!ft_strequ(temp->id, queue->id))
-	{
-		ft_printf("%s(%p) -> ", temp->id, temp->content);
-		temp = temp->previous;
-	}
-	ft_printf("%s(%p) -> ", temp->id, temp->content);
-	ft_putstr("\n");
-}
-
-void		print_set(t_combinations *set)
+void	print_set(t_combinations *set)
 {
 	t_queue *test;
 
 	test = set->set;
-	ft_printf("\nSET Lines required: %d\n", set->print);
+	ft_printf("\nSET Lines required: %d\n", set->print + 1);
 	while (test)
 	{
-		ft_printf("A: %d, D %d \n", test->ants, test->distance);
+		ft_printf("Ants: %d, Distance %d \n", test->ants, test->distance);
 		print_queue_id(test);
 		test = test->parralel;
 	}
 	ft_printf("\n");
 }
 
-void		print_sets(t_combinations *set)
+void	print_info(t_farm *farm)
 {
-	t_combinations	*temp;
-	int				i;
-
-	temp = set;
-	i = 0;
-	while (temp)
-	{
-		ft_printf("\nSET-%d\n", i++);
-		print_set(temp);
-		temp = temp->next;
-	}
+	if (farm->op->info)
+		print_set(best_path(farm->paths->next));
+	if (farm->op->paths)
+		print_set(farm->paths);
 }

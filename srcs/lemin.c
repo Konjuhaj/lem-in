@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 15:21:16 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:03:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,13 @@ static t_option	*parse(int ac, char **av)
 	op = init_option();
 	while (++i < ac)
 	{
-		if (ft_strequ(av[i], "-c") || ft_strequ(av[i], "--color"))
-			op->color = 1;
-		else if (ft_strequ(av[i], "-i") || ft_strequ(av[i], "--info"))
+		if (ft_strequ(av[i], "-i") || ft_strequ(av[i], "--info"))
 			op->info = 1;
 		else if (ft_strequ(av[i], "-p") || ft_strequ(av[i], "--paths"))
 			op->paths = 1;
 		else if (ft_strequ(av[i], "-e") || ft_strequ(av[i], "--error"))
 			op->error = 1;
 		else if (!ft_strequ(av[i], "-i") && !ft_strequ(av[i], "--info")
-			&& !ft_strequ(av[i], "-c") && !ft_strequ(av[i], "--color")
 			&& !ft_strequ(av[i], "-e") && !ft_strequ(av[i], "--error")
 			&& !ft_strequ(av[i], "-p") && !ft_strequ(av[i], "--paths"))
 			op->help = 1;
@@ -87,7 +84,7 @@ int				main(int ac, char **av)
 	if (farm.op->help)
 	{
 		ft_putstr("Usage:\n./lem-in [-e --error] [-i --info] ");
-		ft_putendl("[-p --paths] [-c --color] < maps/demo_map");
+		ft_putendl("[-p --paths] < maps/demo_map");
 		return (0);
 	}
 	else
@@ -100,6 +97,7 @@ int				main(int ac, char **av)
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
+		print_info(&farm);
 		//ft_putendl(farm.file);
 		send_ants(&farm);
 	}

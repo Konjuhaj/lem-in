@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:07:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:09:06 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:13:12 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		improve_set2(t_queue *new, t_combinations *farm, t_room *sink)
 	i = -1;
 	while ((all = get_smallest(farm, ++i)))
 	{
-		if (i == 80)
+		if (i == 40)
 			break ;
 		if (!are_duplicates(all, new, sink))
 		{

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 15:20:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:57:44 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ typedef struct		s_combinations
 	void			*next;
 }					t_combinations;
 
-typedef	struct 		s_option
+typedef	struct		s_option
 {
-	int				color;
 	int				paths;
 	int				info;
 	int				error;
 	int				help;
 }					t_option;
-
 
 typedef struct		s_farm
 {
@@ -167,9 +165,11 @@ t_combinations		*get_paths_in_use(t_combinations *comb);
 
 void				calculate_ants_per_path(t_combinations *comb, int ants);
 
-t_combinations		*best_path(t_combinations *comb, int ants);
+t_combinations		*best_path(t_combinations *comb);
 
 void				update_length(t_combinations *comb);
+
+void				print_info(t_farm *farm);
 
 /*
 **					COMBINATIONS

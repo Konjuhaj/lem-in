@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numbers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 11:50:40 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/01/25 15:34:05 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ void		p_flag(t_data *data)
 	num = va_arg(data->arg, unsigned long);
 	temp2 = ft_uitoa_base(num, HEXAL);
 	p_flag_helper(data, &temp2);
-	if (!(BUFFER) || data->size < ((int)ft_strlen(temp2) + 2))
+	if (!(data->container.buffer) || data->size < ((int)ft_strlen(temp2) + 2))
 	{
-		if (BUFFER)
-			free(BUFFER);
-		BUFFER = ft_strjoin("0x", temp2);
+		if (data->container.buffer)
+			free(data->container.buffer);
+		data->container.buffer = ft_strjoin("0x", temp2);
 	}
 	else
 		ft_fill(ft_strdup(temp2), data);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 	free(temp2);
 }

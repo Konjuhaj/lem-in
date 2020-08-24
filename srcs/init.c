@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:54:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 15:36:53 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:58:48 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_option		*init_option(void)
 	if (!(op = (t_option *)malloc(sizeof(t_option))))
 		ft_errno("Failed to allocate memory", NULL);
 	op->info = 0;
-	op->color = 0;
 	op->paths = 0;
 	op->error = 0;
 	op->help = 0;

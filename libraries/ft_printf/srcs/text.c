@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   text.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 17:37:05 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/01/25 15:43:04 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void	s_flag(t_data *data)
 	slen = ft_strlen(s);
 	slen = data->precision > slen ? ft_strlen(s) : data->precision;
 	slen = slen == -1 ? ft_strlen(s) : slen;
-	if (!(BUFFER) || size < slen)
+	if (!(data->container.buffer) || size < slen)
 	{
-		if (BUFFER)
-			free(BUFFER);
-		BUFFER = data->precision > -1 ?
+		if (data->container.buffer)
+			free(data->container.buffer);
+		data->container.buffer = data->precision > -1 ?
 		ft_strsub(s, 0, data->precision) : ft_strdup(s);
 	}
 	else
 		fill_buffer(s, data);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 }
 
 /*
 ** set the second index to '\0' for strcpy to work.
-** if !BUFFER we point buffer to c. If !c we print ^0
+** if !data->container.buffer we point buffer to c. If !c we print ^0
 ** else we add c to either the end or start of Buffer
 */
 
@@ -67,31 +67,31 @@ void	c_flag(t_data *data)
 	c[0] = va_arg(data->arg, int);
 	c[1] = '\0';
 	data->precision = 1;
-	if (!BUFFER)
+	if (!data->container.buffer)
 	{
 		if (!(*c))
 		{
 			ft_putchar(*c);
 			data->ret++;
 		}
-		BUFFER = c;
+		data->container.buffer = c;
 	}
 	else if (!(*c))
 	{
-		BUFFER[data->allign == '-' ? 0 : data->size - 1] = '\0';
+		data->container.buffer[data->allign == '-' ? 0 : data->size - 1] = '\0';
 		data->ret++;
 		free(c);
 	}
 	else
 		ft_fill(c, data);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 }
 
 void	percent_flag(t_data *data)
 {
-	if (!(BUFFER))
-		BUFFER = ft_strdup("%");
+	if (!(data->container.buffer))
+		data->container.buffer = ft_strdup("%");
 	else
 		fill_buffer("%", data);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 }

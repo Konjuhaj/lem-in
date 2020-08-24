@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 09:07:20 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 15:35:50 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:04:02 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	are_numbers(char *s)
 	int i;
 	int fine;
 
-	i = 0;
+	i = -1;
 	fine = 0;
 	while (s[++i])
 	{
@@ -72,7 +72,7 @@ void		validate_lines(char *s)
 	{
 		while (s[++i])
 		{
-			if (s[i] == '\n' && s[i -1] == '\n')
+			if ((s[i] == '\n' && s[i -1] == '\n') || s[0] == '\n')
 				ft_errno("Empty line found", NULL);
 		}
 	}
@@ -80,4 +80,6 @@ void		validate_lines(char *s)
 		ft_errno("Empty file found", NULL);
 	if (i < 6)
 		ft_errno("Insufficient information", NULL);
+	else if (s[i -1] != '\n')
+		ft_errno("Missing new line at the end", NULL);
 }

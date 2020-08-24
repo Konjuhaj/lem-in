@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 17:35:00 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/05 11:48:41 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_fill(char *temp, t_data *data)
 	}
 	fill_buffer(str, data);
 	if (data->precision >= len
-		|| BUFFER[0] == '0' || data->sign)
-		BUFFER = sign_flag(data, temp);
+		|| data->container.buffer[0] == '0' || data->sign)
+		data->container.buffer = sign_flag(data, temp);
 	if (temp)
 		ft_strdel(&temp);
 }
@@ -80,10 +80,10 @@ void	move_right(t_data *data, char sign)
 {
 	int i;
 
-	i = ft_strlen(BUFFER) - 1;
+	i = ft_strlen(data->container.buffer) - 1;
 	while (--i >= 0)
-		BUFFER[i + 1] = BUFFER[i];
-	BUFFER[0] = sign;
+		data->container.buffer[i + 1] = data->container.buffer[i];
+	data->container.buffer[0] = sign;
 }
 
 /*

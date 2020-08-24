@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 09:10:40 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 19:51:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:56:13 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			update_length(t_combinations *comb)
 	comb->print = longest;
 }
 
-t_combinations	*best_path(t_combinations *comb, int ants)
+t_combinations	*best_path(t_combinations *comb)
 {
 	t_combinations	*temp;
 	t_combinations	*better;
@@ -91,7 +91,7 @@ t_combinations	*best_path(t_combinations *comb, int ants)
 	shortest = comb->print;
 	better = comb;
 	temp = comb;
-	while (temp && ants)
+	while (temp)
 	{
 		if (temp->print < shortest)
 		{
