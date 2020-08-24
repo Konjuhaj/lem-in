@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 17:38:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:08:14 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:11:36 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void		print_queue_id(t_queue *queue)
+void	print_queue_id(t_queue *queue)
 {
 	t_queue *temp;
 

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:03:34 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:13:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char		**get_rooms(t_farm *farm)
 	return (validate_instructions(strstr));
 }
 
-static void	reset_unused_edges(t_farm *farm)
+static void		reset_unused_edges(t_farm *farm)
 {
 	int i;
 
