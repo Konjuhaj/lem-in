@@ -77,7 +77,6 @@ error=("test/Errors/empty_file_1"
 "test/Errors/number_of_ants_invalid_number_4"
 "test/Errors/number_of_ants_negative_number"
 "test/Errors/number_of_ants_zero"
-"hard_test"
 )
 
 for t in ${!error[@]}; do

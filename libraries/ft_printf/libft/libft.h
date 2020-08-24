@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-<<<<<<< HEAD
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 18:43:47 by bkonjuha         ###   ########.fr       */
-=======
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/09 15:29:45 by bkonjuha         ###   ########.fr       */
->>>>>>> first commit
-=======
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/29 12:13:43 by bkonjuha         ###   ########.fr       */
->>>>>>> Working reading files and connecting rooms
+/*   Updated: 2020/08/24 18:55:52 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-<<<<<<< HEAD
 # define BUFF_SIZE 1000000
-=======
-# define BUFF_SIZE 32
->>>>>>> first commit
 # define MAX_FD 10240
 # include <fcntl.h>
 # include <string.h>
@@ -204,22 +186,12 @@ long				ft_atol(const char *str);
 
 void				ft_strstrdel(char ***s);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Working reading files and connecting rooms
 char				*ft_read_file(int fd);
 
 int					ft_rowlen(char **s);
 
-<<<<<<< HEAD
 char				*ft_strsub_until(char *s, char c);
 
 int					*sort_arr(int *arr, int size);
-=======
->>>>>>> first commit
-=======
-char				*ft_strcpy_until(char *s, char c);
->>>>>>> Working reading files and connecting rooms
 
 #endif

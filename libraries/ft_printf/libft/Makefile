@@ -3,24 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-<<<<<<< HEAD
-<<<<<<< HEAD
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 08:09:19 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/19 13:34:34 by bkonjuha         ###   ########.fr        #
-=======
-#    By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/16 08:09:19 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/03/09 15:29:56 by bkonjuha         ###   ########.fr        #
->>>>>>> first commit
-=======
-#    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/16 08:09:19 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/03/29 12:13:59 by bkonjuha         ###   ########.fr        #
->>>>>>> Working reading files and connecting rooms
+#    Updated: 2020/08/24 18:53:58 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +25,8 @@ SRCS=ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstputstr.c ft_isspace.c \
 		ft_wlen.c ft_wcount.c ft_printbit.c ft_lstsplit.c ft_putnbr_base.c \
 		ft_itoa_base.c ft_capitalize.c ncount.c ft_uitoa_base.c ncount_base.c\
-<<<<<<< HEAD
-<<<<<<< HEAD
 		ft_abs.c ft_strjoin2.c get_next_line.c ft_atol.c ft_strstrdel.c \
 		ft_read_file.c ft_rowlen.c ft_strsub_until.c ft_sort_arr.c
-=======
-		ft_abs.c ft_strjoin2.c get_next_line.c ft_atol.c ft_strstrdel.c
->>>>>>> first commit
-=======
-		ft_abs.c ft_strjoin2.c get_next_line.c ft_atol.c ft_strstrdel.c \
-		ft_read_file.c ft_rowlen.c ft_strcpy_until.c
->>>>>>> Working reading files and connecting rooms
 OBJS=$(subst .c,.o,$(SRCS))
 
 all: $(NAME)
