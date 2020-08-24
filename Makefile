@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/24 18:44:06 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/24 19:12:16 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INCLUDES = -I ./includes/
 HEADER_PATH = ./includes/
 HEADER_FILES = lemin.h
 HEADERS = $(addprefix $(HEADER_PATH), $(HEADER_FILES))
-COMPILE = gcc -Wall -Werror -Wextra -g # DELETE THIS <-----------------------------------------------------------------
+COMPILE = gcc -Wall -Werror -Wextra
 
 LIBFT_PATH = libraries/ft_printf/libft/
 LIBFT_FILE = libft.a

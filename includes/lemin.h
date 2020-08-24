@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:44:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 20:06:25 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct		s_farm
 	t_room			*sink;
 	char			*file;
 	int				ants;
+	int				count;
 }					t_farm;
 
 void				ft_errno(char *s, t_option *o);
@@ -112,6 +113,8 @@ void				validate_rooms(char **s);
 char				**validate_instructions(char **s);
 
 void				validate_lines(char *s);
+
+void				check_duplicates(char **s);
 
 /*
 **					TESTING FUNCTUION

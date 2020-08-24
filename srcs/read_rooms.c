@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:12:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 20:36:49 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static int	count_rooms(char **s)
+static int	count_rooms(char **s, t_farm *farm)
 {
 	int i;
 	int count;
@@ -24,6 +24,7 @@ static int	count_rooms(char **s)
 		if (s[i][0] != '#' && s[i][0] != 'L')
 			count++;
 	}
+	farm->count = count;
 	return (count);
 }
 
@@ -31,20 +32,19 @@ int			read_rooms(char **s, t_farm *farm)
 {
 	int		i;
 	int		j;
-	int		rooms;
 	char	**temp;
 
 	i = 0;
-	rooms = count_rooms(s);
-	farm->rooms = init_all_rooms(rooms);
+	farm->rooms = init_all_rooms(count_rooms(s, farm));
 	j = 0;
+	check_duplicates(s);
 	while (s[++i])
 	{
-		while (s[i][0] == '#' && s[i][1] != '#')
-			i++;
+		if (s[i][0] == '#' && s[i][1] != '#')
+			continue ;
 		if ((ft_strchr(s[i], '-')))
 			break ;
-		farm->rooms[j] = init_room(rooms);
+		farm->rooms[j] = init_room(farm->count);
 		if (ft_strequ(s[i], "##start") && i++)
 			farm->source = farm->rooms[j];
 		if (ft_strequ(s[i], "##end") && i++)
@@ -63,11 +63,15 @@ static void	connect_bothways(t_room *from, t_room *to)
 
 	i = 0;
 	j = 0;
-	while (from->edge[i].next != NULL)
+	while (from->edge[i].next != NULL && from->edge[i].next != to)
 		i++;
+	if (from->edge[i].next == to)
+		ft_errno("duplicate connection", NULL);
 	from->edge[i].next = to;
-	while (to->edge[j].next != NULL)
+	while (to->edge[j].next != NULL && to->edge[j].next != from)
 		j++;
+	if (to->edge[j].next == from)
+		ft_errno("duplicate connection", NULL);
 	to->edge[j].next = from;
 	to->edge[j].pair = &from->edge[i];
 	from->edge[i].pair = &to->edge[j];

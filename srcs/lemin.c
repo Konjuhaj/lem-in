@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:56:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 21:06:16 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int				main(int ac, char **av)
 	{
 		ft_errno(NULL, farm.op);
 		file = get_rooms(&farm);
-		farm.ants = ft_atoi(file[0]);
+		if (!ft_isint(farm.ants = ft_atol(file[0])))
+			ft_errno("Number of ants is out of bounds", NULL);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
 		farm.paths = init_comb();
 		farm.paths->set = NULL;
@@ -101,5 +102,6 @@ int				main(int ac, char **av)
 		ft_putendl(farm.file);
 		send_ants(&farm);
 	}
+	system ("leaks lem-in");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 09:07:20 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:15:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 20:05:47 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,25 @@ void	validate_lines(char *s)
 		ft_errno("Insufficient information", NULL);
 	else if (s[i - 1] != '\n')
 		ft_errno("Missing new line at the end", NULL);
+}
+
+void	check_duplicates(char **s)
+{
+	int end;
+	int start;
+	int i;
+
+	end = 0;
+	start = 0;
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i][0] == '#' && s[i][1] == '#')
+		{
+			end += ft_strequ(s[i], "##end") ? 1 : 0;
+			start += ft_strequ(s[i], "##start") ? 1 : 0;
+		}
+	}
+	if (end != 1 || start != 1)
+		ft_errno("Incorrect amount of mandatory commands", NULL);
 }

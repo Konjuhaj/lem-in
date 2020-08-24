@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 18:55:52 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 20:33:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,7 @@ int					ft_rowlen(char **s);
 char				*ft_strsub_until(char *s, char c);
 
 int					*sort_arr(int *arr, int size);
+
+int					ft_isint(long num);
 
 #endif
