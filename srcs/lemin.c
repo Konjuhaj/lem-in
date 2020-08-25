@@ -3,110 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/02 14:53:22 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 21:25:18 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static char	**get_rooms(char *av)
+static char		**get_rooms(t_farm *farm)
 {
-	int 	fd;
 	char	*line;
+	char	**strstr;
 
-	fd = open(av, O_RDONLY);
-	line = ft_read_file(fd);
-	return (ft_strsplit(line, '\n'));
+	line = ft_read_file(STD_IN);
+	validate_lines(line);
+	farm->file = line;
+	strstr = ft_strsplit(line, '\n');
+	return (validate_instructions(strstr));
 }
 
-static void	reset_unused_edges(t_farm *farm)
+static void		reset_unused_edges(t_farm *farm)
 {
 	int i;
-	int j;
-	t_room *temp;
-	t_edge *pair;
 
 	i = -1;
-	while(farm->rooms[++i])
-	{
+	while (farm->rooms[++i])
 		farm->rooms[i]->visited = 0;
-		if(farm->rooms[i]->path == 0)
-		{
-			temp = farm->rooms[i];
-			j = -1;
-			while(temp->edge[++j].next)
-			{
-				temp->edge[j].current = 1;
-				pair = temp->edge[j].pair;
-				pair->current = 1;
-			}
-		}
-	}
 }
 
-// static void	reset_all_edges(t_farm * farm)
-// {
-// 	int i;
-// 	int j;
-// 	t_room *temp;
-
-// 	i = -1;
-// 	while(farm->rooms[++i])
-// 	{
-// 		farm->rooms[i]->visited = 0;
-// 		temp = farm->rooms[i];
-// 		j = -1;
-// 		while(temp->edge[++j].next)
-// 		{
-// 			temp->edge[j].current = 1;
-// 		}
-// 	}
-// }
-
-static void	pathfinder(t_farm *farm)
+static void		pathfinder(t_farm *farm)
 {
-		int i;
+	int i;
 
-		i = -1;
-		farm->source->path = 2;
-		farm->source->visited = 2;
-		bfs(farm->source, farm->sink, farm);
+	i = -1;
+	bfs(farm->source, farm->sink);
+	reset_unused_edges(farm);
+	reconstruct_path(farm->sink, farm->source, farm);
+	reset_unused_edges(farm);
+	while (bfs(farm->source, farm->sink))
+	{
+		reset_unused_edges(farm);
 		reconstruct_path(farm->sink, farm->source, farm);
 		reset_unused_edges(farm);
-		while (++i < 50)
-		{
-			//ft_printf("\n ITARATION #%d\n", i);
-			farm->source->path = 2;
-			farm->source->visited = 2;
-			bfs(farm->source, farm->sink, farm);
-			reset_unused_edges(farm);
-			reconstruct_path(farm->sink, farm->source, farm);
-			reset_unused_edges(farm);
-		}
-		// exit(2);
+	}
+	if (!farm->paths->set)
+		ft_errno("No paths found", NULL);
 }
 
-int			main(int ac, char **av)
+static t_option	*parse(int ac, char **av)
+{
+	int			i;
+	t_option	*op;
+
+	i = 0;
+	op = init_option();
+	while (++i < ac)
+	{
+		if (ft_strequ(av[i], "-i") || ft_strequ(av[i], "--info"))
+			op->info = 1;
+		else if (ft_strequ(av[i], "-p") || ft_strequ(av[i], "--paths"))
+			op->paths = 1;
+		else if (ft_strequ(av[i], "-e") || ft_strequ(av[i], "--error"))
+			op->error = 1;
+		else if (!ft_strequ(av[i], "-i") && !ft_strequ(av[i], "--info")
+			&& !ft_strequ(av[i], "-e") && !ft_strequ(av[i], "--error")
+			&& !ft_strequ(av[i], "-p") && !ft_strequ(av[i], "--paths"))
+			op->help = 1;
+	}
+	return (op);
+}
+
+int				main(int ac, char **av)
 {
 	char	**file;
 	t_farm	farm;
 
-	if (ac == 2)
+	farm.op = parse(ac, av);
+	if (farm.op->help)
 	{
-		file = get_rooms(av[1]);
-		farm.ants = ft_atoi(file[0]);
+		ft_putstr("Usage:\n./lem-in [-e --error] [-i --info] ");
+		ft_putendl("[-p --paths] < maps/demo_map");
+		return (0);
+	}
+	else
+	{
+		ft_errno(NULL, farm.op);
+		file = get_rooms(&farm);
+		if (!ft_isint(farm.ants = ft_atol(file[0])))
+			ft_errno("Number of ants is out of bounds", NULL);
 		connect_rooms(file, &farm, read_rooms(file, &farm));
-		if(!(farm.paths = (t_combinations *)malloc(sizeof(t_combinations))))
-			ft_errno();
+		farm.paths = init_comb();
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
+		ft_putendl(farm.file);
 		send_ants(&farm);
 	}
-	print_sets(farm.paths);
-	system("leaks lem-in");
 	return (0);
 }

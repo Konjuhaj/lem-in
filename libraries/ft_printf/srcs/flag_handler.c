@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 08:24:02 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/05 11:48:14 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:50:59 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*hash_flag(char *s, t_data *data)
 	else if (data->container.filler == '0')
 	{
 		if (data->type == 'x')
-			BUFFER[1] = data->type;
+			data->container.buffer[1] = data->type;
 	}
 	else if (data->type == 'x' || data->type == 'X' || data->type == 'p')
 		temp = ft_strjoin("0x", s);
@@ -87,20 +87,20 @@ void	minus_flag(t_data *data, char sign)
 
 	sign = sign + 1;
 	space = data->size;
-	slen = ft_strlen(BUFFER);
+	slen = ft_strlen(data->container.buffer);
 	i = 0;
-	while (BUFFER[i] != '-' && BUFFER[i])
+	while (data->container.buffer[i] != '-' && data->container.buffer[i])
 		i++;
-	BUFFER[i] = '0';
-	if (BUFFER[0] == ' ')
+	data->container.buffer[i] = '0';
+	if (data->container.buffer[0] == ' ')
 	{
 		i = 0;
-		while (!ft_isalnum(BUFFER[i]))
+		while (!ft_isalnum(data->container.buffer[i]))
 			i++;
-		BUFFER[i - 1] = '-';
+		data->container.buffer[i - 1] = '-';
 	}
 	else if (data->precision == -1)
-		BUFFER[0] = '-';
+		data->container.buffer[0] = '-';
 }
 
 /*
@@ -117,7 +117,7 @@ void	plus_flag(t_data *data, char sign, int len)
 
 	space = data->size;
 	i = 0;
-	if (BUFFER[0] != ' ' && (space <= data->precision
+	if (data->container.buffer[0] != ' ' && (space <= data->precision
 			|| space == 0 || space <= len))
 	{
 		ft_putchar(data->sign);
@@ -127,9 +127,9 @@ void	plus_flag(t_data *data, char sign, int len)
 		move_right(data, sign);
 	else
 	{
-		while (BUFFER[i] == ' ')
+		while (data->container.buffer[i] == ' ')
 			i++;
-		BUFFER[i == 0 ? 0 : i - 1] = data->sign;
+		data->container.buffer[i == 0 ? 0 : i - 1] = data->sign;
 	}
 }
 
@@ -142,7 +142,8 @@ char	*sign_flag(t_data *data, char *temp)
 	len = ft_strlen(temp);
 	size = data->precision;
 	sign = temp[0] == '-' ? '-' : 0;
-	BUFFER = BUFFER == NULL ? ft_strnew(1) : BUFFER;
+	data->container.buffer = data->container.buffer == NULL ?
+			ft_strnew(1) : data->container.buffer;
 	if (data->sign > 0 && sign != '-')
 		sign = data->sign;
 	if (sign && sign != '-' && data->container.id == NUMBER
@@ -151,5 +152,5 @@ char	*sign_flag(t_data *data, char *temp)
 	else if (temp[0] == '-' && data->container.filler == '0'
 			&& (size >= len || size == -1))
 		minus_flag(data, sign);
-	return (BUFFER);
+	return (data->container.buffer);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:27:25 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/05 11:43:54 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int		read_flags(const char *src, t_data *data, int i)
 	if (data->container.id == 0)
 		return (ft_default(remember));
 	function[(int)data->type](data, data->type);
-	if (BUFFER == NULL)
+	if (data->container.buffer == NULL)
 		return (data->i);
 	i = -1;
-	while (++i < (int)ft_strlen(BUFFER) || i < data->size)
-		ft_putchar(BUFFER[i]);
+	while (++i < (int)ft_strlen(data->container.buffer) || i < data->size)
+		ft_putchar(data->container.buffer[i]);
 	return (data->i);
 }
 

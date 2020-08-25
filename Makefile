@@ -6,24 +6,25 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/07/30 22:07:12 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/24 19:12:16 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LEMIN = lem-in
 
 SRC_PATH = ./srcs/
-SRC_FILES = lemin.c ft_errno.c find_path.c read_rooms.c ft_queuenew.c ft_queueadd.c \
+SRC_FILES = lemin.c ft_errno.c read_rooms.c ft_queuenew.c ft_queueadd.c \
 			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c save_path.c printer.c \
-			combinations.c checker.c send_ants.c find_paths2.c ft_freequeue.c \
-			bfs.c reconstruct_path.c ft_queueaddback.c
+			combinations.c checker.c send_ants.c ft_freequeue.c validate.c\
+			bfs.c reconstruct_path.c ft_queueaddback.c improve_set.c \
+			helper.c ft_connect_queue.c init.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/
 HEADER_PATH = ./includes/
 HEADER_FILES = lemin.h
 HEADERS = $(addprefix $(HEADER_PATH), $(HEADER_FILES))
-COMPILE = gcc -Wall -Werror -Wextra -g # DELETE THIS <-----------------------------------------------------------------
+COMPILE = gcc -Wall -Werror -Wextra
 
 LIBFT_PATH = libraries/ft_printf/libft/
 LIBFT_FILE = libft.a
@@ -40,7 +41,7 @@ COLOR_DEFAULT = \033[1;34m
 
 all: $(LEMIN)
 
-$(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF)
+$(LEMIN): $(HEADERS) $(LIBFT) $(PRINTF) $(SRC)
 		@$(COMPILE) $(SRC) $(LIBFT) $(PRINTF) -o $(LEMIN)
 		@echo "[$(COLOR_PENDING)Putting everything togeather$(COLOR_RESET)]"
 		@echo "[$(COLOR_SUCCESS)Executable $(PUSH_SWAP) created$(COLOR_RESET)]"

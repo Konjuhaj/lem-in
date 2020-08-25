@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 12:02:28 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/03/29 12:14:59 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:13:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_rowlen(char **s)
 	int i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }

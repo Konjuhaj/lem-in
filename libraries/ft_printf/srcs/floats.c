@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floats.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:17:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/05 12:19:10 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ static void	move_minus(t_data *data, char *temp)
 	int i;
 
 	i = 0;
-	if (temp[0] == '-' && BUFFER[0] != '-'
+	if (temp[0] == '-' && data->container.buffer[0] != '-'
 		&& data->container.filler != ' ')
 	{
-		while (BUFFER[i] != '-')
+		while (data->container.buffer[i] != '-')
 			i++;
-		BUFFER[i] = '0';
-		BUFFER[0] = '-';
+		data->container.buffer[i] = '0';
+		data->container.buffer[0] = '-';
 	}
 }
 
 static void	append_float_to_buffer(char *temp, t_data *data)
 {
-	if (BUFFER)
-		ft_strdel(&BUFFER);
+	if (data->container.buffer)
+		ft_strdel(&data->container.buffer);
 	if (data->sign > 0 && ft_isdigit(temp[0]) == 1)
 		ft_putchar(data->sign);
-	BUFFER = temp;
+	data->container.buffer = temp;
 }
 
 static void	lf_flag(t_data *data)
@@ -63,11 +63,11 @@ static void	lf_flag(t_data *data)
 	temp = ft_lf_itoa(num, data->precision);
 	if (num < 0 && temp[0] != '-')
 		add_minus(&temp);
-	if (!(BUFFER) || data->size < (int)ft_strlen(temp))
+	if (!(data->container.buffer) || data->size < (int)ft_strlen(temp))
 		append_float_to_buffer(temp, data);
 	else
 		ft_fill(temp, data);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 }
 
 void		f_flag(t_data *data)
@@ -86,12 +86,12 @@ void		f_flag(t_data *data)
 	temp = ft_f_itoa(num, data->precision);
 	if (num < 0 && temp[0] != '-')
 		add_minus(&temp);
-	if (!(BUFFER) || data->size < (int)ft_strlen(temp))
+	if (!(data->container.buffer) || data->size < (int)ft_strlen(temp))
 		append_float_to_buffer(temp, data);
 	else
 		ft_fill(temp, data);
 	if (data->hash && data->precision == 0)
 		add_buffer_postfix(data, ".");
 	move_minus(data, temp);
-	data->ret += ft_strlen(BUFFER);
+	data->ret += ft_strlen(data->container.buffer);
 }

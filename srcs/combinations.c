@@ -6,27 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/30 22:23:42 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:08:46 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
-
-void	update_combination(t_combinations *comb)
-{
-	t_queue *temp;
-
-	temp = comb->set;
-	comb->avg_speed = 0.0;
-	comb->max_flow = 0;
-	while (temp)
-	{
-		comb->max_flow++;
-		comb->avg_speed += (double)temp->distance;
-		temp = temp->parralel;
-	}
-	comb->avg_speed /= (double)comb->max_flow;
-}
 
 t_queue			*copy_path(t_queue *paths)
 {
@@ -42,20 +26,19 @@ t_queue			*copy_path(t_queue *paths)
 	return (NULL);
 }
 
-t_combinations	*new_set(t_queue *paths, t_room *sink)
+t_combinations	*new_set(t_queue *paths, t_queue *current, t_room *sink)
 {
-	t_queue *temp_new;
-	t_combinations *new;
+	t_queue			*temp_new;
+	t_combinations	*new;
 
-	if (!(new = (t_combinations *)malloc(sizeof(t_combinations) + 1)))
-		ft_errno();
-	new->set = copy_path(paths);
+	new = init_comb();
+	new->set = copy_path(current);
 	temp_new = new->set;
-	while (paths->parralel)
+	while (paths)
 	{
-		if (!are_duplicates(paths->parralel, new->set, sink))
+		if (!are_duplicates(paths, new->set, sink))
 		{
-			temp_new->parralel = copy_path(paths->parralel);
+			temp_new->parralel = copy_path(paths);
 			temp_new = temp_new->parralel;
 		}
 		paths = paths->parralel;
@@ -65,19 +48,24 @@ t_combinations	*new_set(t_queue *paths, t_room *sink)
 	return (new);
 }
 
-void	combinations(t_farm *farm)
+void			combinations(t_farm *farm)
 {
 	t_combinations	*comb;
 	t_queue			*path;
 
 	comb = farm->paths;
 	path = comb->set;
-	while (path->parralel)
+	farm->paths = get_paths_in_use(farm->paths);
+	while (path)
 	{
-		comb->next = new_set(path, farm->sink);
+		comb->next = new_set(farm->paths->set, path, farm->sink);
 		comb = comb->next;
-		//print_set(comb);
-		update_combination(comb);
+		calculate_ants_per_path(comb, farm->ants);
+		remove_unused(comb->set);
+		improve_set2(comb->set, farm->paths, farm->sink);
+		reset_ants(comb->set);
+		calculate_ants_per_path(comb, farm->ants);
+		update_length(comb);
 		path = path->parralel;
 	}
 }

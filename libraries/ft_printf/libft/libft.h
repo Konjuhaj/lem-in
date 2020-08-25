@@ -6,13 +6,13 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 08:13:08 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/06/04 09:59:23 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 21:21:28 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 1000000
 # define MAX_FD 10240
 # include <fcntl.h>
 # include <string.h>
@@ -191,5 +191,9 @@ char				*ft_read_file(int fd);
 int					ft_rowlen(char **s);
 
 char				*ft_strsub_until(char *s, char c);
+
+int					*sort_arr(int *arr, int size);
+
+int					ft_isint(long num);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 11:41:30 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/02/04 19:29:45 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:50:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		create_buffer(const char *s, t_data *data)
 			data->container.filler = '0';
 			data->size = size;
 		}
-		BUFFER = ft_strnew(size + 1);
-		ft_memset(BUFFER, data->container.filler, size);
+		data->container.buffer = ft_strnew(size + 1);
+		ft_memset(data->container.buffer, data->container.filler, size);
 		if (data->precision < data->size
 			&& data->container.id == NUMBER
 			&& data->precision != -1 && data->container.filler == '0'
@@ -42,7 +42,7 @@ int		create_buffer(const char *s, t_data *data)
 			data->container.filler = ' ';
 			size = size - data->precision;
 			while (--size >= 0)
-				BUFFER[size] = data->container.filler;
+				data->container.buffer[size] = data->container.filler;
 		}
 	}
 	return (0);
@@ -81,21 +81,22 @@ void	fill_buffer(char *temp, t_data *data)
 
 	c = temp;
 	dot_validator(data, &c, &precision);
-	destlen = ft_strlen(BUFFER);
+	destlen = ft_strlen(data->container.buffer);
 	srclen = precision < 0 ? ft_strlen(c) : precision;
 	if (srclen >= destlen && data->container.id == NUMBER)
 	{
-		free(BUFFER);
-		BUFFER = ft_strdup(c);
+		free(data->container.buffer);
+		data->container.buffer = ft_strdup(c);
 	}
 	else if (data->allign != '-')
 	{
 		start = destlen - srclen > 0 ? destlen - srclen : 0;
-		ft_strncpy(BUFFER + start, c, destlen - start);
+		ft_strncpy(data->container.buffer + start, c, destlen - start);
 	}
 	else
-		ft_memcpy(BUFFER, c, srclen);
-	if (c != temp && c != BUFFER && data->container.id == NUMBER)
+		ft_memcpy(data->container.buffer, c, srclen);
+	if (c != temp && c != data->container.buffer
+		&& data->container.id == NUMBER)
 		free(c);
 }
 
@@ -103,16 +104,16 @@ void	add_buffer_postfix(t_data *data, char *postfix)
 {
 	char *temp;
 
-	temp = ft_strjoin(BUFFER, postfix);
-	free(BUFFER);
-	BUFFER = temp;
+	temp = ft_strjoin(data->container.buffer, postfix);
+	free(data->container.buffer);
+	data->container.buffer = temp;
 }
 
 void	add_buffer_prefix(char *prefix, t_data *data)
 {
 	char *temp;
 
-	temp = ft_strjoin(prefix, BUFFER);
-	free(BUFFER);
-	BUFFER = temp;
+	temp = ft_strjoin(prefix, data->container.buffer);
+	free(data->container.buffer);
+	data->container.buffer = temp;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:30:36 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/01/25 16:47:30 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:45:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	capital_s_flag(t_data *data)
 
 	str = va_arg(data->arg, char**);
 	j = -1;
-	if (BUFFER)
-		free(BUFFER);
-	BUFFER = str[++j];
+	if (data->container.buffer)
+		free(data->container.buffer);
+	data->container.buffer = str[++j];
 	while (str[++j])
 	{
-		temp = ft_strjoin(BUFFER, str[j]);
-		free(BUFFER);
-		BUFFER = temp;
+		temp = ft_strjoin(data->container.buffer, str[j]);
+		free(data->container.buffer);
+		data->container.buffer = temp;
 		if (data->length == 'h' && str[j + 1] != NULL)
 			add_buffer_postfix(data, "\n");
 	}

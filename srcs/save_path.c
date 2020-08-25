@@ -3,18 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   save_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 16:29:39 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/02 14:58:56 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/23 21:03:58 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
+static int	path_exists(t_queue *new, t_queue *all)
+{
+	t_queue *first_n;
+	t_queue *first_a;
+
+	first_n = new;
+	while (all)
+	{
+		first_a = all;
+		if (are_identical(new, all))
+			return (1);
+		all = first_a;
+		all = all->parralel;
+		new = first_n;
+	}
+	return (0);
+}
+
 void		save_path(t_queue *path, t_farm *farm)
 {
-	t_queue			*temp;
+	t_queue *temp;
 
 	if (!farm->paths->set)
 	{
@@ -23,12 +41,17 @@ void		save_path(t_queue *path, t_farm *farm)
 	}
 	else
 	{
-		temp = farm->paths->set;
-		while (temp->parralel)
+		if (!path_exists(path, farm->paths->set) && path->distance < 105)
+		{
+			temp = farm->paths->set;
+			while (temp->parralel)
+				temp = temp->parralel;
+			temp->parralel = path;
 			temp = temp->parralel;
-		temp->parralel = path;
-		temp = temp->parralel;
-		temp->parralel = NULL;
+			temp->parralel = NULL;
+		}
+		else
+			ft_free_queue(path);
 	}
 }
 
@@ -37,13 +60,12 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 	int		i;
 	t_queue	*path;
 	t_queue *last;
-	t_room *temp;
+	t_room	*temp;
 
-	i = 0;
+	i = 1;
 	path = ft_dequeue(&queue);
-	path->distance = 0;
+	path->distance = 1;
 	temp = path->content;
-	temp->path = 1;
 	last = ft_queuefind(&queue, path->called_by);
 	ft_queueaddback(&path, last);
 	while (last->id != first)
@@ -51,12 +73,13 @@ void		store_path(t_queue *queue, char *first, t_farm *farm)
 		last = ft_queuefind(&queue, last->called_by);
 		ft_queueaddback(&path, last);
 		temp = last->content;
-		temp->path = 1;
 		path->distance = i++;
 	}
 	last = path->next;
 	last->distance = path->distance;
 	free((void *)path);
-	//print_queue_id(last);
+	path = ft_queuenew(farm->sink, sizeof(t_room), farm->sink->name);
+	ft_queueaddback(&last, path);
+	free((void *)path);
 	save_path(last, farm);
 }
