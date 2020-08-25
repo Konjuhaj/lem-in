@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
+#    By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 15:14:05 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/24 19:12:16 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/08/25 14:21:46 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_FILES = lemin.c ft_errno.c read_rooms.c ft_queuenew.c ft_queueadd.c \
 			ft_dequeue.c ft_queueaddfront.c ft_queuefind.c save_path.c printer.c \
 			combinations.c checker.c send_ants.c ft_freequeue.c validate.c\
 			bfs.c reconstruct_path.c ft_queueaddback.c improve_set.c \
-			helper.c ft_connect_queue.c init.c
+			helper.c ft_connect_queue.c init.c validate2.c
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
 INCLUDES = -I ./includes/
