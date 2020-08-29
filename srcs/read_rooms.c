@@ -6,7 +6,11 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/08/29 13:06:19 by bkonjuha         ###   ########.fr       */
+=======
+/*   Updated: 2020/08/25 14:22:31 by bkonjuha         ###   ########.fr       */
+>>>>>>> 16bb466070dd5c602b7d5ed10ca907a59c09d126
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +44,7 @@ int			read_rooms(char **s, t_farm *farm)
 	check_duplicates(s);
 	while (s[++i])
 	{
-		if (s[i][0] == '#' && s[i][1] != '#')
+		if (is_command_or_comment(s[i]))
 			continue ;
 		if ((ft_strchr(s[i], '-')))
 			break ;
