@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   combinations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:08:46 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/29 13:55:35 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ void			combinations(t_farm *farm)
 		update_length(comb);
 		path = path->parralel;
 	}
+	comb->next = short_comb(farm);
+	calculate_ants_per_path(comb->next, farm->ants);
 }

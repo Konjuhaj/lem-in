@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/29 13:18:08 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/29 13:54:33 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,9 +189,10 @@ void				update_combination(t_combinations *comb);
 void				improve_set2(t_queue *new,
 					t_combinations *farm, t_room *sink);
 
-void				improve_set(t_queue *best, t_queue *all, t_room *sink);
+t_queue				*get_smallest(t_combinations *comb, int i);
 
-t_combinations		*knapsack(t_queue *queue, t_room *sink);
+t_combinations		*short_comb(t_farm *farm);
+
 
 /*
 **					CHECKER
