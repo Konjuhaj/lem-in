@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 21:21:54 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/29 13:06:19 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void		connect_rooms(char **s, t_farm *farm, int i)
 		connect_bothways(farm->rooms[src_room], farm->rooms[dst_room]);
 		i++;
 	}
+	check_path_to_source(farm);
 }

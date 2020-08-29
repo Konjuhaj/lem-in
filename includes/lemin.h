@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 20:06:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/08/29 13:06:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ char				**validate_instructions(char **s);
 void				validate_lines(char *s);
 
 void				check_duplicates(char **s);
+
+void				check_path_to_source(t_farm *farm);
+
 
 /*
 **					TESTING FUNCTUION
