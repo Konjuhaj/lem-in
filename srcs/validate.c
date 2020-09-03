@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 09:07:20 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/03 12:25:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:52:42 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	validate_rooms(char **s)
 	}
 	if (i != 3)
 		ft_errno("Wrong number of coordinated found", NULL);
-	if (!ft_isint(atol(s[1])) || !ft_isint(atol(s[1])))
+	if (!ft_isint(atol(s[1])) || !ft_isint(atol(s[2])))
 		ft_errno("Coordinates out of bound", NULL);
 }
 
