@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/23 21:07:45 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 22:16:07 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		reconstruct_path2(t_room *sink, t_room *source, t_farm *farm)
 {
 	t_queue *queue;
 	t_queue *base;
+	t_queue	*temp;
 
 	queue = ft_queuenew(sink, sizeof(sink), sink->name);
 	base = queue;
@@ -52,7 +53,8 @@ void		reconstruct_path2(t_room *sink, t_room *source, t_farm *farm)
 	{
 		if (add_paths(queue, source))
 		{
-			store_path(base, sink->name, farm);
+			temp = store_path(base, sink->name, farm);
+			save_path(temp, farm);
 		}
 		queue = queue->next;
 	}

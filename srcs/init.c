@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 19:54:18 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 17:58:48 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 16:22:29 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ t_combinations	*init_comb(void)
 	comb->next = NULL;
 	comb->print = 0;
 	comb->set = NULL;
-	comb->using = NULL;
 	return (comb);
 }

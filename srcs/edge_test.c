@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edge_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:59:10 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/29 13:14:32 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 22:17:56 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		check_path_to_source(t_farm *farm)
 		if (farm->source->edge[i].next == farm->sink)
 		{
 			send_all_ants_short(farm);
-			exit (0);
+			exit(0);
 		}
 	}
 }

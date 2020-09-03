@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 09:07:20 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 20:05:47 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 09:42:58 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ void	validate_rooms(char **s)
 char	**validate_instructions(char **s)
 {
 	int		i;
+	int		j;
 
 	i = -1;
-	while (s[0][++i])
-		if (!ft_isdigit(s[0][i]))
+	j = 0;
+	while (s[j][0] == '#')
+		j++;
+	while (s[j][++i])
+		if (!ft_isdigit(s[j][i]))
 			ft_errno("Special Character found in ants", NULL);
-	if (s[0][0] == '0' || !ft_isdigit(s[0][0]))
+	if (s[j][0] == '0' || !ft_isdigit(s[j][0]))
 		ft_errno("Missing ants", NULL);
 	i = -1;
 	while (s[++i])
@@ -80,8 +84,6 @@ void	validate_lines(char *s)
 		ft_errno("Empty file found", NULL);
 	if (i < 6)
 		ft_errno("Insufficient information", NULL);
-	else if (s[i - 1] != '\n')
-		ft_errno("Missing new line at the end", NULL);
 }
 
 void	check_duplicates(char **s)

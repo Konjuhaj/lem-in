@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 13:27:15 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/20 21:40:54 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 22:51:19 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	*sort_arr(int *arr, int size)
 		i = -1;
 		while (++i < size)
 		{
-			if (arr[i] > arr[i + 1])
+			if (i < size && arr[i] > arr[i + 1])
 			{
 				swap = arr[i];
 				arr[i] = arr[i + 1];

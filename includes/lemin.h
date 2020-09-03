@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/29 13:54:33 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 22:49:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void				reverse_connect(t_combinations *comb, t_room *sink);
 
 void				save_path(t_queue *path, t_farm *farm);
 
-void				store_path(t_queue *queue, char *first, t_farm *farm);
+t_queue				*store_path(t_queue *queue, char *first, t_farm *farm);
 
 t_queue				*copy_path(t_queue *paths);
 
@@ -178,6 +178,8 @@ void				update_length(t_combinations *comb);
 
 void				print_info(t_farm *farm);
 
+void				add_queue(t_queue *all, t_queue *new);
+
 /*
 **					COMBINATIONS
 */
@@ -192,7 +194,6 @@ void				improve_set2(t_queue *new,
 t_queue				*get_smallest(t_combinations *comb, int i);
 
 t_combinations		*short_comb(t_farm *farm);
-
 
 /*
 **					CHECKER

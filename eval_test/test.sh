@@ -11,8 +11,7 @@ do
 	declare -i EXPECTED=$(cat file.txt | tail -n 1 | cut -d ' ' -f 8)
 	declare -i FILE=$(cat file.txt | wc -l)
 	declare -i LINES=$($LEM < file.txt | wc -l)
-	LINES=$[$LINES-$FILE]
-	declare -i DIFF=$(($LINES - $EXPECTED - 1))
+	declare -i DIFF=$(($LINES - $EXPECTED))
 	echo "MINE: $LINES ||| EXPECTED $EXPECTED ||| DIFFIRENCE $DIFF"
 	AVG=$[$AVG+$DIFF]
 	if [ $DIFF -gt 15 ]
@@ -64,11 +63,13 @@ for t in test/Errors/*; do
 		fi
 	}
 	timeout 2s
+	printf $temp
 	VAR=$($LEM < $temp | grep ERROR)
 	if [ "$VAR" ]; then
 		printf "✅"
 	else
 		printf "❌"
 	fi
+	echo " "
 done
 

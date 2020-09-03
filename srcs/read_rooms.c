@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/29 13:20:00 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 23:49:25 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ static int	count_rooms(char **s, t_farm *farm)
 	return (count);
 }
 
+int			sink_or_start(char **s, t_farm *farm, int i, int j)
+{
+
+	if (ft_strequ(s[i], "##start") && i++)
+	{
+		while (is_command_or_comment(s[i]))
+			i++;
+		farm->source = farm->rooms[j];
+	}
+	if (ft_strequ(s[i], "##end") && i++)
+	{
+		while (is_command_or_comment(s[i]))
+			i++;
+		farm->sink = farm->rooms[j];
+	}
+	return (i);
+}
+
 int			read_rooms(char **s, t_farm *farm)
 {
 	int		i;
@@ -38,6 +56,8 @@ int			read_rooms(char **s, t_farm *farm)
 	farm->rooms = init_all_rooms(count_rooms(s, farm));
 	j = 0;
 	check_duplicates(s);
+	while (is_command_or_comment(s[i]))
+		i++;
 	while (s[++i])
 	{
 		if (is_command_or_comment(s[i]))
@@ -45,10 +65,7 @@ int			read_rooms(char **s, t_farm *farm)
 		if ((ft_strchr(s[i], '-')))
 			break ;
 		farm->rooms[j] = init_room(farm->count);
-		if (ft_strequ(s[i], "##start") && i++)
-			farm->source = farm->rooms[j];
-		if (ft_strequ(s[i], "##end") && i++)
-			farm->sink = farm->rooms[j];
+		i = sink_or_start(s, farm, i, j);
 		validate_rooms((temp = ft_strsplit(s[i], ' ')));
 		farm->rooms[j++]->name = ft_strdup(temp[0]);
 		ft_strstrdel(&(temp));

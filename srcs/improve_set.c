@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   improve_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:07:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/29 13:47:11 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 23:07:43 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,22 @@ t_queue		*get_smallest(t_combinations *comb, int i)
 
 	temp = comb->set;
 	while (temp && temp->distance != comb->using[i])
+	{
 		temp = temp->parralel;
+	}
 	return (temp);
+}
+
+void		add_queue(t_queue *all, t_queue *new)
+{
+	t_queue *temp;
+
+	temp = all;
+	while (temp->parralel)
+		temp = temp->parralel;
+	temp->parralel = copy_path(new);
+	temp = temp->parralel;
+	temp->parralel = NULL;
 }
 
 void		improve_set2(t_queue *new, t_combinations *farm, t_room *sink)
@@ -69,11 +83,7 @@ void		improve_set2(t_queue *new, t_combinations *farm, t_room *sink)
 			break ;
 		if (!are_duplicates(all, new, sink))
 		{
-			while (new->parralel)
-				new = new->parralel;
-			new->parralel = copy_path(all);
-			new = new->parralel;
-			new->parralel = NULL;
+			add_queue(new, all);
 			new = first_n;
 		}
 	}

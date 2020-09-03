@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 09:10:40 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 17:56:13 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/02 23:07:27 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ void			calculate_ants_per_path(t_combinations *comb, int ants)
 t_combinations	*get_paths_in_use(t_combinations *comb)
 {
 	int		i;
-	int		arr[150];
+	int		*arr;
 	t_queue	*temp;
 
 	temp = comb->set;
 	i = -1;
-	ft_bzero(&arr[0], sizeof(arr));
+	arr = ft_memalloc(150);
+	ft_bzero(arr, sizeof(arr));
 	while (temp && i + 1 < 150)
 	{
 		arr[++i] = temp->distance;
 		temp = temp->parralel;
 	}
-	comb->using = sort_arr(&arr[0], 149);
+	comb->using = sort_arr(arr, i);
 	return (comb);
 }
 

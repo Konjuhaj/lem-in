@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 23:23:43 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/08/24 21:25:18 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 08:49:50 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@ static char		**get_rooms(t_farm *farm)
 {
 	char	*line;
 	char	**strstr;
+	int		i;
 
+	i = 0;
 	line = ft_read_file(STD_IN);
 	validate_lines(line);
 	farm->file = line;
 	strstr = ft_strsplit(line, '\n');
-	return (validate_instructions(strstr));
+	while (is_command_or_comment(strstr[i]))
+	{
+		ft_strdel(&strstr[i]);
+		i++;
+	}
+	return (validate_instructions(strstr + i));
 }
 
 static void		reset_unused_edges(t_farm *farm)
@@ -98,7 +105,7 @@ int				main(int ac, char **av)
 		farm.paths->set = NULL;
 		pathfinder(&farm);
 		combinations(&farm);
-		ft_putendl(farm.file);
+		//ft_putendl(farm.file);
 		send_ants(&farm);
 	}
 	return (0);
