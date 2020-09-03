@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:14:59 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/02 22:49:03 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:47:20 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void				check_duplicates(char **s);
 void				check_path_to_source(t_farm *farm);
 
 int					is_command_or_comment(char *s);
+
+void				duplicate_room(t_farm *farm);
 
 /*
 **					TESTING FUNCTUION

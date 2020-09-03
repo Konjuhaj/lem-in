@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:37:44 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/02 22:16:07 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 10:33:51 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		reconstruct_path2(t_room *sink, t_room *source, t_farm *farm)
 		queue = queue->next;
 	}
 	ft_free_queue(base);
+
 }
 
 void		reconstruct_path(t_room *sink, t_room *source, t_farm *farm)

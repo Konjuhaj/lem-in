@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 12:07:38 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/02 23:49:25 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:48:03 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			read_rooms(char **s, t_farm *farm)
 		validate_rooms((temp = ft_strsplit(s[i], ' ')));
 		farm->rooms[j++]->name = ft_strdup(temp[0]);
 		ft_strstrdel(&(temp));
+		duplicate_room(farm);
 	}
 	farm->rooms[j] = NULL;
 	return (i);
@@ -83,13 +84,13 @@ static void	connect_bothways(t_room *from, t_room *to)
 	j = 0;
 	while (from->edge[i].next != NULL && from->edge[i].next != to)
 		i++;
-	if (from->edge[i].next == to)
-		ft_errno("duplicate connection", NULL);
+	if (from->edge[i].next == to || from == to)
+		return ;
 	from->edge[i].next = to;
 	while (to->edge[j].next != NULL && to->edge[j].next != from)
 		j++;
 	if (to->edge[j].next == from)
-		ft_errno("duplicate connection", NULL);
+		return ;
 	to->edge[j].next = from;
 	to->edge[j].pair = &from->edge[i];
 	from->edge[i].pair = &to->edge[j];

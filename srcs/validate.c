@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 09:07:20 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/03 09:42:58 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 12:25:26 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	validate_rooms(char **s)
 	}
 	if (i != 3)
 		ft_errno("Wrong number of coordinated found", NULL);
+	if (!ft_isint(atol(s[1])) || !ft_isint(atol(s[1])))
+		ft_errno("Coordinates out of bound", NULL);
 }
 
 char	**validate_instructions(char **s)
@@ -51,10 +53,12 @@ char	**validate_instructions(char **s)
 	j = 0;
 	while (s[j][0] == '#')
 		j++;
+	if(s[j][0] == '+')
+		i++;
 	while (s[j][++i])
 		if (!ft_isdigit(s[j][i]))
 			ft_errno("Special Character found in ants", NULL);
-	if (s[j][0] == '0' || !ft_isdigit(s[j][0]))
+	if (!ft_isdigit(s[j][0]) && s[j][0] != '+')
 		ft_errno("Missing ants", NULL);
 	i = -1;
 	while (s[++i])

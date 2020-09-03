@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 11:01:10 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/07/10 15:03:26 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:28:34 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	**ft_strsplit(char const *s, char c)
 {
@@ -31,8 +32,7 @@ char	**ft_strsplit(char const *s, char c)
 		if ((i == 0 && s[i] != c) || ((s[i - 1] == c) && s[i] != c))
 		{
 			w_len = ft_wlen(s + i, c);
-			if (!(splt[w] = (char *)malloc(sizeof(char) * (w_len + 1))))
-				return (NULL);
+			splt[w] = ft_strnew(w_len + 1);
 			ft_strncpy(splt[w], s + i, w_len);
 			splt[w++][w_len] = '\0';
 		}

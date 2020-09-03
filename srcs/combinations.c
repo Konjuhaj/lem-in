@@ -6,7 +6,7 @@
 /*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 15:46:41 by bkonjuha          #+#    #+#             */
-/*   Updated: 2020/09/02 23:35:36 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 13:28:01 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			combinations(t_farm *farm)
 		comb = comb->next;
 		calculate_ants_per_path(comb, farm->ants);
 		remove_unused(comb->set);
-		improve_set2(comb->set, farm->paths, farm->sink);
+		//improve_set2(comb->set, farm->paths, farm->sink);
 		reset_ants(comb->set);
 		calculate_ants_per_path(comb, farm->ants);
 		update_length(comb);

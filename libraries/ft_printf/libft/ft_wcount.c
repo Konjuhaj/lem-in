@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wcount.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkonjuha <bkonjuha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:13:17 by bkonjuha          #+#    #+#             */
-/*   Updated: 2019/10/31 10:20:27 by bkonjuha         ###   ########.fr       */
+/*   Updated: 2020/09/03 11:28:30 by bkonjuha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int		ft_wcount(char const *s, char c)
 		if ((i == 0 && s[i] != c) || (s[i] != c && s[i + 1] == c))
 			j++;
 	}
-	return (j);
+	return (j + 1);
 }

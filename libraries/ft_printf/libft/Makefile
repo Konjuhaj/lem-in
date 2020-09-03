@@ -6,7 +6,7 @@
 #    By: bkonjuha <bkonjuha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 08:09:19 by bkonjuha          #+#    #+#              #
-#    Updated: 2020/08/24 20:33:34 by bkonjuha         ###   ########.fr        #
+#    Updated: 2020/09/03 10:47:43 by bkonjuha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJS=$(subst .c,.o,$(SRCS))
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SRCS)
 	@gcc -Wall -Werror -Wextra -c $(SRCS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
